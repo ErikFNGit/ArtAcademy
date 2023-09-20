@@ -73,6 +73,9 @@
                     </tr>
                 </table>
             </form>
+            <form action="index.html">
+                <input type="submit" value="Atras"/>
+            </form>
     <?php 
         }
     ?>

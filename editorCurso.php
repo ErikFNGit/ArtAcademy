@@ -100,6 +100,9 @@
                     </tr>
                 </table>
             </form>
+            <form action="index.html">
+                <input type="submit" value="Atras"/>
+            </form>
     <?php
         }
         elseif(isset($_POST["cursoEdit"]))
@@ -115,6 +118,9 @@
         <input type="text" name="codigo">
         <input type="submit" value="Aceptar">
     </form>
+    <form action="index.html">
+                <input type="submit" value="Atras"/>
+            </form>
 
     <?php
         }
