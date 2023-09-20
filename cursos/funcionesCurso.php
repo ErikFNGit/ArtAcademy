@@ -38,9 +38,9 @@
 
     function editCurso($connection, $code)
     {
-        $set = "name=".$_POST["cursoEdit"][0]."description=".$_POST["cursoEdit"][1].
-        "hours=".$_POST["cursoEdit"][2]."sDate=".$_POST["cursoEdit"][3].
-        "eDate=".$_POST["cursoEdit"][4]."teacher_id=".$_POST["cursoEdit"][5];
+        $set = "name='".$_POST["cursoEdit"][0]."', description='".$_POST["cursoEdit"][1].
+        "',hours='".$_POST["cursoEdit"][2]."',sDate='".$_POST["cursoEdit"][3].
+        "',eDate='".$_POST["cursoEdit"][4]."',teacher_id='".$_POST["cursoEdit"][5]."'";
         
 
         $query="UPDATE curso
