@@ -23,7 +23,7 @@
     <?php
     }else{
     ?>
-<form action="AltaProfes.php" method="POST">
+<form action="AltaProfes.php" method="POST" enctype="multipart/form-data">
     <table>
         <tr>
             <td><label>Id: </label></td>

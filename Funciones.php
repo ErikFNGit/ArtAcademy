@@ -155,10 +155,21 @@
         $surname=$_POST['surname'];
         $password=md5($_POST['pass']);
         $title=$_POST['title'];
-        $picture=$_POST['photo'];
+        $picture=$_FILES['photo']['tmp_name'];
         $active=($_POST['active']==='yes')?1:0;
         //Usmoas bind_param para asginarle los valores a la query y ejecutarla
-        $consulta->bind_param("ssssssbi",$id,$dni,$name,$surname,$password, $title,$picture,$active );
+        
+
+        if(is_uploaded_file($picture)){    
+            $directory= "img/" ;
+            $fileName= $_FILES['photo']['name'];
+            $idUnico=time();
+            $path=$directory.$idUnico.$fileName;
+            move_uploaded_file($picture,$path);
+        }else{
+            print("Error, no se ha subido la imagen");
+        }
+        $consulta->bind_param("sssssssi",$id,$dni,$name,$surname,$password, $title,$path,$active );
         $consulta->execute();
         $consulta->close();
         $conexion->close();
@@ -277,6 +288,7 @@
          
          
          <?php
+         echo"<table>";
         for($i=0; $i<mysqli_num_rows($cursos);$i++){
             $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
             ?>
@@ -291,6 +303,11 @@
                     echo "<td>";
                     echo $dato." |";
                     echo "</td>";
+                }else if($clave=="picture")
+                {
+                    echo "<td>";
+                    echo "<img src='$dato'/> |";
+                    echo "</td>"; 
                 }else{
                 echo "<td>";
                     echo $dato." |";

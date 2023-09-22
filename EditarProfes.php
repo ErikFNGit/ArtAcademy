@@ -22,9 +22,15 @@
         </tr>
         </tr>
             <td><input type="submit" value="Buscar"></td>
-            <td><input type="submit" value="Atras"/></td>
         </tr>
     </table>
+    
+</form>
+
+            <form action="index.html" method="GET">
+                <input type="submit" value="Atras"/>
+            </form>
+        
     <?php
     listaTeachers();
     }
