@@ -37,6 +37,67 @@
 
         mysqli_query($connection,$query);
     }
+
+
+    function listarCursos($connection)
+    {
+        $query = "SELECT * FROM curso";
+        $cursos = mysqli_query($connection, $query);
+        echo "<table>";
+        echo "<tr>";
+        echo 
+            "<td>
+                ID |
+            </td>
+            <td>
+                Nombre |
+            </td>
+            <td>
+                Descripcion |
+            </td>
+            <td>
+                Duracion (horas) |
+            </td>
+            <td>
+                Fecha inicio |
+            </td>
+            <td>
+                Fecha Fin |
+            </td>
+            <td>
+                Profesor Asignado |
+            </td>";
+        echo "</tr>";
+        for($i=0; $i<mysqli_num_rows($cursos);$i++)
+        {
+            $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
+            echo "<tr>";
+
+            foreach($curso as $clave=>$dato)
+            {
+
+                echo "<td>";
+                    echo $dato." |";
+                echo "</td>";
+                
+            }
+            echo "</tr>";
+
+            
+        }
+        echo "</table>";
+
+
+    }
+
+
+
+
+
+
+
+
+
     function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;

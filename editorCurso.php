@@ -118,12 +118,17 @@
         <input type="text" name="codigo">
         <input type="submit" value="Aceptar">
     </form>
-    <form action="index.html">
-                <input type="submit" value="Atras"/>
-            </form>
+    
+  
 
     <?php
+        listarCursos(conexion());
+        
+
         }
     ?>
+    <form action="index.html">
+        <input type="submit" value="Atras"/>
+    </form>
 </body>
 </html>
