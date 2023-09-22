@@ -12,8 +12,6 @@
     <?php
     if(isset($_POST['find'])){
         fillInfoTeacher();
-    }elseif($_GET){
-        updateTeacher();
     }else{
     ?>
 <form action="EditarProfes.php" method="POST">
@@ -24,17 +22,11 @@
         </tr>
         </tr>
             <td><input type="submit" value="Buscar"></td>
-            <td><a href='EditarProfes.php'>Atras</a></td>
+            <td><input type="submit" value="Atras"/></td>
         </tr>
     </table>
-    
-</form>
-
-            <form action="index.html" method="GET">
-                <input type="submit" value="Atras"/>
-            </form>
-
     <?php
+    listaTeachers();
     }
     ?>  
 </body>
