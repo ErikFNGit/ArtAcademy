@@ -30,9 +30,9 @@
     
 </form>
 
-<form action="index.html">
-    <input type="submit" value="Atras"/>
-</form>
+            <form action="index.html" method="GET">
+                <input type="submit" value="Atras"/>
+            </form>
 
     <?php
     }

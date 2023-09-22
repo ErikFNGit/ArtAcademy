@@ -10,7 +10,7 @@
         include("Funciones.php");
         if(isset($_POST["codigo"]) && !isset($_POST["cursoEdit"]))
         {
-            buscarCurso(connectDB(),$_POST["codigo"]);
+            buscarCurso(conexion(),$_POST["codigo"]);
     ?>
             <form action="editorCurso.php" method="POST">
                 <input type="hidden" name="clave" value=
@@ -100,14 +100,14 @@
                     </tr>
                 </table>
             </form>
-            <form action="index.html">
+            <form action="editorCurso.php" method="GET">
                 <input type="submit" value="Atras"/>
             </form>
     <?php
         }
         elseif(isset($_POST["cursoEdit"]))
         {
-            editCurso(connectDB(), $_POST["clave"]);
+            editCurso(conexion(), $_POST["clave"]);
         }
         else
         {

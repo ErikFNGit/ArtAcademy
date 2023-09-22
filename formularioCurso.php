@@ -10,7 +10,7 @@
         include("Funciones.php");
         if(isset($_POST["nuevocurso"]))
         {
-            addCurso(connectDB());
+            addCurso(conexion());
         }
         else
         {
@@ -73,7 +73,7 @@
                     </tr>
                 </table>
             </form>
-            <form action="index.html">
+            <form action="index.html" method="GET">
                 <input type="submit" value="Atras"/>
             </form>
     <?php 
