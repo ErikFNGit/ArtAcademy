@@ -10,7 +10,7 @@
         include("Funciones.php");
         if(isset($_POST["codigo"]) && !isset($_POST["cursoEdit"]))
         {
-            buscarCurso(connectDB(),$_POST["codigo"]);
+            buscarCurso(conexion(),$_POST["codigo"]);
     ?>
             <form action="editorCurso.php" method="POST">
                 <input type="hidden" name="clave" value=
@@ -107,7 +107,7 @@
         }
         elseif(isset($_POST["cursoEdit"]))
         {
-            editCurso(connectDB(), $_POST["clave"]);
+            editCurso(conexion(), $_POST["clave"]);
         }
         else
         {
@@ -118,12 +118,17 @@
         <input type="text" name="codigo">
         <input type="submit" value="Aceptar">
     </form>
-    <form action="index.html">
-                <input type="submit" value="Atras"/>
-            </form>
+    
+  
 
     <?php
+        listarCursos(conexion());
+        
+
         }
     ?>
+    <form action="index.html">
+        <input type="submit" value="Atras"/>
+    </form>
 </body>
 </html>
