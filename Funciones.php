@@ -2,9 +2,7 @@
    function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;
-        } 
-
-        
+        }     
         function addCurso($conexion)
         {
             $datos="";
