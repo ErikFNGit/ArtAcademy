@@ -5,24 +5,19 @@
         } 
     function addCurso($connection){
         $datos = "";
-       foreach($_POST["nuevocurso"] as $dato)
-       {
+       foreach($_POST["nuevocurso"] as $dato){
             $datos = $datos."'$dato',"; 
        }
        $datos = substr($datos,0,-1);
-       $insertNewCourse = "INSERT INTO `curso`(`name`, `description`, `hours`, `sDate`, `eDate`, `teacher_id`) 
-       VALUES ($datos);";
+       $insertNewCourse = "INSERT INTO `curso`(`name`, `description`, `hours`, `sDate`, `eDate`, `teacher_id`) VALUES ($datos);";
        mysqli_query($connection,$insertNewCourse);
     }
     function buscarCurso($connection,$code){
 
-        $cursoE = "SELECT * FROM curso 
-        WHERE code = $code";
-
+        $cursoE = "SELECT * FROM curso WHERE code = $code";
         $curso = mysqli_query($connection,$cursoE);
         $curso = mysqli_fetch_array($curso,MYSQLI_ASSOC);
-        foreach($curso as $clave => $dato)
-        {
+        foreach($curso as $clave => $dato){
             $_POST[$clave] = $dato;
         }
     }
@@ -30,12 +25,7 @@
         $set = "name='".$_POST["cursoEdit"][0]."', description='".$_POST["cursoEdit"][1].
         "',hours='".$_POST["cursoEdit"][2]."',sDate='".$_POST["cursoEdit"][3].
         "',eDate='".$_POST["cursoEdit"][4]."',teacher_id='".$_POST["cursoEdit"][5]."'";
-        
-
-        $query="UPDATE curso
-        SET ".$set." WHERE code=".$code; 
-        
-
+        $query="UPDATE curso SET ".$set." WHERE code=".$code;      
         mysqli_query($connection,$query);
     }
     function listarCursos($connection){
@@ -44,50 +34,26 @@
         echo "<table>";
         echo "<tr>";
         echo 
-            "<td>
-                ID |
-            </td>
-            <td>
-                Nombre |
-            </td>
-            <td>
-                Descripcion |
-            </td>
-            <td>
-                Duracion (horas) |
-            </td>
-            <td>
-                Fecha inicio |
-            </td>
-            <td>
-                Fecha Fin |
-            </td>
-            <td>
-                Profesor Asignado |
-            </td>";
+            "<td>ID </td>
+            <td>Nombre </td>
+            <td>Descripcion </td>
+            <td>Duracion (horas) </td>
+            <td>Fecha inicio </td>
+            <td>Fecha Fin </td>
+            <td>Profesor Asignado </td>";
         echo "</tr>";
-        for($i=0; $i<mysqli_num_rows($cursos);$i++)
-        {
+        for($i=0; $i<mysqli_num_rows($cursos);$i++){
             $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
             echo "<tr>";
-
-            foreach($curso as $clave=>$dato)
-            {
-
+            foreach($curso as $clave=>$dato){
                 echo "<td>";
                     echo $dato." |";
-                echo "</td>";
-                
+                echo "</td>";    
             }
             echo "</tr>";
-
-            
         }
         echo "</table>";
-
-
-    }
-    
+    }    
     function DNIExistente(){
         //Comprobamos la conexion
         $conexion=conexion();
@@ -174,7 +140,7 @@
         $consulta->close();
         $conexion->close();
     }
-    function fillInfoTeacher(){
+    function fillInfoTeacher($id){
         $conexion = conexion();
         //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
         if($conexion == FALSE){
@@ -183,7 +149,6 @@
             exit();
         }
         $query="SELECT id, dni, name, surname, title, active FROM teachers WHERE id = ?";
-        $id=$_POST['find'];
         $consulta = $conexion->prepare($query);
         $consulta->bind_param("i",$id);
         if($consulta->execute()){
@@ -191,7 +156,7 @@
             if($datos->num_rows>0){
             $row= $datos->fetch_assoc();
             ?>
-        <form action="Edicion.php" method="POST">
+        <form action="edicionProfes.php" method="POST">
         <table>
             <tr>
                 <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
@@ -212,13 +177,11 @@
             </tr>
             <tr>
                 <td><label>Activo: </label></td>
-                <td><input type="radio" id="yes" name="active" value ="yes" value=<?php echo $row['active']==1 ?'cheked':'';?> required></td>
-                <td><label for="yes">Si</label></td>
-                <td><input type="radio" id="no" name="active" value = "no" value=<?php echo $row['active']==0  ?'cheked':'';?> ></td>
-                <td><label for="no">No</label></td>
+                <td><input type="radio" id="yes" name="active" value ="yes" <?php echo $row['active'] == 1 ?'checked':'';?> required><label for="yes">Si</label></td>
+                <td><input type="radio" id="no" name="active" value = "no" <?php echo $row['active'] == 0  ?'checked':'';?>><label for="no">No</label></td>
             </tr>       
             </tr>            <td><input type="submit" value="Editar"></td>
-                <td><a href='EditarProfes.php'>Atras</a></td>
+                <td><a href='listarProfes.php'>Atras</td>
             </tr>
         </table>
     </form>
@@ -227,8 +190,7 @@
             echo"<h2>Este id no correspone a ningun profesor</h2>";
             }
         $consulta->close(); 
-    }
-    
+        } 
     }
     function updateTeacher(){
         $conexion = conexion();
@@ -253,7 +215,7 @@
         $consulta->close();
         $conexion->close();
     }
-    function listaTeachers(){
+    function listaTeachers($name){
         $conexion=conexion();
         if($conexion == FALSE){
             echo"Error en la base de datos";
@@ -261,67 +223,31 @@
             exit();
         }
         $query = "SELECT id, dni, name, surname, title, picture FROM teachers";
+        if ($name != ""){
+            $query = $query." WHERE name = '$name'";
+        }
         $cursos = mysqli_query($conexion, $query);
-        ?>
-
-        <table>
-         <tr>
-            <td>
-                ID |
-            </td>
-            <td>
-                DNI |
-            </td>
-            <td>
-                Nombre |
-            </td>
-            <td>
-                Apellido (horas) |
-            </td>
-            <td>
-                Titulo |
-            </td>
-            <td>
-                Foto |
-            </td>
-         </tr>
-         
-         
-         <?php
-         echo"<table>";
+        echo"<table border = '1'>";
+        echo"<tr>";
+        echo"<td>ID </td>";
+        echo"<td>DNI </td>";
+        echo"<td>Nombre </td>";
+        echo"<td>Apellido </td>";
+        echo"<td>Titulo </td>";
+        echo"<td>Foto </td>";
+        echo"</tr>";
         for($i=0; $i<mysqli_num_rows($cursos);$i++){
             $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
-            ?>
-            <form action="EditarProfes.php" method="POST">
-            <tr> 
-            <?php
-            foreach($curso as $clave=>$dato){
-                if($clave=="id"){
-                    ?>
-                    <input type="hidden" name="find" value=<?php echo $dato?>>
-                    <?php
-                    echo "<td>";
-                    echo $dato." |";
-                    echo "</td>";
-                }else if($clave=="picture")
-                {
-                    echo "<td>";
-                    echo "<img src='$dato'/> |";
-                    echo "</td>"; 
-                }else{
-                echo "<td>";
-                    echo $dato." |";
-                echo "</td>";         
-                }      
-            }
-            ?>         
-            <td>
-                <input type="submit" value="Editar">
-            </form>
-            </td>
-            </tr>
-        <?php
+            echo "<tr>";
+            echo "<td>". $curso['id']."</td>";
+            echo "<td>". $curso['dni']."</td>";
+            echo "<td>". $curso['name']."</td>";
+            echo "<td>". $curso['surname']."</td>";
+            echo "<td>". $curso['title']."</td>";
+            echo "<td><img src='".$curso['picture']."'></td>";
+            echo "<td> <a href = 'edicionProfes.php?id=".$curso['id']."'> Editar </a></td>";
+            echo "</tr>";
         }
-        echo "</table>";
+        echo"</table>";
     }
 ?>

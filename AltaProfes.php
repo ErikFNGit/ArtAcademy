@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Alta de profesores</title>
 </head>
 <body>
     <?php
@@ -62,13 +62,10 @@
         </tr>       
         </tr>
             <td><input type="submit" value="Registrarse"></td>
-            <td><a href='AltaProfes.php'>Atras</a></td>
         </tr>
     </table>
 </form>
-        <form action="index.html" method="GET">
-                <input type="submit" value="Atras"/>
-        </form>
+    <a href = 'index.html'> Atras </a>  
     <?php
     }
     ?>    
