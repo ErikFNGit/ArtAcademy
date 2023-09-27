@@ -1,13 +1,9 @@
 <?php
-   function conexion(){
+function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;
-        } 
-
-
-
-function addCurso($conexion)
-{
+} 
+function addCurso($conexion){
     $datos="";
     foreach($_POST["nuevocurso"] as $dato){
         $datos = $datos."'$dato',"; 
@@ -28,9 +24,7 @@ function addCurso($conexion)
     echo $updateTeacher;
     mysqli_query($conexion,$updateTeacher);
 }
-
-function addStudent($conexion)
-{
+function addStudent($conexion){
     $dni=$_POST['dni'];
     $name=$_POST['name'];
     $surname=$_POST['surname'];        
@@ -52,7 +46,6 @@ function addStudent($conexion)
     mysqli_query($conexion,$query);
 
 }
-
 function buscarCurso($connection,$busqueda){
 
     if($busqueda==""){
@@ -67,9 +60,7 @@ function buscarCurso($connection,$busqueda){
         $_POST[$clave] = $dato;
     }
 }
-
-function listaCursos($conexion, $busqueda)
-{
+function listaCursos($conexion, $busqueda){
     if($busqueda=="")
     {
         $query = "SELECT * FROM curso;";
@@ -112,9 +103,7 @@ function listaCursos($conexion, $busqueda)
     }
     echo "</table>";
 }
-
-function updateCurso($conexion, $code)
-{
+function updateCurso($conexion, $code){
     if($_POST["active"]=="no"){
         $activo = "0";
     }else{
@@ -134,9 +123,7 @@ function updateCurso($conexion, $code)
     mysqli_query($conexion,$updateTeacher);
     
 }
-
-function selectTeachers($conexion,$nombreListado,$code,$curso)
-{
+function selectTeachers($conexion,$nombreListado,$code,$curso){
     $query = "SELECT id,curso_id,name,surname FROM teachers WHERE active"."=1;";
     $teachers=mysqli_query($conexion,$query);
     echo "<select name='".$nombreListado."'>";
@@ -152,11 +139,7 @@ function selectTeachers($conexion,$nombreListado,$code,$curso)
     }
     echo "</select>";
 }
-        
-        
-        
-        
-    function DNIExistente(){
+function DNIExistente(){
         //Comprobamos la conexion
         $conexion=conexion();
         if($conexion == FALSE){
@@ -180,8 +163,8 @@ function selectTeachers($conexion,$nombreListado,$code,$curso)
             }else{
                 echo"Error en la consulta";
             }
-        }
-    function IDExistente(){
+}
+function IDExistente(){
             //Comprobamos la conexion
             $conexion=conexion();
             if($conexion == FALSE){
@@ -205,8 +188,8 @@ function selectTeachers($conexion,$nombreListado,$code,$curso)
                 }else{
                     echo"Error en la consulta";
                 }
-        }
-    function nuevoTeacher(){
+}
+function nuevoTeacher(){
         $conexion = conexion();
         //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
         if($conexion == FALSE){
@@ -241,8 +224,8 @@ function selectTeachers($conexion,$nombreListado,$code,$curso)
         $consulta->execute();
         $consulta->close();
         $conexion->close();
-    }
-    function fillInfoTeacher($id){
+}
+function fillInfoTeacher($id){
         $conexion = conexion();
         //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
         if($conexion == FALSE){
@@ -293,8 +276,8 @@ function selectTeachers($conexion,$nombreListado,$code,$curso)
             }
         $consulta->close(); 
         } 
-    }
-    function updateTeacher(){
+}
+function updateTeacher(){
         $conexion = conexion();
         //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
         if($conexion == FALSE){
@@ -316,8 +299,8 @@ function selectTeachers($conexion,$nombreListado,$code,$curso)
         $consulta->execute();
         $consulta->close();
         $conexion->close();
-    }
-    function listaTeachers($name){
+}
+function listaTeachers($name){
         $conexion=conexion();
         if($conexion == FALSE){
             echo"Error en la base de datos";
@@ -351,5 +334,5 @@ function selectTeachers($conexion,$nombreListado,$code,$curso)
             echo "</tr>";
         }
         echo"</table>";
-    }
+}
 ?>
