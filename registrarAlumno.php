@@ -6,7 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include("Funciones.php"); if(!isset($_POST["dni"])){?>
+    <?php include("Funciones.php"); 
+    if(!isset($_POST["dni"])){
+    ?>
     <form action="registrarAlumno.php" method="post" enctype="multipart/form-data">
         <table>
             <tr>
@@ -39,12 +41,11 @@
                 </tr>
             </table>
     </form>
-    <?php }else{
+    <?php 
+    }else{
         addStudent(conexion());
         echo "<meta http-equiv='refresh' content ='0; url=index.html'>";
-
     }
     ?>
-
 </body>
 </html>
