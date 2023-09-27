@@ -51,6 +51,9 @@
             }
         ?>
     </table>
+    <form action="index.html" method="GET">
+        <input type="submit" value="Atras"/>
+    </form>
     
 </body>
 </html>

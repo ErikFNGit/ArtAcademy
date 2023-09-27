@@ -9,8 +9,7 @@
 function addCurso($conexion)
 {
     $datos="";
-    foreach($_POST["nuevocurso"] as $dato)
-    {
+    foreach($_POST["nuevocurso"] as $dato){
         $datos = $datos."'$dato',"; 
     }
     if($_POST["activo"] == "si"){
@@ -21,6 +20,37 @@ function addCurso($conexion)
     $insertNewCourse = "INSERT INTO `curso`(`name`, `description`, `hours`, `sDate`, `eDate`, `teacher_id`, `active`) 
     VALUES ($datos);";
     mysqli_query($conexion,$insertNewCourse);
+    $buscarIDcurso = "SELECT code FROM curso WHERE teacher_id='".$_POST["nuevocurso"][5]."';";
+    $ID = mysqli_query($conexion, $buscarIDcurso);
+    $ID = mysqli_fetch_array($ID, MYSQLI_NUM);
+    $ID = $ID[0];
+    $updateTeacher = "UPDATE teachers SET curso_id='".$ID."' WHERE id ='".$_POST["nuevocurso"][5]."';";
+    echo $updateTeacher;
+    mysqli_query($conexion,$updateTeacher);
+}
+
+function addStudent($conexion)
+{
+    $dni=$_POST['dni'];
+    $name=$_POST['name'];
+    $surname=$_POST['surname'];        
+    $password=md5($_POST['passwd']);
+    $age = $_POST["age"];
+    $picture=$_FILES['photo']['tmp_name'];
+        
+    if(is_uploaded_file($picture)){    
+        $directory= "img/" ;            
+        $fileName= $_FILES['photo']['name'];
+        $idUnico=time();
+        $path=$directory.$idUnico.$fileName;
+        move_uploaded_file($picture,$path);
+    }else{
+        print("Error, no se ha subido la imagen");
+    }
+
+    $query="INSERT INTO students (dni, name, surname, stPass, age, picture) VALUES ('$dni','$name','$surname','$password','$age','$path')";
+    mysqli_query($conexion,$query);
+
 }
 
 function buscarCurso($connection,$busqueda){
@@ -85,8 +115,7 @@ function listaCursos($conexion, $busqueda)
 
 function updateCurso($conexion, $code)
 {
-    if($_POST["active"]=="no")
-    {
+    if($_POST["active"]=="no"){
         $activo = "0";
     }else{
         $activo="1";
@@ -96,24 +125,29 @@ function updateCurso($conexion, $code)
     "',hours='".$_POST["editCurso"][2]."',sDate='".$_POST["editCurso"][3].
     "',eDate='".$_POST["editCurso"][4]."',teacher_id='".$_POST["editCurso"][5]."',active='".$activo."'";
     
-
     $query="UPDATE curso
     SET ".$set." WHERE code=".$code; 
     mysqli_query($conexion,$query);
+    $takeTeacher = "UPDATE teachers SET curso_id='0' WHERE curso_id ='$code';";
+    mysqli_query($conexion,$takeTeacher);
+    $updateTeacher = "UPDATE teachers SET curso_id='$code' WHERE id ='".$_POST["editCurso"][5]."';";
+    mysqli_query($conexion,$updateTeacher);
+    
 }
 
-function selectTeachers($conexion,$nombreListado,$code)
+function selectTeachers($conexion,$nombreListado,$code,$curso)
 {
-    $query = "SELECT id,name,surname FROM teachers WHERE active"."=1;";
+    $query = "SELECT id,curso_id,name,surname FROM teachers WHERE active"."=1;";
     $teachers=mysqli_query($conexion,$query);
     echo "<select name='".$nombreListado."'>";
     for($i=0; $i<mysqli_num_rows($teachers);$i++){
         $teacher=mysqli_fetch_array($teachers, MYSQLI_ASSOC);
-        if($code==$teacher["id"])
-        {
-            echo "<option value='".$teacher["id"]."' selected>".$teacher["name"]." ".$teacher["surname"]."</option>";
-        }else{
-            echo "<option value='".$teacher["id"]."'>".$teacher["name"]." ".$teacher["surname"]."</option>";
+        if($teacher["curso_id"]==0 or $teacher["curso_id"]==$curso){
+            if($code==$teacher["id"]){
+                echo "<option value='".$teacher["id"]."' selected>".$teacher["name"]." ".$teacher["surname"]."</option>";
+            }else{
+                echo "<option value='".$teacher["id"]."'>".$teacher["name"]." ".$teacher["surname"]."</option>";
+            }
         }
     }
     echo "</select>";
@@ -124,123 +158,7 @@ function selectTeachers($conexion,$nombreListado,$code)
 
 
 
-        
-        function addCurso($conexion)
-        {
-            $datos="";
-            foreach($_POST["nuevocurso"] as $dato)
-            {
-                $datos = $datos."'$dato',"; 
-            }
-            if($_POST["activo"] == "si"){
-                $datos = $datos."'1'";
-            }else{
-                $datos = $datos."'0'";
-            }
-            $insertNewCourse = "INSERT INTO `curso`(`name`, `description`, `hours`, `sDate`, `eDate`, `teacher_id`, `active`) 
-            VALUES ($datos);";
-            mysqli_query($conexion,$insertNewCourse);
-        }
-        
-        function buscarCurso($connection,$busqueda){
-        
-            if($busqueda==""){
-                $cursoE = "SELECT * FROM curso";
-            }else{
-                $cursoE = "SELECT * FROM curso WHERE code = $busqueda"; 
-            }
-            
-            $curso = mysqli_query($connection,$cursoE);
-            $curso = mysqli_fetch_array($curso,MYSQLI_ASSOC);
-            foreach($curso as $clave => $dato){
-                $_POST[$clave] = $dato;
-            }
-        }
-        
-        function listaCursos($conexion, $busqueda)
-        {
-            if($busqueda=="")
-            {
-                $query = "SELECT * FROM curso;";
-            }else{
-                $query = "SELECT * FROM curso WHERE name LIKE '%$busqueda%';"; 
-            }
-            $cursos = mysqli_query($conexion, $query);
-            for($i=0; $i<mysqli_num_rows($cursos);$i++)
-            {
-                echo "<form action='editarCurso.php' method='POST'>";
-                $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
-                echo "<tr>";
-                echo "<input type='hidden' name='codigo' value='".$curso["code"]."'>";
-                foreach($curso as $clave=>$dato)
-                {
-                    echo "<td>";
-                    if($clave=="active")
-                    {
-                        if($dato == "1")
-                        {
-                            echo "Si";
-                        }else{
-                            echo "No";
-                        }
-                    }else{
-                        echo $dato;
-                    }
-                    if($clave!="code"){
-                        echo "<input type='hidden' name='$clave' value='$dato'>";
-                    }
-                    echo "</td>";    
-                }
-                echo 
-                "<td>
-                    <input type='submit' value='Editar'/>
-                </td>";
-                echo "</tr>";
-                echo "<input type='hidden' name='listado'>";
-                echo "</form>";    
-            }
-            echo "</table>";
-        }
-        
-        function updateCurso($conexion, $code)
-        {
-            if($_POST["active"]=="no")
-            {
-                $activo = "0";
-            }else{
-                $activo="1";
-            }
-        
-            $set = "name='".$_POST["editCurso"][0]."', description='".$_POST["editCurso"][1].
-            "',hours='".$_POST["editCurso"][2]."',sDate='".$_POST["editCurso"][3].
-            "',eDate='".$_POST["editCurso"][4]."',teacher_id='".$_POST["editCurso"][5]."',active='".$activo."'";
-            
-        
-            $query="UPDATE curso
-            SET ".$set." WHERE code=".$code; 
-            mysqli_query($conexion,$query);
-        }
-        
-        function selectTeachers($conexion,$nombreListado,$code)
-        {
-            $query = "SELECT id,name,surname FROM teachers WHERE active"."=1;";
-            $teachers=mysqli_query($conexion,$query);
-            echo "<select name='".$nombreListado."'>";
-            for($i=0; $i<mysqli_num_rows($teachers);$i++){
-                $teacher=mysqli_fetch_array($teachers, MYSQLI_ASSOC);
-                if($code==$teacher["id"])
-                {
-                    echo "<option value='".$teacher["id"]."' selected>".$teacher["name"]." ".$teacher["surname"]."</option>";
-                }else{
-                    echo "<option value='".$teacher["id"]."'>".$teacher["name"]." ".$teacher["surname"]."</option>";
-                }
-            }
-            echo "</select>";
-        }
-        
-        
-        
-        
+     
         
     function DNIExistente(){
         //Comprobamos la conexion

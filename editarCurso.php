@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <td><label for="profe">Profesor asignado:</label></td>
-                        <td><?php selectTeachers(conexion(),"editCurso[]",$_POST["teacher_id"])?></td>
+                        <td><?php selectTeachers(conexion(),"editCurso[]",$_POST["teacher_id"],$_POST["codigo"])?></td>
                     </tr>
                     <tr>
                         <td>
