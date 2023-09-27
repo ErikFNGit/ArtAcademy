@@ -14,33 +14,7 @@
         <input type="text" name="busqueda">
         <input type="submit" value="Aceptar">
     </form>
-    <table>
-        <tr>
-            <td style="border:solid">
-                ID 
-            </td>
-            <td style="border:solid">
-                Nombre 
-            </td>
-            <td style="border:solid">
-                Descripcion 
-            </td>
-            <td style="border:solid">
-                Duracion (horas) 
-            </td>
-            <td style="border:solid">
-                Fecha inicio 
-            </td>
-            <td style="border:solid">
-                Fecha Fin 
-            </td>
-            <td style="border:solid">
-                Profesor Asignado 
-            </td>
-            <td style="border:solid">
-                Activo
-            </td>
-        </tr>
+    0</br>
         <?php
             if(isset($_POST["busqueda"]))
             {
@@ -50,10 +24,7 @@
                 listaCursos(conexion(),"");
             }
         ?>
-    </table>
-    <form action="index.html" method="GET">
-        <input type="submit" value="Atras"/>
-    </form>
+    <a href='index.html'>Atras</a>
     
 </body>
 </html>
