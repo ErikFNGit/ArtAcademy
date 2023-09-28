@@ -62,7 +62,7 @@
                         </td>
                         <td>
                             <?php
-                                selectTeachers(conexion(),"nuevocurso[]","","0");
+                                selectTeachers("","0");
                             ?>
                         </td>
                     </tr>

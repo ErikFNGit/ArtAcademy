@@ -2,12 +2,8 @@
 function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;
-        } 
-
-
-
-function addCurso($conexion)
-{
+} 
+function addCurso($conexion){
     $datos="";
     foreach($_POST["nuevocurso"] as $dato){
         $datos = $datos."'$dato',"; 
@@ -28,16 +24,13 @@ function addCurso($conexion)
     echo $updateTeacher;
     mysqli_query($conexion,$updateTeacher);
 }
-
-function addStudent($conexion)
-{
+function addStudent($conexion){
     $dni=$_POST['dni'];
     $name=$_POST['name'];
     $surname=$_POST['surname'];        
     $password=md5($_POST['passwd']);
     $age = $_POST["age"];
-    $picture=$_FILES['photo']['tmp_name'];
-        
+    $picture=$_FILES['photo']['tmp_name']; 
     if(is_uploaded_file($picture)){    
         $directory= "img/" ;            
         $fileName= $_FILES['photo']['name'];
@@ -47,12 +40,10 @@ function addStudent($conexion)
     }else{
         print("Error, no se ha subido la imagen");
     }
-
     $query="INSERT INTO students (dni, name, surname, stPass, age, picture) VALUES ('$dni','$name','$surname','$password','$age','$path')";
     mysqli_query($conexion,$query);
 
 }
-
 function buscarCurso($connection,$busqueda){
 
     if($busqueda==""){
@@ -67,58 +58,41 @@ function buscarCurso($connection,$busqueda){
         $_POST[$clave] = $dato;
     }
 }
-
-function listaCursos($conexion, $busqueda)
-{
-    if($busqueda=="")
-    {
-        $query = "SELECT * FROM curso;";
-    }else{
-        $query = "SELECT * FROM curso WHERE name LIKE '%$busqueda%';"; 
+function updateCurso(){
+    $conexion = conexion();
+    //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
     }
-    $cursos = mysqli_query($conexion, $query);
-    for($i=0; $i<mysqli_num_rows($cursos);$i++)
-    {
-        echo "<form action='editarCurso.php' method='POST'>";
-        $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
-        echo "<tr>";
-        echo "<input type='hidden' name='codigo' value='".$curso["code"]."'>";
-        foreach($curso as $clave=>$dato)
-        {
-            echo "<td>";
-            if($clave=="active")
-            {
-                if($dato == "1")
-                {
-                    echo "Si";
-                }else{
-                    echo "No";
-                }
-            }else{
-                echo $dato;
-            }
-            if($clave!="code"){
-                echo "<input type='hidden' name='$clave' value='$dato'>";
-            }
-            echo "</td>";    
-        }
-        echo 
-        "<td>
-            <input type='submit' value='Editar'/>
-        </td>";
-        echo "</tr>";
-        echo "<input type='hidden' name='listado'>";
-        echo "</form>";    
-    }
-    echo "</table>";
+    //Preparamos la query para insertar el usuario
+    $query="UPDATE curso SET name=?, description=?, hours=?, sDate=?, eDate=?, teacher_id=? WHERE code=".$_POST['id']."";
+    $consulta = $conexion->prepare($query);
+    $name=$_POST['name'];
+    $description=$_POST['description'];
+    $hours=$_POST['hours'];
+    $sDate=$_POST['start'];
+    $eDate=$_POST['end'];
+    $teacher=$_POST['idTeacher'];
+    $consulta = $conexion->prepare($query);
+    //Usmoas bind_param para asginarle los valores a la query y ejecutarla
+    $consulta->bind_param("ssissi",$name, $description, $hours, $sDate, $eDate, $teacher );
+    $consulta->execute();
+    $consulta->close();
+    $query="UPDATE teachers SET curso_id=? WHERE id=?";
+    $consulta = $conexion->prepare($query);
+    $consulta->bind_param("ii",$_POST['id'],$teacher);
+    $consulta->execute();
+    $conexion->close();    
 }
-
-function updateCurso($conexion, $code)
-{
-    if($_POST["active"]=="no"){
-        $activo = "0";
-    }else{
-        $activo="1";
+function selectTeachers($code,$curso){
+    $conexion = conexion();
+    //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
     }
 
     $set = "name='".$_POST["editCurso"][0]."', description='".$_POST["editCurso"][1].
@@ -143,7 +117,7 @@ function selectTeachers($conexion,$nombreListado,$code,$curso)
 {
     $query = "SELECT id,curso_id,name,surname FROM teachers WHERE active"."=1;";
     $teachers=mysqli_query($conexion,$query);
-    echo "<select name='".$nombreListado."'>";
+    echo "<select name='idTeacher'>";
     for($i=0; $i<mysqli_num_rows($teachers);$i++){
         $teacher=mysqli_fetch_array($teachers, MYSQLI_ASSOC);
         if($teacher["curso_id"]==0 or $teacher["curso_id"]==$curso){
@@ -195,7 +169,7 @@ function checkStudent($conexion, $codigo){
         
         
         
-    function DNIExistente(){
+function DNIExistente(){
         //Comprobamos la conexion
         $conexion=conexion();
         if($conexion == FALSE){
@@ -219,8 +193,8 @@ function checkStudent($conexion, $codigo){
             }else{
                 echo"Error en la consulta";
             }
-        }
-    function IDExistente(){
+}
+function IDExistente(){
             //Comprobamos la conexion
             $conexion=conexion();
             if($conexion == FALSE){
@@ -244,8 +218,8 @@ function checkStudent($conexion, $codigo){
                 }else{
                     echo"Error en la consulta";
                 }
-        }
-    function nuevoTeacher(){
+}
+function nuevoTeacher(){
         $conexion = conexion();
         //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
         if($conexion == FALSE){
@@ -280,8 +254,8 @@ function checkStudent($conexion, $codigo){
         $consulta->execute();
         $consulta->close();
         $conexion->close();
-    }
-    function fillInfoTeacher($id){
+}
+function fillInfoTeacher($id){
         $conexion = conexion();
         //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
         if($conexion == FALSE){
@@ -332,8 +306,69 @@ function checkStudent($conexion, $codigo){
             }
         $consulta->close(); 
         } 
+}
+function fillInfoCursos($idCurso){
+    $conexion = conexion();
+    //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
     }
-    function updateTeacher(){
+    $query="SELECT code, name, description, hours, sDate, eDate, teacher_id FROM curso WHERE code = ?";
+    $consulta = $conexion->prepare($query);
+    $consulta->bind_param("i",$idCurso);
+    if($consulta->execute()){
+        $datos=$consulta->get_result();
+        if($datos->num_rows>0){
+        $row= $datos->fetch_assoc();
+        $idProfeSelect=$row['teacher_id'];
+        $query2="SELECT name FROM teachers WHERE id = ".$row['teacher_id']."";
+        $nombreprofe=mysqli_query($conexion,$query2);
+        $nombreprofe=mysqli_fetch_array($nombreprofe, MYSQLI_ASSOC);
+        $nombreprofe=$nombreprofe['name'];
+        ?>
+    <form action="editarCurso.php" method="POST">
+    <table>
+    <input type="hidden" name="id" value=<?php echo $row['code']; ?>>
+        <tr>
+            <td><label>Nombre: </label></td>
+            <td><input type="text" name="name" value=<?php echo $row['name'];?> required></td>
+        </tr>
+        <tr>
+            <td><label>Descripcion: </label></td>
+            <td><input type="text" name="description" value=<?php echo $row['description'];?> required></td>
+        </tr>
+        <tr>
+            <td><label>Horas: </label></td> 
+            <td><input type="number" name="hours" value=<?php echo $row['hours'];?> required></td>
+        </tr>
+        <tr>
+            <td><label>Fecha de inicio: </label></td>
+            <td><input type="date" name="start" value =<?php echo $row['sDate'];?> required><label for="yes"></label></td>
+        </tr>
+        <tr>
+            <td><label>Fecha final: </label></td>
+            <td><input type="date" name="end" value =<?php echo $row['eDate'];?> required><label for="yes"></label></td>
+        </tr>
+        <tr>
+            <td><label>Profesor: </label></td> 
+            <td><?php selectTeachers($idProfeSelect,$idCurso)?></td>
+        </tr>       
+        <tr>
+            <td><input type="submit" value="Editar"></td>
+            <td><a href='listarCursos.php'>Atras</td>
+        </tr>
+    </table>
+</form>
+        <?php
+        }else{
+        echo"<h2>Este id no correspone a ningun curso</h2>";
+        }
+    $consulta->close(); 
+    } 
+}
+function updateTeacher(){
         $conexion = conexion();
         //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
         if($conexion == FALSE){
@@ -355,8 +390,69 @@ function checkStudent($conexion, $codigo){
         $consulta->execute();
         $consulta->close();
         $conexion->close();
+}
+function listaCursos($conexion, $busqueda){
+    if($busqueda==""){
+        $query = "SELECT * FROM curso;";
+    }else{
+        $query = "SELECT * FROM curso WHERE name LIKE '%$busqueda%';"; 
     }
-    function listaTeachers($name){
+    $cursos = mysqli_query($conexion, $query);
+    echo"<table border = '1'>";
+        echo"<tr>";
+            echo"<td>Nombre </td>";
+            echo"<td>Descripcion </td>";
+            echo"<td>Horas </td>";
+            echo"<td>Fecha Inicio </td>";
+            echo"<td>Fecha Final </td>";
+            echo"<td>Profesor </td>";
+        echo"</tr>";
+    for($i=0; $i<mysqli_num_rows($cursos);$i++){
+        $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
+        $query2="SELECT name FROM teachers WHERE id = ".$curso['teacher_id']."";
+        $nombreprofe=mysqli_query($conexion,$query2);
+        $nombreprofe=mysqli_fetch_array($nombreprofe, MYSQLI_ASSOC);
+        $nombreprofe=$nombreprofe['name'];
+            echo "<tr>";
+            echo "<td>". $curso['name']."</td>";
+            echo "<td>". $curso['description']."</td>";
+            echo "<td>". $curso['hours']."</td>";
+            echo "<td>". $curso['sDate']."</td>";
+            echo "<td>". $curso['eDate']."</td>";
+            echo "<td>". $nombreprofe."</td>";
+            echo "<td> <a href = 'editarCurso.php?id=".$curso['code']."'> Editar </a></td>";
+        echo "</tr>";
+        // echo "<form action='editarCurso.php' method='POST'>";
+        // $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
+        // echo "<tr>";
+        // echo "<input type='hidden' name='codigo' value='".$curso["code"]."'>";
+        // foreach($curso as $clave=>$dato){
+        //     echo "<td>";
+        //     if($clave=="active"){
+        //         if($dato == "1"){
+        //             echo "Si";
+        //         }else{
+        //             echo "No";
+        //         }
+        //     }else{
+        //         echo $dato;
+        //     }
+        //     if($clave!="code"){
+        //         echo "<input type='hidden' name='$clave' value='$dato'>";
+        //     }
+        //     echo "</td>";    
+        // }
+        // echo 
+        // "<td>
+        //     <input type='submit' value='Editar'/>
+        // </td>";
+        // echo "</tr>";
+        // echo "<input type='hidden' name='listado'>";
+        // echo "</form>";    
+    }
+    echo "</table>";
+}
+function listaTeachers($name){
         $conexion=conexion();
         if($conexion == FALSE){
             echo"Error en la base de datos";
@@ -390,5 +486,5 @@ function checkStudent($conexion, $codigo){
             echo "</tr>";
         }
         echo"</table>";
-    }
+}
 ?>
