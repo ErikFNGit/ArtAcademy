@@ -55,10 +55,8 @@
         </tr>
         <tr>
             <td><label>Activo: </label></td>
-            <td><input type="radio" id="yes" name="active" value ="yes" required></td>
-            <td><label for="yes">Si</label></td>
-            <td><input type="radio" id="no" name="active" value = "no" required></td>
-            <td><label for="no">No</label></td>
+            <td><input type="radio" id="yes" name="active" value ="yes" required>Si</input></td>
+            <td><input type="radio" id="no" name="active" value = "no" required>No</input></td>
         </tr>       
         </tr>
             <td><input type="submit" value="Registrarse"></td>
