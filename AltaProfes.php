@@ -65,7 +65,7 @@
         </tr>
     </table>
 </form>
-    <a href = 'index.html'> Atras </a>  
+    <a href = 'index.php'> Atras </a>  
     <?php
     }
     ?>    

@@ -7,17 +7,19 @@
     <link rel="stylesheet" href="indexPrueba.css">
 </head>
 <body>
-    <?php
-    ?>
-<div class="header">
+    <div class="header">
         <!-- <img src="logoBlanco.png" alt="aqui va el logo"> -->
-        <a href="loginUser.php">Inicio</a>    
+        <a href="">Inicio</a>    
         <a href="">Cerrar Sesion</a>
     </div>
-    <a href="AltaProfes.php">Añadir profesores</a> <br>
-    <a href="crearCurso.php">Añadir cursos</a> <br>
-    <a href="listarProfes.php">Editar profesores</a> <br>
-    <a href="listarCursos.php">Listado de cursos</a> <br>
-    <a href="registrarAlumno.php">Registrar alumno</a>
+    <div class="container">
+        <div class="menu">
+            <a href="AltaProfes.php">Añadir profesores</a> <br>
+            <a href="crearCurso.php">Añadir cursos</a> <br>
+            <a href="listarProfes.php">Editar profesores</a> <br>
+            <a href="listarCursos.php">Listado de cursos</a> <br>
+            <a href="registrarAlumno.php">Registrar alumno</a>
+        </div>
+    </div>
 </body>
 </html>

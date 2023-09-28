@@ -6,7 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-    <?php include("Funciones.php"); if(!isset($_POST["dni"])){?>
+    <?php include("Funciones.php"); 
+    if(!isset($_POST["dni"])){
+    ?>
     <form action="registrarAlumno.php" method="post" enctype="multipart/form-data">
         <table>
             <tr>
@@ -39,6 +41,7 @@
                 </tr>
             </table>
     </form>
+    <a href = 'index.php'> Atras </a>  
     <?php }else{
         if(!checkStudent(conexion(),$_POST["dni"]))
         {
@@ -57,6 +60,5 @@
 
     }
     ?>
-
 </body>
 </html>

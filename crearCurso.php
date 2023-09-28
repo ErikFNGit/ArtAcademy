@@ -62,7 +62,7 @@
                         </td>
                         <td>
                             <?php
-                                selectTeachers(conexion(),"nuevocurso[]","","0");
+                                selectTeachers("","0");
                             ?>
                         </td>
                     </tr>
@@ -84,7 +84,7 @@
                     </tr>
                 </table>
             </form>
-            <form action="index.html" method="GET">
+            <form action="index.php" method="GET">
                 <input type="submit" value="Atras"/>
             </form>
         <?php
