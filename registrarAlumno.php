@@ -41,6 +41,7 @@
                 </tr>
             </table>
     </form>
+    <a href = 'index.php'> Atras </a>  
     <?php }else{
         if(!checkStudent(conexion(),$_POST["dni"]))
         {

@@ -28,6 +28,6 @@
     <?php
         listaTeachers($name);
     ?>
-    <a href = 'index.html'> Atras </a>  
+    <a href = 'index.php'> Atras </a>  
 </body>
 </html>
