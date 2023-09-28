@@ -40,8 +40,20 @@
             </table>
     </form>
     <?php }else{
-        addStudent(conexion());
-        echo "<meta http-equiv='refresh' content ='0; url=index.html'>";
+        if(!checkStudent(conexion(),$_POST["dni"]))
+        {
+            addStudent(conexion());
+            echo "<meta http-equiv='refresh' content ='0; url=index.php'>";
+        }else{
+            unset($_POST["dni"]);
+            unset($_POST["name"]);
+            unset($_POST["surname"]);
+            unset($_POST["passwd"]);
+            unset($_POST["age"]);
+            unset($_POST["photo"]);
+            echo "<meta http-equiv='refresh' content ='0; url=registrarAlumno.php'>";
+        }
+        
 
     }
     ?>
