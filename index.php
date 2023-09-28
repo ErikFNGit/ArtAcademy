@@ -9,7 +9,7 @@
 <body>
     <div class="header">
         <!-- <img src="logoBlanco.png" alt="aqui va el logo"> -->
-        <a href="">Inicio</a>    
+        <a href="loginUser.php">Inicio</a>    
         <a href="">Cerrar Sesion</a>
     </div>
     <div class="container">
