@@ -63,7 +63,7 @@
         </tr>
     </table>
 </form>
-    <a href = 'index.php'> Atras </a>  
+    <a href = 'controlAdmin.php'> Atras </a>  
     <?php
     }
     ?>    

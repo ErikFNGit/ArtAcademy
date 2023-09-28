@@ -84,9 +84,7 @@
                     </tr>
                 </table>
             </form>
-            <form action="index.php" method="GET">
-                <input type="submit" value="Atras"/>
-            </form>
+            <a href = 'controlAdmin.php'> Atras </a>  
         <?php
         }
         else

@@ -1,3 +1,6 @@
+<?php
+    session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,19 +9,40 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="header">
-        <!-- <img src="logoBlanco.png" alt="aqui va el logo"> -->
-        <a href="loginUser.php">Inicio</a>    
-        <a href="">Cerrar Sesion</a>
-    </div>
-    <div class="container">
-        <div class="menu">
-            <a href="AltaProfes.php">Añadir profesores</a> <br>
-            <a href="crearCurso.php">Añadir cursos</a> <br>
-            <a href="listarProfes.php">Editar profesores</a> <br>
-            <a href="listarCursos.php">Listado de cursos</a> <br>
-            <a href="registrarAlumno.php">Registrar alumno</a>
-        </div>
-    </div>
+    <?php
+        include("Funciones.php");
+        if(!isset($_POST["dni"])){
+            if(isset($_SESSION["error"]))
+            {
+                echo $_SESSION["error"];
+                unset($_SESSION["error"]);
+            }
+    ?>
+    <table>
+        <form action="loginUser.php" method="post">
+            <tr>
+                <td><label for="dni">DNI:</label></td>
+                <td><input type="text" name="dni"></td>
+            </tr>
+            <tr>
+                <td><label for="passwd">Contraseña:</label></td>
+                <td><input type="password" name="passwd"></td>
+            </tr>
+            <tr><td><input type="submit" value="Acceder"></td></tr>
+        </form>
+    </table>
+    <?php 
+        }else{
+            if(!studentLogin(conexion())){
+                unset($_POST["dni"]);
+                unset($_POST["passwd"]);
+                $_SESSION["error"]="<p>Contraseña o usuario incorrecto(s) pruebe de nuevo</p>";
+                echo "<meta http-equiv='refresh' content ='0; url=loginUser.php'>";               
+            }else{
+                echo "<meta http-equiv='refresh' content ='0; url=perfilAlumno.php'>";               
+
+            }
+        }
+    ?>
 </body>
 </html>
