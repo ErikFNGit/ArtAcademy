@@ -94,6 +94,27 @@ function selectTeachers($code,$curso){
         mysqli_connect_error();
         exit();
     }
+
+    $set = "name='".$_POST["editCurso"][0]."', description='".$_POST["editCurso"][1].
+    "',hours='".$_POST["editCurso"][2]."',sDate='".$_POST["editCurso"][3].
+    "',eDate='".$_POST["editCurso"][4]."',teacher_id='".$_POST["editCurso"][5]."',active='".$activo."'";
+    
+    $query="UPDATE curso
+    SET ".$set." WHERE code=".$code; 
+    mysqli_query($conexion,$query);
+    $takeTeacher = "UPDATE teachers SET curso_id='0' WHERE curso_id ='$code';";
+    mysqli_query($conexion,$takeTeacher);
+    $updateTeacher = "UPDATE teachers SET curso_id='$code' WHERE id ='".$_POST["editCurso"][5]."';";
+    mysqli_query($conexion,$updateTeacher);
+    
+}
+
+function updateStudent($conexion){
+    
+}
+
+function selectTeachers($conexion,$nombreListado,$code,$curso)
+{
     $query = "SELECT id,curso_id,name,surname FROM teachers WHERE active"."=1;";
     $teachers=mysqli_query($conexion,$query);
     echo "<select name='idTeacher'>";
@@ -109,6 +130,45 @@ function selectTeachers($code,$curso){
     }
     echo "</select>";
 }
+
+function studentLogin($conexion){
+    $dni = $_POST["dni"];
+    $passwd = $_POST["passwd"];
+    $passwd = md5($passwd);
+
+
+    $query = "SELECT stPass FROM students WHERE dni LIKE '$dni'";
+    $stPass = mysqli_query($conexion,$query);
+    $stPass = mysqli_fetch_array($stPass, MYSQLI_NUM);
+    $login = false;
+    if(isset($stPass[0])){
+        $stPass = $stPass[0];
+        if($stPass==$passwd){
+            $login = true;
+        }
+    }
+   
+    return $login;
+
+}
+
+function checkStudent($conexion, $codigo){
+    $query = "SELECT dni FROM students";
+    $resultado = mysqli_query($conexion,$query);
+    $esta = false;
+    for($i=0; $i<mysqli_num_rows($resultado);$i++){
+        $dni = mysqli_fetch_array($resultado, MYSQLI_NUM);
+        if($codigo == $dni[0])
+        {
+            $esta = true;
+        }
+    }
+    return $esta;
+}
+        
+        
+        
+        
 function DNIExistente(){
         //Comprobamos la conexion
         $conexion=conexion();
