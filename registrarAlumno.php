@@ -41,12 +41,12 @@
                 </tr>
             </table>
     </form>
-    <a href = 'index.php'> Atras </a>  
+    <a href = 'controlAdmin.php'> Atras </a>  
     <?php }else{
         if(!checkStudent(conexion(),$_POST["dni"]))
         {
             addStudent(conexion());
-            echo "<meta http-equiv='refresh' content ='0; url=index.php'>";
+            echo "<meta http-equiv='refresh' content ='0; url=controlAdmin.php'>";
         }else{
             unset($_POST["dni"]);
             unset($_POST["name"]);
