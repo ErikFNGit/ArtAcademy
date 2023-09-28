@@ -9,6 +9,9 @@
     <title>Document</title>
 </head>
 <body>
-    
+<?php
+        include("Funciones.php");
+        perfilStudent($_SESSION["dni"]);
+?>        
 </body>
 </html>

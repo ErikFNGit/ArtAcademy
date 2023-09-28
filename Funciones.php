@@ -437,7 +437,7 @@ function listaTeachers($name){
         }
         $query = "SELECT id, dni, name, surname, title, picture FROM teachers";
         if ($name != ""){
-            $query = $query." WHERE name = '$name'";
+            $query = $query." WHERE name = '%$name%'";
         }
         $cursos = mysqli_query($conexion, $query);
         echo"<table border = '1'>";
@@ -462,5 +462,40 @@ function listaTeachers($name){
             echo "</tr>";
         }
         echo"</table>";
+}
+function perfilStudent($dni){
+    $conexion = conexion();
+        //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
+        if($conexion == FALSE){
+            echo"Error en la base de datos";
+            mysqli_connect_error();
+            exit();
+        }
+    $query="SELECT name, id FROM students WHERE dni=?";
+    $consulta = $conexion->prepare($query);
+    $consulta->bind_param("i",$dni );
+    $consulta->execute();
+    $row=$consulta->get_result();
+    $name=$row->fetch_assoc();
+    $consulta->close();
+    $query2="SELECT curso_id, score FROM matricula WHERE student_id = ".$name['id']."";
+    $notas=mysqli_query($conexion, $query2);
+    echo"<h2>Bienvenido, a tu perfil de estudiante ".$name['name']. " </h2>";
+    echo"<p>Notas: </p>";
+    echo"<table border = '1'>";
+    echo"<th>Curso </th>";
+    echo"<th> Nota </th>";
+    for($i=0;$i<mysqli_num_rows($notas);$i++){
+        $row = mysqli_fetch_array($notas, MYSQLI_ASSOC);
+        $query3="SELECT name FROM curso WHERE code =".$row['curso_id']." ";
+        $nameCurso=mysqli_query($conexion,$query3);
+        $nameCurso=mysqli_fetch_array($nameCurso, MYSQLI_ASSOC);
+        echo"<tr>";
+        echo "<td>".$nameCurso['name']." </td>";
+        echo "<td>".$row['score']." </td>";
+        echo"</tr>";
+    }
+    echo"</table>";
+    echo "<td><a href = 'editarEstudiante.php?id=".$name['id']."'> Editar </a></td>";
 }
 ?>
