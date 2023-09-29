@@ -43,6 +43,7 @@
                 $_SESSION["error"]="<p>Contraseña o usuario incorrecto(s) pruebe de nuevo</p>";
                 echo "<meta http-equiv='refresh' content ='0; url=index.php'>";               
             }else{
+                $_SESSION['dni']=$_POST['dni'];
                 echo "<meta http-equiv='refresh' content ='0; url=perfilAlumno.php'>";               
 
             }
