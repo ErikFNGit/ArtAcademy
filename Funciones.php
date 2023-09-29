@@ -550,7 +550,7 @@ function perfilStudent($dni){
             mysqli_connect_error();
             exit();
         }
-    $query="SELECT name, id FROM students WHERE dni=?";
+    $query="SELECT name, id, picture FROM students WHERE dni=?";
     $consulta = $conexion->prepare($query);
     $consulta->bind_param("i",$dni );
     $consulta->execute();
@@ -560,6 +560,7 @@ function perfilStudent($dni){
     $query2="SELECT curso_id, score FROM matricula WHERE student_id = ".$name['id']."";
     $notas=mysqli_query($conexion, $query2);
     echo"<h2>Bienvenido a tu perfil de estudiante, ".$name['name']. " </h2>";
+    echo "<div><img src='".$name['picture']."'></div>";
     echo"<p>Notas: </p>";
     echo"<table border = '1'>";
     echo"<th>Curso </th>";
