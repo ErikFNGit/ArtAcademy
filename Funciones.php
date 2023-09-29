@@ -110,8 +110,7 @@ function selectTeachers($code,$curso){
     echo "</select>";
     
 }
-function updateStudent($conexion){
-}
+
 function studentLogin($conexion){
     $dni = $_POST["dni"];
     $passwd = $_POST["passwd"];
@@ -283,6 +282,50 @@ function fillInfoTeacher($id){
         $consulta->close(); 
         } 
 }
+function fillInfoStudent($id){
+    $conexion = conexion();
+    //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
+    }
+    $query="SELECT id, dni, name, surname FROM students WHERE id = ?";
+    $consulta = $conexion->prepare($query);
+    $consulta->bind_param("i",$id);
+    if($consulta->execute()){
+        $datos=$consulta->get_result();
+        if($datos->num_rows>0){
+        $row= $datos->fetch_assoc();
+        ?>
+    <form action="editarEstudiante.php" method="POST">
+    <table>
+        <tr>
+            <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
+            <td><label>Dni: </label></td>
+            <td><input type="text" name="dni" value=<?php echo $row['dni'];?> required></td>
+        </tr>
+        <tr>
+            <td><label>Nombre: </label></td>
+            <td><input type="text" name="name" value=<?php echo $row['name'];?> required></td>
+        </tr>
+        <tr>
+            <td><label>Apellido: </label></td>
+            <td><input type="text" name="surname" value=<?php echo $row['surname'];?> required></td>
+        </tr>       
+        <tr>            
+            <td><input type="submit" value="Editar"></td>
+            <td><a href='perfilAlumnto.php'>Atras</td>
+        </tr>
+    </table>
+</form>
+        <?php
+        }else{
+        echo"<h2>Este id no correspone a ningun alumno</h2>";
+        }
+    $consulta->close(); 
+    } 
+}
 function fillInfoCursos($idCurso){
     $conexion = conexion();
     //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
@@ -367,6 +410,28 @@ function updateTeacher(){
         $consulta->close();
         $conexion->close();
 }
+function updateStudent(){
+    $conexion = conexion();
+    //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
+    }
+    //Preparamos la query para insertar el usuario
+    $query="UPDATE students SET id=?, dni=?, name=?, surname=? WHERE id=?";
+    $consulta = $conexion->prepare($query);
+    $id=$_POST['id'];
+    $name=$_POST['name'];
+    $surname=$_POST['surname'];
+    $dni=$_POST['dni'];
+    $consulta = $conexion->prepare($query);
+    //Usmoas bind_param para asginarle los valores a la query y ejecutarla
+    $consulta->bind_param("isssi",$id,$dni, $name, $surname, $id);
+    $consulta->execute();
+    $consulta->close();
+    $conexion->close();
+}
 function listaCursos($conexion, $busqueda){
     if($busqueda==""){
         $query = "SELECT * FROM curso;";
@@ -397,34 +462,7 @@ function listaCursos($conexion, $busqueda){
             echo "<td>". $curso['eDate']."</td>";
             echo "<td>". $nombreprofe."</td>";
             echo "<td> <a href = 'editarCurso.php?id=".$curso['code']."'> Editar </a></td>";
-        echo "</tr>";
-        // echo "<form action='editarCurso.php' method='POST'>";
-        // $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
-        // echo "<tr>";
-        // echo "<input type='hidden' name='codigo' value='".$curso["code"]."'>";
-        // foreach($curso as $clave=>$dato){
-        //     echo "<td>";
-        //     if($clave=="active"){
-        //         if($dato == "1"){
-        //             echo "Si";
-        //         }else{
-        //             echo "No";
-        //         }
-        //     }else{
-        //         echo $dato;
-        //     }
-        //     if($clave!="code"){
-        //         echo "<input type='hidden' name='$clave' value='$dato'>";
-        //     }
-        //     echo "</td>";    
-        // }
-        // echo 
-        // "<td>
-        //     <input type='submit' value='Editar'/>
-        // </td>";
-        // echo "</tr>";
-        // echo "<input type='hidden' name='listado'>";
-        // echo "</form>";    
+        echo "</tr>";  
     }
     echo "</table>";
 }
@@ -480,7 +518,7 @@ function perfilStudent($dni){
     $consulta->close();
     $query2="SELECT curso_id, score FROM matricula WHERE student_id = ".$name['id']."";
     $notas=mysqli_query($conexion, $query2);
-    echo"<h2>Bienvenido, a tu perfil de estudiante ".$name['name']. " </h2>";
+    echo"<h2>Bienvenido a tu perfil de estudiante, ".$name['name']. " </h2>";
     echo"<p>Notas: </p>";
     echo"<table border = '1'>";
     echo"<th>Curso </th>";
@@ -498,4 +536,5 @@ function perfilStudent($dni){
     echo"</table>";
     echo "<td><a href = 'editarEstudiante.php?id=".$name['id']."'> Editar </a></td>";
 }
+
 ?>
