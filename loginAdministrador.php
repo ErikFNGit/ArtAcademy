@@ -9,24 +9,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Login alumnado</h1>
-
+    <h1>Login administrador</h1>
     <?php
         include("Funciones.php");
-        if(!isset($_POST["dni"])){
+        if(!isset($_POST["ID"])){
             if(isset($_SESSION["error"]))
             {
                 echo $_SESSION["error"];
                 unset($_SESSION["error"]);
             }
     ?>
-    
-
     <table>
-        <form action="index.php" method="post">
+        <form action="loginAdministrador.php" method="post">
             <tr>
-                <td><label for="dni">DNI:</label></td>
-                <td><input type="text" name="dni"></td>
+                <td><label for="ID">ID:</label></td>
+                <td><input type="text" name="ID"></td>
             </tr>
             <tr>
                 <td><label for="passwd">Contraseña:</label></td>
@@ -37,13 +34,13 @@
     </table>
     <?php 
         }else{
-            if(!studentLogin(conexion())){
-                unset($_POST["dni"]);
+            if(!adminLogin(conexion())){
+                unset($_POST["ID"]);
                 unset($_POST["passwd"]);
                 $_SESSION["error"]="<p>Contraseña o usuario incorrecto(s) pruebe de nuevo</p>";
-                echo "<meta http-equiv='refresh' content ='0; url=index.php'>";               
+                echo "<meta http-equiv='refresh' content ='0; url=loginAdministrador.php'>";               
             }else{
-                echo "<meta http-equiv='refresh' content ='0; url=perfilAlumno.php'>";               
+                echo "<meta http-equiv='refresh' content ='0; url=controlAdmin.php'>";               
 
             }
         }

@@ -10,7 +10,7 @@
 </head>
 <body>
     <?php
-   if ($_GET){    
+    if($_GET){    
     fillInfoCursos($_GET['id']);
     }else if ($_POST){
         updateCurso();

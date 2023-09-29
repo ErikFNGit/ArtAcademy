@@ -43,7 +43,7 @@
     </form>
     <a href = 'controlAdmin.php'> Atras </a>  
     <?php }else{
-        if(!checkStudent(conexion(),$_POST["dni"]))
+        if(!checkID(conexion(),$_POST["dni"]))
         {
             addStudent(conexion());
             echo "<meta http-equiv='refresh' content ='0; url=controlAdmin.php'>";
