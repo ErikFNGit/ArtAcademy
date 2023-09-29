@@ -17,7 +17,10 @@
             <a href="crearCurso.php">Añadir cursos</a> <br>
             <a href="listarProfes.php">Editar profesores</a> <br>
             <a href="listarCursos.php">Listado de cursos</a> <br>
-            <a href="registrarAlumno.php">Registrar alumno</a>
+            <a href="registrarAlumno.php">Registrar alumno</a> <br>
+            <a href="listadoAlumnos.php">Listado alumno</a> <br>
+            <a href="loginAdministrador.php">Atras</a> 
+
         </div>
     </div>
 </body>

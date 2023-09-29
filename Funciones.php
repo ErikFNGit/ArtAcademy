@@ -110,7 +110,31 @@ function selectTeachers($code,$curso){
     echo "</select>";
     
 }
-
+function listarAlumnos($conexion,$busqueda){
+    if($busqueda==""){
+        $query = "SELECT * FROM students;";
+    }else{
+        $query = "SELECT * FROM students WHERE name LIKE '%$busqueda%';"; 
+    }
+    $alumnos = mysqli_query($conexion, $query);
+    echo"<table border = '1'>";
+        echo"<tr>";
+            echo"<td>ID </td>";
+            echo"<td>DNI </td>";
+            echo"<td>Nomre </td>";
+            echo"<td>Apellido </td>";
+        echo"</tr>";
+    for($i=0; $i<mysqli_num_rows($alumnos);$i++){
+        $alumno = mysqli_fetch_array($alumnos, MYSQLI_ASSOC);
+        echo "<tr>";
+            echo "<td>". $alumno['id']."</td>";
+            echo "<td>". $alumno['dni']."</td>";
+            echo "<td>". $alumno['name']."</td>";
+            echo "<td>". $alumno['surname']."</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+}
 function studentLogin($conexion){
     $dni = $_POST["dni"];
     $passwd = $_POST["passwd"];
@@ -131,7 +155,27 @@ function studentLogin($conexion){
     return $login;
 
 }
-function checkStudent($conexion, $codigo){
+
+function adminLogin($conexion){
+    $ID = $_POST["ID"];
+    $passwd = $_POST["passwd"];
+    $passwd = md5($passwd);
+
+
+    $query = "SELECT adminPass FROM datosadministrador WHERE id LIKE '$ID'";
+    $adminPass = mysqli_query($conexion,$query);
+    $adminPass = mysqli_fetch_array($adminPass, MYSQLI_NUM);
+    $login = false;
+    if(isset($adminPass[0])){
+        $adminPass = $adminPass[0];
+        if($adminPass==$adminPass){
+            $login = true;
+        }
+    }
+   
+    return $login;
+}
+function checkID($conexion, $codigo){
     $query = "SELECT dni FROM students";
     $resultado = mysqli_query($conexion,$query);
     $esta = false;
@@ -343,9 +387,6 @@ function fillInfoCursos($idCurso){
         $row= $datos->fetch_assoc();
         $idProfeSelect=$row['teacher_id'];
         $query2="SELECT name FROM teachers WHERE id = ".$row['teacher_id']."";
-        $nombreprofe=mysqli_query($conexion,$query2);
-        $nombreprofe=mysqli_fetch_array($nombreprofe, MYSQLI_ASSOC);
-        $nombreprofe=$nombreprofe['name'];
         ?>
     <form action="editarCurso.php" method="POST">
     <table>
@@ -379,7 +420,7 @@ function fillInfoCursos($idCurso){
             <td><a href='listarCursos.php'>Atras</td>
         </tr>
     </table>
-</form>
+    </form>
         <?php
         }else{
         echo"<h2>Este id no correspone a ningun curso</h2>";
@@ -536,5 +577,4 @@ function perfilStudent($dni){
     echo"</table>";
     echo "<td><a href = 'editarEstudiante.php?id=".$name['id']."'> Editar </a></td>";
 }
-
 ?>

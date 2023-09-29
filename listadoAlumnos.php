@@ -9,7 +9,7 @@
     <?php
         include("Funciones.php");
     ?>
-    <form action="listarCursos.php" method="POST">
+    <form action="listadoAlumnos.php" method="POST">
         <label for="codigo">Buscador:</label>
         <input type="text" name="busqueda">
         <input type="submit" value="Aceptar">
@@ -18,13 +18,16 @@
         <?php
             if(isset($_POST["busqueda"]))
             {
-                listaCursos(conexion(),$_POST["busqueda"]);
+                listarAlumnos(conexion(),$_POST["busqueda"]);
+
 
             }else{
-                listaCursos(conexion(),"");
+                listarAlumnos(conexion(),"");
+
             }
         ?>
     <a href='controlAdmin.php'>Atras</a>
+
     
 </body>
 </html>
