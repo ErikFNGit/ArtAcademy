@@ -1,0 +1,13 @@
+header {
+  display: grid;
+  grid-template-columns: 80% 10% 10%;
+  background-color: white;
+}
+header div {
+  display: flex;
+  align-items: center;
+}
+header div:nth-child(2), header div:last-child {
+  text-align: right;
+  justify-content: flex-end;
+}/*# sourceMappingURL=headerSCSS.css.map */

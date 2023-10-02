@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArtAcademy</title>
-    <link rel="stylesheet" href="mainSCSS.css">
+    <link rel="stylesheet" href="scss/headerSCSS.css">
 </head>
 <body>
     <header>
@@ -17,8 +17,6 @@
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="200px" height="100px">
         </div>
-        <div></div>
-        <div></div>
         <div>
             <a href="index.php"> Iniciar Sesion </a>
         </div>
