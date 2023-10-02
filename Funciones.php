@@ -3,7 +3,6 @@ function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;
 } 
-
 function findStudentID($conexion, $dni){
     $findStudent = "SELECT id FROM students WHERE dni LIKE '".$dni."';";
     $id = mysqli_query($conexion,$findStudent);
@@ -12,8 +11,6 @@ function findStudentID($conexion, $dni){
     return $id;
 
 }
-
-
 function addCurso($conexion){
     $datos="";
     foreach($_POST["nuevocurso"] as $dato){
@@ -56,7 +53,6 @@ function addStudent($conexion){
 
 }
 function selectCurso($connection,$busqueda){
-    
     $info=[];
     $cursoE = "SELECT * FROM curso WHERE code = $busqueda"; 
     $curso = mysqli_query($connection,$cursoE);
@@ -79,7 +75,7 @@ function updateCurso(){
         exit();
     }
     //Preparamos la query para insertar el usuario
-    $query="UPDATE curso SET name=?, description=?, hours=?, sDate=?, eDate=?, teacher_id=? WHERE code=".$_POST['id']."";
+    $query="UPDATE curso SET name=?, description=?, hours=?, sDate=?, eDate=?, teacher_id=?, active=? WHERE code=".$_POST['id']."";
     $consulta = $conexion->prepare($query);
     $name=$_POST['name'];
     $description=$_POST['description'];
@@ -87,9 +83,10 @@ function updateCurso(){
     $sDate=$_POST['start'];
     $eDate=$_POST['end'];
     $teacher=$_POST['idTeacher'];
+    $active=($_POST['active']==='yes')?1:0;
     $consulta = $conexion->prepare($query);
     //Usmoas bind_param para asginarle los valores a la query y ejecutarla
-    $consulta->bind_param("ssissi",$name, $description, $hours, $sDate, $eDate, $teacher );
+    $consulta->bind_param("ssissii",$name, $description, $hours, $sDate, $eDate, $teacher, $active );
     $consulta->execute();
     $consulta->close();
     $query="UPDATE teachers SET curso_id=? WHERE id=?";
@@ -126,7 +123,6 @@ function selectTeachers($code,$curso){
     echo "</select>";
     
 }
-
 function listarAlumnos($conexion,$busqueda){
     if($busqueda==""){
         $query = "SELECT * FROM students;";
@@ -172,7 +168,6 @@ function studentLogin($conexion){
     return $login;
 
 }
-
 function adminLogin($conexion){
     $ID = $_POST["ID"];
     $passwd = $_POST["passwd"];
@@ -395,7 +390,7 @@ function fillInfoCursos($idCurso){
         mysqli_connect_error();
         exit();
     }
-    $query="SELECT code, name, description, hours, sDate, eDate, teacher_id FROM curso WHERE code = ?";
+    $query="SELECT code, name, description, hours, sDate, eDate, teacher_id, active FROM curso WHERE code = ?";
     $consulta = $conexion->prepare($query);
     $consulta->bind_param("i",$idCurso);
     if($consulta->execute()){
@@ -403,7 +398,6 @@ function fillInfoCursos($idCurso){
         if($datos->num_rows>0){
         $row= $datos->fetch_assoc();
         $idProfeSelect=$row['teacher_id'];
-        $query2="SELECT name FROM teachers WHERE id = ".$row['teacher_id']."";
         ?>
     <form action="editarCurso.php" method="POST">
     <table>
@@ -431,6 +425,11 @@ function fillInfoCursos($idCurso){
         <tr>
             <td><label>Profesor: </label></td> 
             <td><?php selectTeachers($idProfeSelect,$idCurso)?></td>
+        </tr>       
+        <tr>
+            <td><label>Activo: </label></td>
+            <td><input type="radio" id="yes" name="active" value ="yes" <?php echo $row['active'] == 1 ?'checked':'';?> required><label for="yes">Si</label></td>
+            <td><input type="radio" id="no" name="active" value = "no" <?php echo $row['active'] == 0  ?'checked':'';?>><label for="no">No</label></td>
         </tr>       
         <tr>
             <td><input type="submit" value="Editar"></td>
@@ -475,14 +474,16 @@ function listaCursos($conexion, $busqueda, $userType){
         $query = "SELECT * FROM curso WHERE name LIKE '%$busqueda%';"; 
     }
     $cursos = mysqli_query($conexion, $query);
-    $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
-    $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
-    $matriculas = [];
-    for($i=0; $i<mysqli_num_rows($cursosMatriculado);$i++){
-        $placeholder = mysqli_fetch_array($cursosMatriculado, MYSQLI_NUM);
-        $matriculas[$i] = $placeholder[0];
-    }
+    if($userType=="student"){
+        $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
+        $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
+        $matriculas = [];
+        for($i=0; $i<mysqli_num_rows($cursosMatriculado);$i++){
+            $placeholder = mysqli_fetch_array($cursosMatriculado, MYSQLI_NUM);
+            $matriculas[$i] = $placeholder[0];
+        }
 
+    }
     echo"<table>";
             echo"<tr>";
             echo"<td></td>";
@@ -541,8 +542,6 @@ function listaCursos($conexion, $busqueda, $userType){
 
 if(isset($_GET["llamarInsert"])){ insertMatricula(conexion(), $_SESSION["dni"], $_GET["codigo"]); }
 if(isset($_GET["llamarDelete"])){ dropMatricula(conexion(), $_SESSION["dni"], $_GET["codigo"]); }
-
-
 
 function insertMatricula($conexion,$alumno,$curso){
 

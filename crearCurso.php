@@ -17,70 +17,36 @@
             <form action="crearCurso.php" method="POST">
                 <table>
                     <tr>
-                        <td>
-                            <label for="name">Nombre del curso:</label>
-                        </td>
-                        <td>
-                            <input type="text" name="nuevocurso[]" id="" required>
-                        </td>
+                        <td><label for="name">Nombre del curso:</label></td>
+                        <td><input type="text" name="nuevocurso[]" id="" required></td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="descp">Descripcion del curso:</label>
-                        </td>
-                        <td>
-                            <input type="text" name="nuevocurso[]" id="" required>
-                        </td>
+                        <td><label for="descp">Descripcion del curso:</label></td>
+                        <td><input type="text" name="nuevocurso[]" id="" required></td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="horas">Horas del curso:</label>
-                        </td>
-                        <td>
-                            <input type="number" name="nuevocurso[]" id="" required>
-                        </td>
+                        <td><label for="horas">Horas del curso:</label></td>
+                        <td><input type="number" name="nuevocurso[]" id="" required></td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="inicio">Inicio del curso:</label>
-                        </td>
-                        <td>
-                            <input type="date" name="nuevocurso[]" id="" required>
-                        </td>
+                        <td><label for="inicio">Inicio del curso:</label></td>
+                        <td><input type="date" name="nuevocurso[]" id="" required></td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="fin">Fin del curso:</label>
-                        </td>
-                        <td>
-                            <input type="date" name="nuevocurso[]" id="" required>
-                        </td>
+                        <td><label for="fin">Fin del curso:</label></td>
+                        <td><input type="date" name="nuevocurso[]" id="" required></td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="profe">Profesor asignado:</label>
-                        </td>
-                        <td>
-                            <?php
-                                selectTeachers("","0");
-                            ?>
-                        </td>
+                        <td><label for="profe">Profesor asignado:</label></td>
+                        <td><?php  selectTeachers("","0"); ?> </td>
                     </tr>
                     <tr>
-                        <td>
-                            <label for="activo">Curso activo:</label>
-                        </td>
-                        <td>
-                           <input type="radio" name="activo" value="si">Si</input>
-                        </td>
-                        <td>
-                           <input type="radio" name="activo" value="no">No</input>
-                        </td>
+                        <td><label for="activo">Curso activo:</label></td>
+                        <td><input type="radio" name="activo" value="si">Si</input></td>
+                        <td><input type="radio" name="activo" value="no">No</input></td>
                     </tr>
                     <tr>
-                        <td>
-                            <input type="submit" value="Aceptar">
-                        </td>
+                        <td><input type="submit" value="Aceptar"></td>
                     </tr>
                 </table>
             </form>

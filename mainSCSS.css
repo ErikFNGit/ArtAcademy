@@ -1,50 +1,8 @@
-* {
-  font-family: sans-serif;
-}
-
-body {
-  background-image: url(batllo.jpeg);
-  background-repeat: no-repeat;
-  background-size: cover;
-  display: grid;
-  grid-template-columns: 15% 70% 15%;
-}
-
-table {
-  background-color: rgba(214, 214, 214, 0.6);
-  border-radius: 20px;
-  padding: 10px;
-  grid-column-start: 2;
-  grid-column-end: 3;
-}
-
-.indice {
-  font-size: 2em;
-}
-
-h1 {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  text-align: center;
-}
-
-.button {
-  padding: 5px;
-  border-radius: 10px;
-  color: white;
-  background-color: black;
-  text-decoration: none;
-  font-size: small;
-}
-
-td {
-  font-weight: bold;
-}
 header {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   grid-template-areas: "logo logo logo inicioSesion registrarse";
-  align-items: center;
+  background-color: white;
 }
 
 .logo {
@@ -54,10 +12,87 @@ header {
 
 .inicioSesion {
   grid-area: inicioSesion;
-  text-align: right;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .registrarse {
   grid-area: registrarse;
+  align-items: center;
+  justify-content: center;
+  text-align: flex-end;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 100% auto;
+  grid-template-areas: "headers" "main" "footer";
+  grid-template-columns: fit-content;
+}
+
+.headers {
+  grid-area: headers;
+  text-align: left;
+}
+
+.main {
+  grid-area: main;
+  text-align: right;
+}
+
+.footer {
+  grid-area: footer;
+  text-align: right;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-areas: "cursos aboutUS contacto";
+}
+.container div {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+}
+
+.cursos {
+  grid-area: cursos;
+  text-align: left;
+}
+
+.aboutUS {
+  grid-area: aboutUS;
+  text-align: right;
+}
+
+.contacto {
+  grid-area: contacto;
+  text-align: right;
+}
+
+footer {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-areas: "logo logo logo contacto rrss";
+  background-color: white;
+}
+
+.logo {
+  grid-area: logo;
+  text-align: left;
+}
+
+.contacto {
+  grid-area: contacto;
+  justify-content: center;
+  align-items: center;
+  text-align: right;
+}
+
+.rrss {
+  grid-area: rrss;
+  justify-content: center;
+  align-items: center;
   text-align: right;
 }/*# sourceMappingURL=mainSCSS.css.map */

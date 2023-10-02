@@ -41,7 +41,7 @@
     }
     ?>
     </header>
-      <div>
+    <div class="container">
         <div>
             <h1>CURSOS</h1>
             <p>Si quieres informacion <br> de los cursos que <br> impartimos, clic aqui</p>
@@ -58,11 +58,12 @@
             <h1>CONTACTANOS</h1>
             <p>Necesitas mas informacion? <br> Contactanos!</p>
             <img src="logoGmail.png" alt="el logo de gmail" width="150px" height="100px"> <br>
-            <a href=""> Contactans </a>
+            <a href=""> Contactanos </a>
         </div>
     </div>
     <footer>
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="200px" height="100px"> <br>
+        <div></div>
         <address>
             Calle Invent, 69 08917 Badalona <br>
             +34 677 424 950 <br>

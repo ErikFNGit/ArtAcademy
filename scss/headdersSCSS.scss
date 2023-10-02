@@ -2,7 +2,8 @@ header{
     display: grid;
     grid-template-columns: repeat(5,1fr);
     grid-template-areas: "logo logo logo inicioSesion registrarse";
-    align-items: center;
+    // align-items: center;
+    background-color: white;
 }
 .logo{
     grid-area:logo;
@@ -10,9 +11,13 @@ header{
 }
 .inicioSesion{
     grid-area: inicioSesion;
-    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
 }
 .registrarse{
     grid-area: registrarse;
-    text-align: right;
+    align-items: center;
+    justify-content: center;
+    text-align: flex-end;
 }
