@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include("Funciones.php");
 ?>
 <!DOCTYPE html>
@@ -10,12 +11,17 @@
 </head>
 <body>
     <?php
-    if($_GET){    
-    fillInfoCursos($_GET['id']);
-    }else if ($_POST){
-        updateCurso();
-        echo "<meta http-equiv='refresh' content ='0; url=listarCursos.php'>";
-    }
-    ?>
+        if(isset($_SESSION["userType"]) and $_SESSION["userType"] == "admin"){
+            if(isset($_GET["id"])){ 
+                fillInfoCursos($_GET['id']);
+            }else if ($_POST){
+                updateCurso();
+                echo "<meta http-equiv='refresh' content ='0; url=listarCursos.php'>";
+            }
+        }else{
+            echo "<h1>No tienes acceso a esta pagina</h1>";
+            echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+        }
+        ?>
 </body>
 </html>

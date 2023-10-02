@@ -9,6 +9,7 @@
     <title>Document</title>
 </head>
 <body>
+    
     <h1>Login administrador</h1>
     <?php
         include("Funciones.php");
@@ -40,10 +41,12 @@
                 $_SESSION["error"]="<p>Contraseña o usuario incorrecto(s) pruebe de nuevo</p>";
                 echo "<meta http-equiv='refresh' content ='0; url=loginAdministrador.php'>";               
             }else{
+                $_SESSION["userType"] = "admin";
                 echo "<meta http-equiv='refresh' content ='0; url=controlAdmin.php'>";               
 
             }
         }
     ?>
+    
 </body>
 </html>
