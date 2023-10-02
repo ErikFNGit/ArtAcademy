@@ -10,6 +10,7 @@
     if(!isset($_POST["dni"])){
     ?>
     <form action="registrarAlumno.php" method="post" enctype="multipart/form-data">
+        <h2>Introduzca sus datos a continuacion: </h2>
         <table>
             <tr>
                 <td><label>Dni: </label></td>
