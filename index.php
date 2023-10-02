@@ -7,21 +7,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
     <h1>Login alumnado</h1>
-
     <?php
         include("Funciones.php");
         if(!isset($_POST["dni"])){
-            if(isset($_SESSION["error"]))
-            {
+            if(isset($_SESSION["error"])){
                 echo $_SESSION["error"];
                 unset($_SESSION["error"]);
             }
     ?>
-    
-
     <table>
         <form action="index.php" method="post">
             <tr>
@@ -35,17 +32,18 @@
             <tr><td><input type="submit" value="Acceder"></td></tr>
         </form>
     </table>
+    <p>Aun no te has registrado?</p>
+    <p><a href = 'registrarAlumno.php'>Clic aqui </a></p>
     <?php 
         }else{
             if(!studentLogin(conexion())){
                 unset($_POST["dni"]);
                 unset($_POST["passwd"]);
                 $_SESSION["error"]="<p>Contraseña o usuario incorrecto(s) pruebe de nuevo</p>";
-                echo "<meta http-equiv='refresh' content ='0; url=index.php'>";               
+                echo "<meta http-equiv='refresh' content ='0; url=index.php'>";        
             }else{
                 $_SESSION['dni']=$_POST['dni'];
-                echo "<meta http-equiv='refresh' content ='0; url=perfilAlumno.php'>";               
-
+                echo "<meta http-equiv='refresh' content ='0; url=perfilAlumno.php'>";
             }
         }
     ?>

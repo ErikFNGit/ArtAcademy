@@ -1,0 +1,18 @@
+header{
+    display: grid;
+    grid-template-columns: repeat(5,1fr);
+    grid-template-areas: "logo logo logo inicioSesion registrarse";
+    align-items: center;
+}
+.logo{
+    grid-area:logo;
+    text-align: left;
+}
+.inicioSesion{
+    grid-area: inicioSesion;
+    text-align: right;
+}
+.registrarse{
+    grid-area: registrarse;
+    text-align: right;
+}

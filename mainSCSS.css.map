@@ -1,1 +1,1 @@
-{"version":3,"sources":[],"names":[],"mappings":"","file":"mainSCSS.css"}
+{"version":3,"sources":["scss/headdersSCSS.scss","mainSCSS.css"],"names":[],"mappings":"AAcA;EACI,aAAA;EACA,qCAAA;EACA,8DAAA;EACA,mBAAA;ACbJ;;ADeA;EACI,eAAA;EACA,gBAAA;ACZJ;;ADcA;EACI,uBAAA;EACA,iBAAA;ACXJ;;ADaA;EACI,sBAAA;EACA,iBAAA;ACVJ","file":"mainSCSS.css"}
