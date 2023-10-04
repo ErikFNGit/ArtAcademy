@@ -371,7 +371,7 @@ function fillInfoStudent($id){
         </tr>       
         <tr>            
             <td><input type="submit" value="Editar"></td>
-            <td><a href='perfilAlumnto.php'>Atras</td>
+            <td><a href='perfilAlumno.php'>Atras</td>
         </tr>
     </table>
 </form>
@@ -534,9 +534,9 @@ function listaCursos($conexion, $busqueda, $userType){
     }
     echo "</table>";
     if($userType=="admin"){
-        echo "<a href='controlAdmin.php?id='admin''>Atras</a>";
+        echo "<a class='button' href='controlAdmin.php?id='admin''>Atras</a>";
     }elseif($userType=="student"){
-        echo "<a href='inicioAlumno.php?id='student'>Atras</a>";
+        echo "<a class='button' href='inicioAlumno.php?id='student'>Atras</a>";
     }  
 }
 
