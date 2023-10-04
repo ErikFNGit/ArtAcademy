@@ -10,24 +10,7 @@
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-<header>
-    <?php
-    if (isset($_SESSION)){
-    ?>
-        <div>
-            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="200px" height="100px">
-        </div>
-        <div></div>
-        <div></div>
-        <div>
-            <a href="index.php"> Iniciar Sesion </a>
-        </div>
-        <div>
-            <a href="cerrarSesion.php"> Registrarse </a>
-        </div>
-    <?php
-    }else{
-    ?>
+    <header>
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="200px" height="100px">
         </div>
@@ -35,11 +18,8 @@
             <a href="index.php"> Mi perfil </a>
         </div>
         <div>
-            <a href="registrarAlumno.php"> Cerrar Sesion</a>
+            <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
-    <?php
-    }
-    ?>
     </header>
     <div class="listado">
         <?php
