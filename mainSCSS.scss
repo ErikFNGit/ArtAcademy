@@ -3,6 +3,7 @@
 @import 'scss/bodySCSS.scss';
 @import 'scss/headerSCSS.scss';
 @import 'scss/footerSCSS.scss';
+@import 'scss/listadoSCSS.scss';
 body{
     background-image: url(batllo.jpeg);
     background-repeat: no-repeat;
@@ -17,44 +18,5 @@ body{
     padding: 0%;
 }
 
-.listado{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    form{
-        grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 1;
-        grid-row-start: 2;
-    }
-    .tabla{
-        grid-column-start: 2;
-        grid-column-end: 3;
-        grid-row-start: 2;
-        grid-row-start: 3;
-        background-color: $grey;
-        border-radius: 20px;
-        padding: 10px;
-        grid-column-start: 2;
-        grid-column-end: 3;
 
-        td{}
-    }
-    .button{
-        grid-column-start: 1;
-        grid-column-end: 2;
-        grid-row-start: 3;
-        grid-row-start: 4;
-    }
-    h1{text-align: center;}
-
-}
-
-.button{
-    padding: 5px;
-    border-radius: 10px;
-    color: white;
-    background-color: black;
-    text-decoration: none;
-    font-size: small;
-}
+.button{ @include button; }

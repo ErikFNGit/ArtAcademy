@@ -12,7 +12,7 @@
 <body>
     <header>
         <div>
-            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="200px" height="100px">
+            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
         <div>
             <a href="index.php"> Mi perfil </a>
@@ -26,11 +26,13 @@
             include("Funciones.php");
             if(isset($_SESSION["userType"])){
         ?>
-        <form action="listarCursos.php" method="POST">
-            <label for="codigo">Buscador:</label>
-            <input type="text" name="busqueda">
-            <input type="submit" value="Aceptar">
-        </form>
+        <div class="buscador">
+            <form action="listarCursos.php" method="POST">
+                <label for="codigo">Buscador:</label>
+                <input type="text" name="busqueda">
+                <input type="submit" value="Aceptar">
+            </form>
+        </div>
         <div class="tabla">
             <h1>CURSOS</h1>
             <?php
@@ -39,15 +41,21 @@
                 }else{
                     listaCursos(conexion(),"",$_SESSION["userType"]);
                 }
-            }else{
-                echo "<h1>No tienes acceso a esta pagina</h1>";
-                echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
-            }
+                }else{
+                    echo "<h1>No tienes acceso a esta pagina</h1>";
+                    echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+                }
+                
+                if($_SESSION["userType"]=="admin"){
+                    echo "<a class='button' href='controlAdmin.php?id='admin''>Atras</a>";
+                }elseif($_SESSION["userType"]=="student"){
+                    echo "<a class='button' href='inicioAlumno.php?id='student'>Atras</a>";
+                } 
             ?>
         </div>
     </div>
     <footer>
-        <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="200px" height="100px">
+        <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>
             Calle Invent, 69 08917 Badalona <br>
             +34 677 424 950 <br>

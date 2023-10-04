@@ -533,11 +533,7 @@ function listaCursos($conexion, $busqueda, $userType){
         echo "</tr>";  
     }
     echo "</table>";
-    if($userType=="admin"){
-        echo "<a class='button' href='controlAdmin.php?id='admin''>Atras</a>";
-    }elseif($userType=="student"){
-        echo "<a class='button' href='inicioAlumno.php?id='student'>Atras</a>";
-    }  
+    
 }
 
 if(isset($_GET["llamarInsert"])){ insertMatricula(conexion(), $_SESSION["dni"], $_GET["codigo"]); }

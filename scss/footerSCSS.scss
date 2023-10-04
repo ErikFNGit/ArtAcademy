@@ -1,6 +1,9 @@
 @import 'variablesSCSS.scss';
 
 footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     display: grid;
     grid-template-columns: 70% 15% 15%;
     background-color: $color-footer;
