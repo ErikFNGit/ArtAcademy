@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-<header>
+    <header>
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
