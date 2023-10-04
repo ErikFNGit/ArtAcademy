@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <?php
-    session_start();
+    session_start();   
     include("Funciones.php");
 ?>
 <html lang="en">
@@ -20,6 +20,7 @@ if ($_GET){
         ?>
         <meta http-equiv="refresh" content="0; url=perfilAlumno.php">;
         <?php
+        echo "Cambios";
     }
 ?>
 </body>
