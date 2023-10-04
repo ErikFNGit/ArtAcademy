@@ -1,7 +1,7 @@
 footer{
     display: grid;
     grid-template-columns: 70% 15% 15%;
-    background-color: white;
+    background-color: $color-footer;
     div{
         display:flex;
         align-items: center;

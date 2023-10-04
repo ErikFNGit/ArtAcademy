@@ -1,1 +1,8 @@
-/*# sourceMappingURL=bodySCSS.css.map */
+* {
+  border: 1px solid black;
+}
+
+body {
+  display: grid;
+  grid-template-rows: auto 100% auto;
+}/*# sourceMappingURL=bodySCSS.css.map */

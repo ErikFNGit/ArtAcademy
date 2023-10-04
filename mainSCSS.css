@@ -1,3 +1,10 @@
+* {
+  border: 1px solid black;
+}
+body {
+  display: grid;
+  grid-template-rows: auto 100% auto;
+}
 header {
   display: grid;
   grid-template-columns: 90% 5% 5%;
@@ -11,11 +18,10 @@ header div:nth-child(2), header div:last-child {
   text-align: right;
   justify-content: flex-end;
 }
-
 footer {
   display: grid;
   grid-template-columns: 70% 15% 15%;
-  background-color: white;
+  background-color: 40, 40, 40;
 }
 footer div {
   display: flex;
