@@ -21,6 +21,7 @@ if ($_GET){
         <meta http-equiv="refresh" content="0; url=perfilAlumno.php">;
         <?php
         echo "Cambios";
+        echo "Cambio 2";
     }
 ?>
 </body>
