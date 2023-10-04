@@ -1,23 +1,19 @@
 footer{
     display: grid;
-    grid-template-columns: repeat(5,1fr);
-    grid-template-areas: "logo logo logo contacto rrss";
-    // align-items: center;
+    grid-template-columns: 70% 15% 15%;
     background-color: white;
-}
-.logo{
-    grid-area:logo;
-    text-align: left;
-}
-.contacto{
-    grid-area: contacto;
-    justify-content: center;
-    align-items: center;
-    text-align: right;
-}
-.rrss{
-    grid-area: rrss;
-    justify-content: center;
-    align-items: center;
-    text-align: right;
+    div{
+        display:flex;
+        align-items: center;
+        
+        &:nth-child(2),&:last-child{
+            text-align: right;
+            justify-content: flex-end;
+        }
+        &:last-child{
+            ul{
+                list-style-type: none;
+            }
+        }
+    }
 }

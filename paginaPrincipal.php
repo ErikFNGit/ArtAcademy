@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ArtAcademy</title>
-    <link rel="stylesheet" href="scss/headerSCSS.css">
+    <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
     <header>
@@ -60,17 +60,18 @@
         </div>
     </div>
     <footer>
-        <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="200px" height="100px"> <br>
-        <div></div>
-        <address>
+        <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="200px" height="100px">
+        <div>
             Calle Invent, 69 08917 Badalona <br>
             +34 677 424 950 <br>
-        </address>
-        <address>    
-            <a href="">Instagram</a><br>
-            <a href="">Facebook</a> <br>
-            <a href="">Twitter</a>  <br>
-        </address>
+        </div>
+        <div>
+            <ul>   
+                <li><a href="">Instagram</a></li>
+                <li><a href="">Facebook</a></li>
+                <li><a href="">Twitter</a></li>
+            </ul>  
+        </div>
     </footer>
 </body>
 </html>
