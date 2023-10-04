@@ -6,17 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Panel de Administracion</title>
+    <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
     <?php
         if(isset($_SESSION["userType"]) and $_SESSION["userType"] == "admin"){
     ?>
-    <div class="header">
-        <!-- <img src="logoBlanco.png" alt="aqui va el logo"> -->
-        <a href="index.php">Inicio</a>    
-        <a href="">Cerrar Sesion</a>
-    </div>
+    <header>
+        <div>
+            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
+        </div>
+        <div>
+            <a href="cerrarSesion.php"> Cerrar Sesion</a>
+        </div>
+    </header>
     <div class="container">
         <div class="menu">
             <a href="AltaProfes.php">Añadir profesores</a> <br>

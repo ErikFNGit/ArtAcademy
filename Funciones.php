@@ -564,7 +564,7 @@ function listaTeachers($name){
             $query = $query." WHERE name = '%$name%'";
         }
         $cursos = mysqli_query($conexion, $query);
-        echo"<table border = '1'>";
+        echo"<table>";
         echo"<tr>";
         echo"<td>ID </td>";
         echo"<td>DNI </td>";
@@ -582,7 +582,7 @@ function listaTeachers($name){
             echo "<td>". $curso['surname']."</td>";
             echo "<td>". $curso['title']."</td>";
             echo "<td><img src='".$curso['picture']."'></td>";
-            echo "<td> <a href = 'edicionProfes.php?id=".$curso['id']."'> Editar </a></td>";
+            echo "<td> <a class='button' href = 'edicionProfes.php?id=".$curso['id']."'> Editar </a></td>";
             echo "</tr>";
         }
         echo"</table>";

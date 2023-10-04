@@ -27,7 +27,7 @@
     }else{
     ?>
         <div>
-            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="200px" height="100px">
+            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
         <div>
             <a href="index.php"> Mi perfil </a>
@@ -60,7 +60,7 @@
         </div>
     </div>
     <footer>
-        <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="200px" height="100px">
+        <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>
             Calle Invent, 69 08917 Badalona <br>
             +34 677 424 950 <br>

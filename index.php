@@ -9,7 +9,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
-<body>
+<body class="paginaIndex">
     <h1>Login alumnado</h1>
     <?php
         include("Funciones.php");
@@ -32,8 +32,7 @@
             <tr><td><input type="submit" value="Acceder"></td></tr>
         </form>
     </table>
-    <p>Aun no te has registrado?</p>
-    <p><a href = 'registrarAlumno.php'>Clic aqui </a></p>
+    <p>Aun no te has registrado? <a href = 'registrarAlumno.php'>Clic aqui </a></p>
     <?php 
         }else{
             if(!studentLogin(conexion())){

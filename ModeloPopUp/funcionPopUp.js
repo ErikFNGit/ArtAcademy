@@ -1,5 +1,5 @@
 function popUpSorteo(){
-    let params = 'widht=660,height=300,left=300,top=300';
+    let params = 'widht=300,height=300,left=500,top=300';
     if (randomNum(1,4)==1){
         window.open('popUpBombones.php', 'sorteo', params);
     }else if (randomNum(1,4)==2){   
