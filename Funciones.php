@@ -542,8 +542,15 @@ if(isset($_GET["llamarDelete"])){ dropMatricula(conexion(), $_SESSION["dni"], $_
 function insertMatricula($conexion,$alumno,$curso){
 
     $id = findStudentID($conexion,$alumno);
-    $query = "INSERT INTO matricula (student_id,curso_id) VALUES ($id,$curso);";
-    mysqli_query($conexion,$query);
+    $find = "SELECT * FROM matricula WHERE curso_id = $curso AND student_id = $id;";
+    $esta = mysqli_query($conexion,$find);
+    $esta = mysqli_fetch_array($esta,MYSQLI_NUM);
+    try{
+        $query = "INSERT INTO matricula (student_id,curso_id) VALUES ($id,$curso);";
+        mysqli_query($conexion,$query);
+    }catch(Exception $mysqli_sql_exception){}
+        
+    
 }
 
 function dropMatricula($conexion,$alumno,$curso){
