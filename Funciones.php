@@ -635,4 +635,26 @@ function perfilStudent($dni){
     echo"</div>";
     echo "<td><a href = 'editarEstudiante.php?id=".$name['id']."'> Editar </a></td>";
 }
+function updateStudent(){
+    $conexion = conexion();
+    //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
+    }
+    //Preparamos la query para insertar el usuario
+    $query="UPDATE students SET id=?, dni=?, name=?, surname=? WHERE id=?";
+    $consulta = $conexion->prepare($query);
+    $id=$_POST['id'];
+    $name=$_POST['name'];
+    $surname=$_POST['surname'];
+    $dni=$_POST['dni'];
+    $consulta = $conexion->prepare($query);
+    //Usmoas bind_param para asginarle los valores a la query y ejecutarla
+    $consulta->bind_param("isssi",$id,$dni, $name, $surname, $id);
+    $consulta->execute();
+    $consulta->close();
+    $conexion->close();
+}
 ?>
