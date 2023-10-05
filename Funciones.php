@@ -346,7 +346,7 @@ function fillInfoStudent($id){
         mysqli_connect_error();
         exit();
     }
-    $query="SELECT id, dni, name, surname FROM students WHERE id = ?";
+    $query="SELECT id, dni, name, surname, stPass FROM students WHERE id = ?";
     $consulta = $conexion->prepare($query);
     $consulta->bind_param("i",$id);
     if($consulta->execute()){
@@ -358,6 +358,7 @@ function fillInfoStudent($id){
     <table>
         <tr>
             <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
+            <input type="hidden" name="pass" value=<?php echo $row['stPass']; ?>>
             <td><label>Dni: </label></td>
             <td><input type="text" name="dni" value=<?php echo $row['dni'];?> required></td>
         </tr>
@@ -368,7 +369,11 @@ function fillInfoStudent($id){
         <tr>
             <td><label>Apellido: </label></td>
             <td><input type="text" name="surname" value=<?php echo $row['surname'];?> required></td>
-        </tr>       
+        </tr>  
+        <tr>
+            <td><label>Contraseña: </label></td>
+            <td><input type="text" name="pass" value=<?php echo $row['stPass']; ?> required></td>
+        </tr>            
         <tr>            
             <td><input type="submit" value="Editar"></td>
             <td><a href='perfilAlumno.php'>Atras</td>
@@ -644,15 +649,16 @@ function updateStudent(){
         exit();
     }
     //Preparamos la query para insertar el usuario
-    $query="UPDATE students SET id=?, dni=?, name=?, surname=? WHERE id=?";
+    $query="UPDATE students SET id=?, dni=?, name=?, surname=?, stPass=? WHERE id=?";
     $consulta = $conexion->prepare($query);
     $id=$_POST['id'];
     $name=$_POST['name'];
     $surname=$_POST['surname'];
     $dni=$_POST['dni'];
+    $stPass=md5($_POST['stPass']);
     $consulta = $conexion->prepare($query);
     //Usmoas bind_param para asginarle los valores a la query y ejecutarla
-    $consulta->bind_param("isssi",$id,$dni, $name, $surname, $id);
+    $consulta->bind_param("issssi",$id,$dni, $name, $surname, $stPass, $id);
     $consulta->execute();
     $consulta->close();
     $conexion->close();
