@@ -32,7 +32,7 @@
             <tr><td><input type="submit" value="Acceder"></td></tr>
         </form>
     </table>
-    <p>Aun no te has registrado? <a href = 'registrarAlumno.php'>Clic aqui </a></p>
+    <p>Aun no te has registrado? <a  href = 'registrarAlumno.php'>Clic aqui </a></p>
     <?php 
         }else{
             if(!studentLogin(conexion())){
