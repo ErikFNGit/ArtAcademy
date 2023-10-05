@@ -17,7 +17,6 @@ a{
 .button{
     @include button; 
 }
-
 .paginaIndex{
     display:grid;
     grid-template-rows: 33% 34% 33%;
@@ -46,5 +45,32 @@ a{
         grid-row-end: 4;
         grid-column-start: 2;
         grid-column-end:3;
+    }
+}
+.mainMenu{
+    @include textStyle;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 100%;
+    div{
+        @include divsMainMenu;
+    }
+    a{
+        margin-top: 10px;
+        height: 15px;
+        width: 80px;
+        text-align: center;
+    }
+    div:nth-child(1){
+        grid-column-start: 1;
+        grid-column-end: 2;
+    }
+    div:nth-child(2){
+        grid-column-start: 2;
+        grid-column-end: 3;
+    }
+    div:nth-child(3){
+        grid-column-start: 3;
+        grid-column-end: 4;
     }
 }

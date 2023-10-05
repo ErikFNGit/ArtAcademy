@@ -606,8 +606,11 @@ function perfilStudent($dni){
     $notas=mysqli_query($conexion, $query2);
     echo"<h2>Bienvenido a tu perfil de estudiante, ".$name['name']. " </h2>";
     echo "<div><img src='".$name['picture']."'></div>";
-    echo"<p>Notas: </p>";
+
+    echo"<div class='listado'>";
+    echo"<div class='tabla'>";
     echo"<table border = '1'>";
+    echo"<p>Notas: </p>";
     echo"<th>Curso </th>";
     echo"<th> Nota </th>";
     for($i=0;$i<mysqli_num_rows($notas);$i++){
@@ -621,6 +624,8 @@ function perfilStudent($dni){
         echo"</tr>";
     }
     echo"</table>";
+    echo"</div>";
+    echo"</div>";
     echo "<td><a href = 'editarEstudiante.php?id=".$name['id']."'> Editar </a></td>";
 }
 ?>

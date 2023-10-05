@@ -11,9 +11,12 @@ footer div {
   align-items: center;
   color: white;
 }
+footer div a {
+  color: white;
+  text-decoration: none;
+}
 footer div:nth-child(2), footer div:last-child {
   text-align: right;
-  justify-content: flex-end;
 }
 footer div:last-child ul {
   list-style-type: none;

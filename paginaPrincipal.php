@@ -15,7 +15,7 @@
     if (isset($_SESSION)){
     ?>
         <div>
-            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="200px" height="100px">
+            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
         <div>
             <a href="index.php"> Iniciar Sesion </a>
@@ -26,6 +26,7 @@
     <?php
     }else{
     ?>
+
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
@@ -35,28 +36,29 @@
         <div>
             <a href="registrarAlumno.php"> Cerrar Sesion</a>
         </div>
+
     <?php
     }
     ?>
     </header>
-    <div class="container">
+    <div class="mainMenu">
         <div>
             <h1>CURSOS</h1>
             <p>Si quieres informacion <br> de los cursos que <br> impartimos, clic aqui</p>
             <img src="clasearte.jpg" alt="Gente pintando" width="150px" height="100px"> <br>
-            <a href=""> Cursos </a>
+            <a class="button" href=""> Cursos </a>
         </div>
         <div>
             <h1>QUIENES SOMOS</h1>
             <p>Aqui tienes toda la <br> informacion sobre <br> nuestros profesionales</p>
             <img src="arteprofe.jpg" alt="Profesor pintando" width="150px" height="100px"> <br>
-            <a href=""> About us </a>
+            <a class="button" href=""> About us </a>
         </div>
         <div>
             <h1>CONTACTANOS</h1>
             <p>Necesitas mas informacion? <br> Contactanos!</p>
             <img src="logoGmail.png" alt="el logo de gmail" width="150px" height="100px"> <br>
-            <a href=""> Contactanos </a>
+            <a class="button" href=""> Contactanos </a>
         </div>
     </div>
     <footer>
