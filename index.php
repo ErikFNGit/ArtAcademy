@@ -32,10 +32,10 @@
                 <tr>
                     <td><label for="passwd">Contraseña:</label></td>
                     <td><input type="password" name="passwd"></td>
-                </tr>
-                <tr><td><input type="submit" value="Acceder"></td></tr>
-            </form>
-        </table>
+                </tr>   
+            </table>
+            <input type="submit" value="Acceder">
+        </form>
         <p>Aun no te has registrado? <a  href = 'registrarAlumno.php'>Clic aqui </a></p>
     </div>
 </div>
