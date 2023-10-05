@@ -104,37 +104,6 @@ a {
   font-family: sans-serif;
 }
 
-.paginaIndex {
-  display: grid;
-  grid-template-rows: 33% 34% 33%;
-  grid-template-columns: 33% 34% 33%;
-  min-height: 100vh;
-}
-.paginaIndex h1 {
-  display: flex;
-  margin: auto;
-  grid-row-start: 1;
-  grid-row-end: 2;
-  grid-column-start: 2;
-  grid-column-end: 3;
-}
-.paginaIndex table {
-  display: flex;
-  margin: auto;
-  grid-row-start: 2;
-  grid-row-end: 3;
-  grid-column-start: 2;
-  grid-column-end: 3;
-}
-.paginaIndex p {
-  display: flex;
-  margin: auto;
-  grid-row-start: 3;
-  grid-row-end: 4;
-  grid-column-start: 2;
-  grid-column-end: 3;
-}
-
 .mainMenu {
   font-weight: bold;
   font-family: sans-serif;
@@ -166,4 +135,12 @@ a {
 .mainMenu div:nth-child(3) {
   grid-column-start: 3;
   grid-column-end: 4;
+}
+
+.test {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 }/*# sourceMappingURL=mainSCSS.css.map */
