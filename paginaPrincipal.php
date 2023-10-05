@@ -31,7 +31,7 @@
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
         <div>
-            <a href="index.php"> Mi perfil </a>
+            <a href="perfilAlumno.php"> Mi perfil </a>
         </div>
         <div>
             <a href="registrarAlumno.php"> Cerrar Sesion</a>

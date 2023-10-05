@@ -17,6 +17,7 @@
     }else{
         include("Funciones.php");
         perfilStudent($_SESSION["dni"]);
+        echo"<a href='inicioAlumno.php'>Atras</a>";
     }
 ?>        
 </body>
