@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    $_SESSION["screen"] = "inicioAlumno";
+    include("Funciones.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +23,14 @@
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
     </header>
-    <a href = 'listarCursos.php?id=student'> Listado de cursos </a>
+    <a href = 'listarCursos.php?id=student' class="button"> Listado de todos cursos </a>
+    <div class="listado">
+        <div class="tabla">
+            <?php
+                listaCursos(conexion(),"",$_SESSION["userType"]);
+            ?>
+        </div>
+    </div>
     <footer>
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>

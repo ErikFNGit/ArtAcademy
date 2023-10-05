@@ -527,11 +527,13 @@ function listaCursos($conexion, $busqueda, $userType){
             echo "<td>". $curso['sDate']."</td>";
             echo "<td>". $curso['eDate']."</td>";
             echo "<td>". $nombreprofe."</td>";
-            if(!in_array($curso["code"],$matriculas)){
-                echo "<td><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
-            }else{
-                echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
-
+            if($_SESSION["screen"] != "inicioAlumno"){
+                if(!in_array($curso["code"],$matriculas)){
+                    echo "<td><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
+                }else{
+                    echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
+    
+                }
             }
         }
             

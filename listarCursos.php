@@ -1,5 +1,6 @@
 <?php
     session_start();
+    $_SESSION["screen"] = "listadoCursos";
 ?>
 <!DOCTYPE html>
 <html lang="en">
