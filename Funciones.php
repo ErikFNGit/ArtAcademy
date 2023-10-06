@@ -358,7 +358,6 @@ function fillInfoStudent($id){
     <table>
         <tr>
             <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
-            <input type="hidden" name="pass" value=<?php echo $row['stPass']; ?>>
             <td><label>Dni: </label></td>
             <td><input type="text" name="dni" value=<?php echo $row['dni'];?> required></td>
         </tr>
@@ -372,7 +371,7 @@ function fillInfoStudent($id){
         </tr>  
         <tr>
             <td><label>Contraseña: </label></td>
-            <td><input type="text" name="pass" value=<?php echo $row['stPass']; ?> required></td>
+            <td><input type="password" name="stPass" value=<?php echo $row['stPass']; ?> required></td>
         </tr>            
         <tr>            
             <td><input type="submit" value="Editar"></td>
