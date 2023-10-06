@@ -684,24 +684,17 @@ function updateStudent(){
     $consulta->close();
     $conexion->close();
 }
-function passOlvidada($dni,$mail){
+function passOlvidada($dni,$mail,$pass,$passMatch){
     $conexion=conexion();
     if($conexion == FALSE){
         echo"Error en la base de datos";
         mysqli_connect_error();
         exit();
     }
-    echo"<table>";
-    echo"<form action='passOlvidada.php' method='post'>";
-        echo"<tr>";
-            echo"<td><label for='pass'>Nueva contraseña: </label></td>";
-            echo"<td><input type='password' name='pass' required></td>";
-        echo"</tr>";
-        echo"<tr>";
-            echo"<td><label for='passComprobar'>Introduzca de nuevo la contraseña: </label></td>";
-            echo"<td><input type='password' name='passComprobar' required></td>";
-        echo"</tr>";
-    echo"</table>";
+    echo $dni;
+    echo $mail;
+    echo $pass;
+    echo $passMatch;
     
 }
 ?>

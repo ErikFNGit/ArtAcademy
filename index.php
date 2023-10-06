@@ -37,7 +37,7 @@
             <input type="submit" value="Acceder">
         </form>
         <p>Aun no te has registrado? <a  href = 'registrarAlumno.php'>Clic aqui </a></p>
-        <p>Si has olidado tu contraseña <a href="passOlvidada.php"> Clic aqui </a></p>
+        <p>Si has olvidado tu contraseña <a href="passOlvidada.php"> Clic aqui </a></p>
     </div>
 </div>
 </div>
