@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+    <?php
+    session_start();
+    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,6 +29,10 @@
                 <td><input type="text" name="surname" required></td>
             </tr>
             <tr>
+                <td><label>Correo electronico: </label></td>
+                <td><input type="text" name="mail" required></td>
+            </tr>
+            <tr>
                 <td><label>Contraseña: </label></td>
                 <td><input type="password" name="passwd" required></td>
             </tr>
@@ -44,22 +51,36 @@
             </table>
     </form>
     <a href = 'index.php'> Atras </a>  
-    <?php }else{
+    <?php 
+    }else if (comprobarDNI($_POST["dni"])==true){
         if(!checkID(conexion(),$_POST["dni"]))
         {
+            $_SESSION["userType"]="student";
+            $_SESSION["dni"]=$_POST["dni"];
             addStudent(conexion());
             echo "<meta http-equiv='refresh' content ='0; url=inicioAlumno.php'>";
         }else{
             unset($_POST["dni"]);
             unset($_POST["name"]);
             unset($_POST["surname"]);
+            unset($_POST["mail"]);
             unset($_POST["passwd"]);
             unset($_POST["age"]);
             unset($_POST["photo"]);
-            echo "<meta http-equiv='refresh' content ='0; url=registrarAlumno.php'>";
+            session_destroy();
+            echo "<meta http-equiv='refresh' content ='15; url=registrarAlumno.php'>";
         }
-        
-
+    }else{
+        echo"<p>Dni invalido, porfavor, asegurese de introducir un DNI correcto</p>";
+        unset($_POST["dni"]);
+        unset($_POST["name"]);
+        unset($_POST["surname"]);
+        unset($_POST["mail"]);
+        unset($_POST["passwd"]);
+        unset($_POST["age"]);
+        unset($_POST["photo"]);
+        session_destroy();
+        echo "<meta http-equiv='refresh' content ='15; url=registrarAlumno.php'>";
     }
     ?>
 </body>

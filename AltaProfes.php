@@ -13,8 +13,12 @@
     <?php
     if($_POST){
         if(DNIExistente()==false && IDExistente()==false){
-            nuevoTeacher();
-            echo"<h2>Profesor@ registrado con exito</h2>";
+            if(comprobarDNI($_POST["dni"])==true){
+                nuevoTeacher();
+                echo"<h2>Profesor@ registrado con exito</h2>";
+            }else{
+                echo"<p>Este DNI no es correcto </p>";
+            }
         }else{
             echo"<p>Error, este DNI o est ID ya están en uso</p>";
         }

@@ -3,6 +3,18 @@ function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;
 } 
+function comprobarDNI($dni){
+    $dni=strtoupper($dni);
+    if (preg_match("/[0-9]{8}[A-Z]$/",$dni)){
+        $numeroDni=intval(substr($dni, 0 ,8));
+        $letra=substr("TRWAGMYFPDXBNJZSQVHLCKE", $numeroDni % 23,1);
+        $letra_usuario=substr($dni,-1);
+        if ($letra===$letra_usuario){
+            return true;
+        }
+    }
+    return false; 
+}
 function findStudentID($conexion, $dni){
     $findStudent = "SELECT id FROM students WHERE dni LIKE '".$dni."';";
     $id = mysqli_query($conexion,$findStudent);
@@ -35,7 +47,8 @@ function addCurso($conexion){
 function addStudent($conexion){
     $dni=$_POST['dni'];
     $name=$_POST['name'];
-    $surname=$_POST['surname'];        
+    $surname=$_POST['surname'];       
+    $mail=$_POST['mail'] ;
     $password=md5($_POST['passwd']);
     $age = $_POST["age"];
     $picture=$_FILES['photo']['tmp_name']; 
@@ -48,7 +61,7 @@ function addStudent($conexion){
     }else{
         print("Error, no se ha subido la imagen");
     }
-    $query="INSERT INTO students (dni, name, surname, stPass, age, picture) VALUES ('$dni','$name','$surname','$password','$age','$path')";
+    $query="INSERT INTO students (dni, name, surname, mail, stPass, age, picture) VALUES ('$dni','$name','$surname','$mail', '$password','$age','$path')";
     mysqli_query($conexion,$query);
 
 }
@@ -136,6 +149,7 @@ function listarAlumnos($conexion,$busqueda){
             echo"<td>DNI </td>";
             echo"<td>Nomre </td>";
             echo"<td>Apellido </td>";
+            echo"<td>Correo </td>";
         echo"</tr>";
     for($i=0; $i<mysqli_num_rows($alumnos);$i++){
         $alumno = mysqli_fetch_array($alumnos, MYSQLI_ASSOC);
@@ -144,6 +158,7 @@ function listarAlumnos($conexion,$busqueda){
             echo "<td>". $alumno['dni']."</td>";
             echo "<td>". $alumno['name']."</td>";
             echo "<td>". $alumno['surname']."</td>";
+            echo "<td>". $alumno['mail']."</td>";
         echo "</tr>";
     }
     echo "</table>";
@@ -346,7 +361,7 @@ function fillInfoStudent($id){
         mysqli_connect_error();
         exit();
     }
-    $query="SELECT id, dni, name, surname, stPass FROM students WHERE id = ?";
+    $query="SELECT id, dni, name, surname, mail, stPass FROM students WHERE id = ?";
     $consulta = $conexion->prepare($query);
     $consulta->bind_param("i",$id);
     if($consulta->execute()){
@@ -368,6 +383,10 @@ function fillInfoStudent($id){
         <tr>
             <td><label>Apellido: </label></td>
             <td><input type="text" name="surname" value=<?php echo $row['surname'];?> required></td>
+        </tr>  
+        <tr>
+            <td><label>Correo: </label></td>
+            <td><input type="text" name="mail" value=<?php echo $row['mail'];?> required></td>
         </tr>  
         <tr>
             <td><label>Contraseña: </label></td>
@@ -650,18 +669,39 @@ function updateStudent(){
         exit();
     }
     //Preparamos la query para insertar el usuario
-    $query="UPDATE students SET id=?, dni=?, name=?, surname=?, stPass=? WHERE id=?";
+    $query="UPDATE students SET id=?, dni=?, name=?, surname=?,mail=?, stPass=? WHERE id=?";
     $consulta = $conexion->prepare($query);
     $id=$_POST['id'];
+    $dni=$_POST['dni'];
     $name=$_POST['name'];
     $surname=$_POST['surname'];
-    $dni=$_POST['dni'];
+    $mail=$_POST['mail'];
     $stPass=md5($_POST['stPass']);
     $consulta = $conexion->prepare($query);
     //Usmoas bind_param para asginarle los valores a la query y ejecutarla
-    $consulta->bind_param("issssi",$id,$dni, $name, $surname, $stPass, $id);
+    $consulta->bind_param("isssssi",$id,$dni, $name, $surname, $mail, $stPass, $id);
     $consulta->execute();
     $consulta->close();
     $conexion->close();
+}
+function passOlvidada($dni,$mail){
+    $conexion=conexion();
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
+    }
+    echo"<table>";
+    echo"<form action='passOlvidada.php' method='post'>";
+        echo"<tr>";
+            echo"<td><label for='pass'>Nueva contraseña: </label></td>";
+            echo"<td><input type='password' name='pass' required></td>";
+        echo"</tr>";
+        echo"<tr>";
+            echo"<td><label for='passComprobar'>Introduzca de nuevo la contraseña: </label></td>";
+            echo"<td><input type='password' name='passComprobar' required></td>";
+        echo"</tr>";
+    echo"</table>";
+    
 }
 ?>

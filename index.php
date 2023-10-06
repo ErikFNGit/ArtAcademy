@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Iniciar Sesion</title>
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body class="paginaIndex">
@@ -37,6 +37,7 @@
             <input type="submit" value="Acceder">
         </form>
         <p>Aun no te has registrado? <a  href = 'registrarAlumno.php'>Clic aqui </a></p>
+        <p>Si has olidado tu contraseña <a href="passOlvidada.php"> Clic aqui </a></p>
     </div>
 </div>
 </div>
