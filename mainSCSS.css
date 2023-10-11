@@ -1,12 +1,7 @@
-body {
-  display: grid;
-  grid-template-rows: auto 100% auto;
-}
-
 header {
   display: grid;
   grid-template-columns: 90% 5% 5%;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 header div {
   display: flex;
@@ -17,7 +12,7 @@ header div:nth-child(2), header div:last-child {
 }
 
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   display: grid;
@@ -27,10 +22,10 @@ footer {
 footer div {
   display: flex;
   align-items: center;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 footer div a {
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
 }
 footer div:nth-child(2), footer div:last-child {
@@ -88,6 +83,9 @@ body {
   background-color: rgba(255, 255, 255, 0.6);
   margin: 0%;
   padding: 0%;
+  display: grid;
+  grid-template-rows: 10% 80% 10%;
+  height: 100%;
 }
 
 a {
@@ -97,8 +95,8 @@ a {
 .button {
   padding: 5px;
   border-radius: 10px;
-  color: white;
-  background-color: black;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
   text-decoration: none;
   font-size: small;
   font-family: sans-serif;
@@ -107,6 +105,7 @@ a {
 .mainMenu {
   font-weight: bold;
   font-family: sans-serif;
+  height: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 100%;
