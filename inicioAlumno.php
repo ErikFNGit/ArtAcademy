@@ -1,6 +1,7 @@
 <?php
     session_start();
     $_SESSION["screen"] = "inicioAlumno";
+    $_SESSION["userType"] = "student";
     include("Funciones.php");
 ?>
 <!DOCTYPE html>
@@ -12,6 +13,9 @@
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
+    <?php 
+        if(isset($_SESSION["start"])){
+    ?>
     <header>
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
@@ -20,15 +24,22 @@
             <a href="perfilAlumno.php"> Mi perfil </a>
         </div>
         <div>
-            <a href="cerrarSesion.php"> Cerrar Sesion</a>
+            <a href="cerrarSesion.php"> Cerrar Sesion </a>
         </div>
     </header>
     <div class="listado">
+        <h1>Mis cursos:</h1>
         <div class="tabla">
             <?php
                 listaCursos(conexion(),"",$_SESSION["userType"]);
             ?>
         </div>
+    </div>
+    <div class="listado">
+        <h1>Cursos disponibles:</h1>
+        <?php
+            cursosDisponibles(conexion());
+        ?>
     </div>
     <footer>
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
@@ -44,5 +55,10 @@
             </ul>  
         </div>
     </footer>
+    <?php
+        }else{
+            echo "<h1>NO TIENES ACCESO A ESTA PAGINA</h1>";
+        }
+    ?>
 </body>
 </html>

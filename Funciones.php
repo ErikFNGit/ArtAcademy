@@ -496,7 +496,6 @@ function listaCursos($conexion, $busqueda, $userType){
     }else{
         $query = "SELECT * FROM curso WHERE name LIKE '%$busqueda%';"; 
     }
-    $cursos = mysqli_query($conexion, $query);
     if($userType=="student"){
         $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
         $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
@@ -517,12 +516,7 @@ function listaCursos($conexion, $busqueda, $userType){
             echo"<td>Fecha Final </td>";
             echo"<td>Profesor </td>";
         echo"</tr>";
-    for($i=0; $i<mysqli_num_rows($cursos);$i++){
-        $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
-        $query2="SELECT name FROM teachers WHERE id = ".$curso['teacher_id']."";
-        $nombreprofe=mysqli_query($conexion,$query2);
-        $nombreprofe=mysqli_fetch_array($nombreprofe, MYSQLI_ASSOC);
-        $nombreprofe=$nombreprofe['name'];
+    foreach(findCursos(conexion(),$query) as $curso){
         if($userType=="admin")
         {
             echo "<tr>";
@@ -532,10 +526,10 @@ function listaCursos($conexion, $busqueda, $userType){
             echo "<td>". $curso['hours']."</td>";
             echo "<td>". $curso['sDate']."</td>";
             echo "<td>". $curso['eDate']."</td>";
-            echo "<td>". $nombreprofe."</td>";
+            echo "<td>". $curso['profesor']."</td>";
             echo "<td> <a href = 'editarCurso.php?id=".$curso["code"]."' class='button'> EDITAR </a></td>";
 
-        }elseif($userType=="student" and $curso["active"]=="1")
+        }elseif($userType=="student" and $curso["active"]=="1" and in_array($curso["code"],$matriculas))
         {
             echo "<tr>";
             echo "<td class='indice'>*</td>";
@@ -544,25 +538,66 @@ function listaCursos($conexion, $busqueda, $userType){
             echo "<td>". $curso['hours']."</td>";
             echo "<td>". $curso['sDate']."</td>";
             echo "<td>". $curso['eDate']."</td>";
-            echo "<td>". $nombreprofe."</td>";
-            if($_SESSION["screen"] != "inicioAlumno"){
+            echo "<td>". $curso["profesor"]."</td>";
+            echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
+           /* if($_SESSION["screen"] != "inicioAlumno"){
                 if(!in_array($curso["code"],$matriculas)){
                     echo "<td><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
                 }else{
                     echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
     
                 }
-            }
+            }*/
         }
-            
         echo "</tr>";  
     }
     echo "</table>";
     
 }
 
+function cursosDisponibles($conexion){
+    $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
+    $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
+    $matriculas = [];
+    for($i=0; $i<mysqli_num_rows($cursosMatriculado);$i++){
+        $placeholder = mysqli_fetch_array($cursosMatriculado, MYSQLI_NUM);
+        $matriculas[$i] = $placeholder[0];
+    }
+    $listadoCursos = findCursos(conexion(),"SELECT * FROM curso");
+    foreach($listadoCursos as $curso){
+        if(!in_array($curso["code"],$matriculas)){
+            echo "<div>";
+                echo "<h1>".$curso["name"]."</h1>";
+                //Aqui pues tu ya pones la foto y tal
+                echo "<p>".$curso["description"]."</p>";
+                echo "<p>".$curso["hours"]."</p>";
+                echo "<p>".$curso["sDate"]."</p>";
+                echo "<p>".$curso["eDate"]."</p>";
+                echo "<p>".$curso["profesor"]."</p>";
+                echo "<td><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
+            echo "</div>";
+        }
+    }
+    
+}
+
 if(isset($_GET["llamarInsert"])){ insertMatricula(conexion(), $_SESSION["dni"], $_GET["codigo"]); }
 if(isset($_GET["llamarDelete"])){ dropMatricula(conexion(), $_SESSION["dni"], $_GET["codigo"]); }
+
+function findCursos($conexion, $query){
+    $cursos = mysqli_query($conexion, $query);
+    $listaCursos = [];
+    
+    for($i=0; $i<mysqli_num_rows($cursos);$i++){
+        $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
+        $query2="SELECT name FROM teachers WHERE id = ".$curso['teacher_id']."";
+        $nombreprofe=mysqli_query($conexion,$query2);
+        $nombreprofe=mysqli_fetch_array($nombreprofe, MYSQLI_ASSOC);
+        $curso["profesor"] = $nombreprofe['name'];
+        $listaCursos[$i] = $curso;
+    }
+    return $listaCursos;
+}
 
 function insertMatricula($conexion,$alumno,$curso){
 

@@ -51,6 +51,7 @@
             }else{
                 $_SESSION["dni"] = $_POST["dni"];
                 $_SESSION["userType"] = "student";
+                $_SESSION["start"] = true;
                 echo "<meta http-equiv='refresh' content ='0; url=inicioAlumno.php'>";           
 
             }

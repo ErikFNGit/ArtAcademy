@@ -43,6 +43,7 @@
                 echo "<meta http-equiv='refresh' content ='0; url=loginAdministrador.php'>";               
             }else{
                 $_SESSION["userType"] = "admin";
+                $_SESSION["start"] = true;
                 echo "<meta http-equiv='refresh' content ='0; url=controlAdmin.php'>";               
 
             }
