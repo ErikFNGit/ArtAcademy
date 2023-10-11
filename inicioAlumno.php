@@ -23,7 +23,6 @@
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
     </header>
-    <a href = 'listarCursos.php?id=student' class="button"> Listado de todos cursos </a>
     <div class="listado">
         <div class="tabla">
             <?php
