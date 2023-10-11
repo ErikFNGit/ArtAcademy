@@ -65,16 +65,6 @@ function addStudent($conexion){
     mysqli_query($conexion,$query);
 
 }
-function selectCurso($connection,$busqueda){
-    $info=[];
-    $cursoE = "SELECT * FROM curso WHERE code = $busqueda"; 
-    $curso = mysqli_query($connection,$cursoE);
-    $curso = mysqli_fetch_array($curso,MYSQLI_ASSOC);
-    foreach($curso as $clave => $dato){
-        $info[$clave] = $dato;
-    }
-    return $info;
-}
 function updateCurso(){
     $conexion = conexion();
     $findTeacher = "SELECT id FROM teachers WHERE curso_id = ".$_POST["id"]."";
@@ -435,11 +425,11 @@ function fillInfoCursos($idCurso){
         </tr>
         <tr>
             <td><label>Horas: </label></td> 
-            <td><input type="number" name="hours" value=<?php echo $row['hours'];?> required></td>
+            <td><input type="number" name="hours" value=<?php echo $row['hours'];1?> required></td>
         </tr>
         <tr>
             <td><label>Fecha de inicio: </label></td>
-            <td><input type="date" name="start" value =<?php echo $row['sDate'];?> required><label for="yes"></label></td>
+            <td><input type="date" name="start" value =<?php echo $row['sDate'];?>  min="<?php echo date("Y-m-d"); ?>" required><label for="yes"></label></td>
         </tr>
         <tr>
             <td><label>Fecha final: </label></td>
@@ -565,17 +555,21 @@ function cursosDisponibles($conexion){
     }
     $listadoCursos = findCursos(conexion(),"SELECT * FROM curso");
     foreach($listadoCursos as $curso){
-        if(!in_array($curso["code"],$matriculas)){
-            echo "<div>";
-                echo "<h1>".$curso["name"]."</h1>";
-                //Aqui pues tu ya pones la foto y tal
-                echo "<p>".$curso["description"]."</p>";
-                echo "<p>".$curso["hours"]."</p>";
-                echo "<p>".$curso["sDate"]."</p>";
-                echo "<p>".$curso["eDate"]."</p>";
-                echo "<p>".$curso["profesor"]."</p>";
-                echo "<td><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
-            echo "</div>";
+        if(!in_array($curso["code"],$matriculas))
+        {
+            if($curso["sDate"]<date("Y-m-d"))
+            {
+                echo "<div>";
+                    echo "<h1>".$curso["name"]."</h1>";
+                    //Aqui ya pues pones tu ya pones la foto y tal
+                    echo "<p>".$curso["description"]."</p>";
+                    echo "<p>".$curso["hours"]."</p>";
+                    echo "<p>".$curso["sDate"]."</p>";
+                    echo "<p>".$curso["eDate"]."</p>";
+                    echo "<p>".$curso["profesor"]."</p>";
+                    echo "<td><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
+                echo "</div>";
+            }
         }
     }
     

@@ -37,7 +37,7 @@
                     </tr>
                     <tr>
                         <td><label for="inicio">Inicio del curso:</label></td>
-                        <td><input type="date" name="nuevocurso[]" id="" required></td>
+                        <td><input type="date" name="nuevocurso[]" id=""  min="<?php echo date('Y-m-d'); ?>" required></td>
                     </tr>
                     <tr>
                         <td><label for="fin">Fin del curso:</label></td>
