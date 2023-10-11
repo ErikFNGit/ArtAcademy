@@ -1,5 +1,5 @@
 footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   display: grid;
@@ -9,10 +9,10 @@ footer {
 footer div {
   display: flex;
   align-items: center;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 footer div a {
-  color: white;
+  color: rgb(255, 255, 255);
   text-decoration: none;
 }
 footer div:nth-child(2), footer div:last-child {

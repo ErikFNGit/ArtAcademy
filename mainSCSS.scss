@@ -10,6 +10,9 @@ body{
     background-color: rgba(255,255,255,0.6);
     margin: 0%;
     padding: 0%;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+    height: 100%;
 }
 a{
     text-decoration: inherit;
@@ -19,6 +22,7 @@ a{
 }
 .mainMenu{
     @include textStyle;
+    height: 100%;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 100%;
