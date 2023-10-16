@@ -164,6 +164,11 @@ a {
 .formulario form table tbody tr td input {
   border-radius: 7px;
 }
+.formulario form table tbody tr td textarea {
+  width: 100%;
+  height: 100px;
+  resize: none;
+}
 .formulario form table tbody tr .lbl {
-  text-align: right;
+  text-align: left;
 }/*# sourceMappingURL=mainSCSS.css.map */
