@@ -427,42 +427,53 @@ function fillInfoCursos($idCurso){
                     <input type="hidden" name="id" value=<?php echo $row['code']; ?>>
                     <tr>
                         <td><label>Nombre del curso: </label></td>
+                    </tr>
+                    <tr>
                         <td><input type="text" name="name" value=<?php echo $row['name'];?> required></td>
                     </tr>
                     <tr>
-                        <td><label>Descripcion del curso: </label></td>
-                        <td><input type="text" name="description" value=<?php echo $row['description'];?> required></td>
+                        <td><label>Horas del curso: </label></td> 
                     </tr>
                     <tr>
-                        <td><label>Horas del curso: </label></td> 
                         <td><input type="number" name="hours" value=<?php echo $row['hours'];1?> required></td>
                     </tr>
                     <tr>
                         <td><label>Fecha de inicio: </label></td>
-                        <td><input type="date" name="start" value =<?php echo $row['sDate'];?>  min="<?php echo date("Y-m-d"); ?>" required><label for="yes"></label></td>
+                        <td><label>Fecha de finalizacion: </label></td>
                     </tr>
                     <tr>
-                        <td><label>Fecha de finalizacion: </label></td>
+                        <td><input type="date" name="start" value =<?php echo $row['sDate'];?>  min="<?php echo date("Y-m-d"); ?>" required><label for="yes"></label></td>
                         <td><input type="date" name="end" value =<?php echo $row['eDate'];?> required><label for="yes"></label></td>
+
                     </tr>
                     <tr>
                         <td><label>Profesor asignado: </label></td> 
+                    </tr>   
+                    <tr>
                         <td><?php selectTeachers($idProfeSelect,$idCurso)?></td>
-                    </tr>       
+                    </tr>    
                     <tr>
                         <td><label>Activo: </label></td>
+                    </tr>
+                    <tr>
                         <td>
                             <input type="radio" id="yes" name="active" value ="yes" <?php echo $row['active'] == 1 ?'checked':'';?> required><label for="yes">Si</label>
                             <input type="radio" id="no" name="active" value = "no" <?php echo $row['active'] == 0  ?'checked':'';?>><label for="no">No</label>
                         </td>
-                    </tr>       
+                    </tr>    
+                    <tr>
+                        <td><label>Descripcion del curso: </label></td>
+                    </tr>
+                    <tr>
+                        <td colspan=2><textarea name="description" maxlength=254 required><?php echo $row['description'];?></textarea></td>
+    
+                    </tr>   
                     <tr>
                         <td><input type="submit" value="Editar"></td>
-                        <td><a href='listarCursos.php?id=admin'>Atras</td>
+                        <td><a href='listarCursos.php?id=admin' class="button">Atras</td>
                     </tr>
                 </table>
             </form> 
-        
         </div>
         <?php
         }else{
