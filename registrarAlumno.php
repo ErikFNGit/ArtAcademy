@@ -38,7 +38,7 @@
             </tr>
             <tr>
                 <td><label>Edad: </label></td>
-                <td><input type="number" name="age" required></td>
+                <td><input type="date" name="age" required></td>
             </tr>
             <tr>
                 <td><label>Foto: </label></td>

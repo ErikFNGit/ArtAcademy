@@ -712,7 +712,6 @@ function updateStudent(){
     $surname=$_POST['surname'];
     $mail=$_POST['mail'];
     $stPass=md5($_POST['stPass']);
-    $consulta = $conexion->prepare($query);
     //Usmoas bind_param para asginarle los valores a la query y ejecutarla
     $consulta->bind_param("isssssi",$id,$dni, $name, $surname, $mail, $stPass, $id);
     $consulta->execute();
@@ -726,10 +725,23 @@ function passOlvidada($dni,$mail,$pass,$passMatch){
         mysqli_connect_error();
         exit();
     }
-    echo $dni;
-    echo $mail;
-    echo $pass;
-    echo $passMatch;
+    if($pass == $passMatch){
+        $query="UPDATE students SET stPass=? WHERE dni=?";
+        $consulta = $conexion->prepare($query);
+        $newPass=md5($pass);
+        $consulta -> bind_param("ss", $newPass, $dni);
+        $consulta->execute();
+        $consulta->close();
+        $conexion->close();
+    }else{
+        echo"<p>Ambas contraseñas no coinciden, introduzcalas de nuevo por favor.</p>";
+        echo "<meta http-equiv='refresh' content ='10; url=passOlvidada.php'>";
+        unset($_SESSION['dni']);
+        unset($_SESSION['mail']);
+        unset($_POST['pass']);
+        unset($_POST['passComprobar']);
+    }
+
     
 }
 ?>
