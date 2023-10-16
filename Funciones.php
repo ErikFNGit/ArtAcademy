@@ -275,11 +275,8 @@ function nuevoTeacher(){
         $surname=$_POST['surname'];
         $password=md5($_POST['pass']);
         $title=$_POST['title'];
-        $picture=$_FILES['photo']['tmp_name'];
         $active=($_POST['active']==='yes')?1:0;
-        //Usmoas bind_param para asginarle los valores a la query y ejecutarla
-        
-
+        $picture=$_FILES['photo']['tmp_name'];
         if(is_uploaded_file($picture)){    
             $directory= "img/" ;
             $fileName= $_FILES['photo']['name'];
@@ -310,7 +307,7 @@ function fillInfoTeacher($id){
             if($datos->num_rows>0){
             $row= $datos->fetch_assoc();
             ?>
-        <form action="edicionProfes.php" method="POST">
+        <form action="edicionProfes.php" method="POST" enctype="multipart/form-data">
         <table>
             <tr>
                 <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
@@ -333,8 +330,12 @@ function fillInfoTeacher($id){
                 <td><label>Activo: </label></td>
                 <td><input type="radio" id="yes" name="active" value ="yes" <?php echo $row['active'] == 1 ?'checked':'';?> required><label for="yes">Si</label></td>
                 <td><input type="radio" id="no" name="active" value = "no" <?php echo $row['active'] == 0  ?'checked':'';?>><label for="no">No</label></td>
+            </tr>
+            <tr>
+                <td><label>Foto: </label></td>
+                <td><input type="file" name="photo" required></td>
             </tr>       
-            </tr>            <td><input type="submit" value="Editar"></td>
+            </tr><td><input type="submit" value="Editar"></td>
                 <td><a href='listarProfes.php'>Atras</td>
             </tr>
         </table>
@@ -362,7 +363,7 @@ function fillInfoStudent($id){
         if($datos->num_rows>0){
         $row= $datos->fetch_assoc();
         ?>
-    <form action="editarEstudiante.php" method="POST">
+    <form action="editarEstudiante.php" method="POST" enctype="multipart/form-data">
     <table>
         <tr>
             <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
@@ -384,7 +385,11 @@ function fillInfoStudent($id){
         <tr>
             <td><label>Contraseña: </label></td>
             <td><input type="password" name="stPass" value=<?php echo $row['stPass']; ?> required></td>
-        </tr>            
+        </tr>
+        <tr>
+            <td><label>Foto: </label></td>
+            <td><input type="file" name="photo" required></td>
+        </tr>                
         <tr>            
             <td><input type="submit" value="Editar"></td>
             <td><a href='perfilAlumno.php'>Atras</td>
@@ -475,16 +480,26 @@ function updateTeacher(){
             exit();
         }
         //Preparamos la query para insertar el usuario
-        $query="UPDATE teachers SET name=?, surname=?, title=?, active=? WHERE id=?";
+        $query="UPDATE teachers SET name=?, surname=?, title=?, active=?, picture=? WHERE id=?";
         $consulta = $conexion->prepare($query);
         $id=$_POST['id'];
         $name=$_POST['name'];
         $surname=$_POST['surname'];
         $title=$_POST['title'];
         $active=($_POST['active']==='yes')?1:0;
+        $picture=$_FILES['photo']['tmp_name'];
+        if(is_uploaded_file($picture)){    
+            $directory= "img/" ;
+            $fileName= $_FILES['photo']['name'];
+            $idUnico=time();
+            $path=$directory.$idUnico.$fileName;
+            move_uploaded_file($picture,$path);
+        }else{
+            print("Error, no se ha subido la imagen");
+        }
         $consulta = $conexion->prepare($query);
         //Usmoas bind_param para asginarle los valores a la query y ejecutarla
-        $consulta->bind_param("sssii",$name,$surname, $title,$active,$id );
+        $consulta->bind_param("sssisi",$name,$surname, $title,$active,$path,$id );
         $consulta->execute();
         $consulta->close();
         $conexion->close();
@@ -707,7 +722,7 @@ function updateStudent(){
         exit();
     }
     //Preparamos la query para insertar el usuario
-    $query="UPDATE students SET id=?, dni=?, name=?, surname=?,mail=?, stPass=? WHERE id=?";
+    $query="UPDATE students SET id=?, dni=?, name=?, surname=?,mail=?, stPass=?, picture=? WHERE id=?";
     $consulta = $conexion->prepare($query);
     $id=$_POST['id'];
     $dni=$_POST['dni'];
@@ -715,8 +730,18 @@ function updateStudent(){
     $surname=$_POST['surname'];
     $mail=$_POST['mail'];
     $stPass=md5($_POST['stPass']);
+    $picture=$_FILES['photo']['tmp_name'];
+    if(is_uploaded_file($picture)){    
+        $directory= "img/" ;
+        $fileName= $_FILES['photo']['name'];
+        $idUnico=time();
+        $path=$directory.$idUnico.$fileName;
+        move_uploaded_file($picture,$path);
+    }else{
+        print("Error, no se ha subido la imagen");
+    }
     //Usmoas bind_param para asginarle los valores a la query y ejecutarla
-    $consulta->bind_param("isssssi",$id,$dni, $name, $surname, $mail, $stPass, $id);
+    $consulta->bind_param("issssssi",$id,$dni, $name, $surname, $mail, $stPass, $path, $id);
     $consulta->execute();
     $consulta->close();
     $conexion->close();
