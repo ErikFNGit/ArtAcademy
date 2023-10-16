@@ -142,4 +142,25 @@ a {
   flex-direction: column;
   text-align: center;
   align-items: center;
+}
+
+.formulario {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  font-family: Impact, "Arial Narrow Bold", sans-serif;
+}
+.formulario h1 {
+  grid-column-start: 4;
+  grid-column-end: 6;
+  text-align: center;
+}
+.formulario form {
+  grid-column-start: 4;
+  grid-column-end: 6;
+  background-color: rgba(214, 214, 214, 0.6);
+  padding: 5%;
+  border-radius: 30px;
+}
+.formulario form label {
+  text-align: right;
 }/*# sourceMappingURL=mainSCSS.css.map */

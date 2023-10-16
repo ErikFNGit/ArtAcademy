@@ -55,3 +55,29 @@ a{
     text-align: center;
     align-items: center;
 }
+
+.formulario{
+    display: grid;
+    grid-template-columns: repeat(9,1fr);
+    font-family: Impact,'Arial Narrow Bold', sans-serif;
+    h1{
+        grid-column-start: 4;
+        grid-column-end: 6;
+        text-align: center;
+    }
+    form{
+       grid-column-start: 4; 
+       grid-column-end: 6; 
+       background-color: $grey;
+       padding: 5%;
+       border-radius: 30px;
+        label{
+            text-align: right;
+        }
+    }
+
+}
+
+
+
+
