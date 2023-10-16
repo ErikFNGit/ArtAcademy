@@ -71,9 +71,20 @@ a{
        background-color: $grey;
        padding: 5%;
        border-radius: 30px;
-        label{
-            text-align: right;
-        }
+        table{
+            tbody{
+                tr{
+                    td{
+                        input{
+                            border-radius: 7px;
+                        }
+                    }
+                    .lbl{
+                        text-align: right;
+                    }
+                }
+            }
+       }
     }
 
 }

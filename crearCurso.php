@@ -9,7 +9,7 @@
 <body>
     <?php
         include("Funciones.php");
-        if(!isset($_POST["nuevocurso"]))
+        if(!isset($_POST["name"]))
         {
             
     ?>
@@ -23,39 +23,38 @@
     </header>
             <div class="formulario">
                 <h1>Añadir curso</h1>
-
                 <form action="crearCurso.php" method="POST">
                     <table>
                         <tr>
-                            <td><label for="name">Nombre del curso:</label></td>
-                            <td><input type="text" name="nuevocurso[]" id="" required></td>
+                            <td class="lbl"><label for="name">Nombre del curso:</label></td>
+                            <td><input type="text" name="name" id="" required></td>
                         </tr>
                         <tr>
-                            <td><label for="descp">Descripcion del curso:</label></td>
-                            <td><input type="text" name="nuevocurso[]" id="" required></td>
+                            <td class="lbl"><label for="horas">Horas del curso:</label></td>
+                            <td><input type="number" name="hours" id="" required></td>
                         </tr>
                         <tr>
-                            <td><label for="horas">Horas del curso:</label></td>
-                            <td><input type="number" name="nuevocurso[]" id="" required></td>
+                            <td class="lbl"><label for="inicio">Inicio del curso:</label></td>
+                            <td><input type="date" name="start" id=""  min="<?php echo date('Y-m-d'); ?>" required></td>
                         </tr>
                         <tr>
-                            <td><label for="inicio">Inicio del curso:</label></td>
-                            <td><input type="date" name="nuevocurso[]" id=""  min="<?php echo date('Y-m-d'); ?>" required></td>
+                            <td class="lbl"><label for="fin">Fin del curso:</label></td>
+                            <td><input type="date" name="end" id="" min="<?php echo date('Y-m-d'); ?>" required></td>
                         </tr>
                         <tr>
-                            <td><label for="fin">Fin del curso:</label></td>
-                            <td><input type="date" name="nuevocurso[]" id="" required></td>
-                        </tr>
-                        <tr>
-                            <td><label for="profe">Profesor asignado:</label></td>
+                            <td class="lbl"><label for="profe">Profesor asignado:</label></td>
                             <td><?php  selectTeachers("","0"); ?> </td>
                         </tr>
                         <tr>
-                            <td><label for="activo">Curso activo:</label></td>
+                            <td class="lbl"><label for="activo">Curso activo:</label></td>
                             <td>
                                 <input type="radio" name="activo" value="si">Si</input>
                                 <input type="radio" name="activo" value="no">No</input>
                             </td>
+                        </tr>
+                        <tr>
+                            <td class="lbl"><label for="desc">Descripcion del curso:</label></td>
+                            <td><input type="text" name="descripcion" id="" required></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Aceptar"></td>
@@ -63,13 +62,12 @@
                     </table>
                 </form>
             </div>
-            <a href = 'controlAdmin.php'> Atras </a>  
-        <?php
+            <a href = 'controlAdmin.php' class="button"> Atras </a>  
+            <?php
         }
         else
         {
             addCurso(conexion());
-            
             echo "<meta http-equiv='refresh' content ='0; url=listarCursos.php'>";
         }   
         ?>

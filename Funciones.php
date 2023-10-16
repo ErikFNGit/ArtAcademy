@@ -25,22 +25,25 @@ function findStudentID($conexion, $dni){
 }
 function addCurso($conexion){
     $datos="";
-    foreach($_POST["nuevocurso"] as $dato){
-        $datos = $datos."'$dato',"; 
-    }
+    $datos=$datos."'".$_POST["name"]."',";
+    $datos=$datos."'".$_POST["hours"]."',";
+    $datos=$datos."'".$_POST["start"]."',";
+    $datos=$datos."'".$_POST["end"]."',";
+    $datos=$datos."'".$_POST["idTeacher"]."',";
+    $datos=$datos."'".$_POST["descripcion"]."',";
     if($_POST["activo"] == "si"){
         $datos = $datos."'1'";
     }else{
         $datos = $datos."'0'";
     }
-    $insertNewCourse = "INSERT INTO `curso`(`name`, `description`, `hours`, `sDate`, `eDate`, `teacher_id`, `active`) 
+    $insertNewCourse = "INSERT INTO `curso`(`name`, `hours`, `sDate`, `eDate`, `teacher_id`, `description`,`active`) 
     VALUES ($datos);";
     mysqli_query($conexion,$insertNewCourse);
-    $buscarIDcurso = "SELECT code FROM curso WHERE teacher_id='".$_POST["nuevocurso"][5]."';";
+    $buscarIDcurso = "SELECT code FROM curso WHERE teacher_id='".$_POST["idTeacher"]."';";
     $ID = mysqli_query($conexion, $buscarIDcurso);
     $ID = mysqli_fetch_array($ID, MYSQLI_NUM);
     $ID = $ID[0];
-    $updateTeacher = "UPDATE teachers SET curso_id='".$ID."' WHERE id ='".$_POST["nuevocurso"][5]."';";
+    $updateTeacher = "UPDATE teachers SET curso_id='".$ID."' WHERE id ='".$_POST["idTeacher"]."';";
     echo $updateTeacher;
     mysqli_query($conexion,$updateTeacher);
 }

@@ -161,6 +161,9 @@ a {
   padding: 5%;
   border-radius: 30px;
 }
-.formulario form label {
+.formulario form table tbody tr td input {
+  border-radius: 7px;
+}
+.formulario form table tbody tr .lbl {
   text-align: right;
 }/*# sourceMappingURL=mainSCSS.css.map */
