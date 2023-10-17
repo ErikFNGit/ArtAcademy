@@ -94,7 +94,7 @@ a{
     }
 
 }
-.container{
+.containerMainAdmin{
     display:flex;
     flex-direction: column;
     margin: auto;
@@ -130,5 +130,39 @@ a{
     a{
         margin-top: 20px;
         width: 35px;
+    }
+}
+.containerPerfilAlumno{
+    @include textStyle;
+    display: grid;
+    grid-template-columns: 1fr 80%;
+    .foto{
+        width: 150px;
+        height: 150px;
+        grid-column-start: 1;
+        grid-column-end: 2;
+        img{
+            background-color: $color_fondo_divs;
+            border-radius: 100%;
+        }
+    }
+    .tabla{
+        width: 350px;
+        grid-column-start: 1;
+        grid-column-end: 2;
+        th{
+            width: 150px;
+            text-align: center;
+            font-weight: bolder;
+        }
+        td{
+            text-align: center;
+        }
+    }
+    a{
+        width: 35px;
+        margin-top: 15px;
+        grid-column-start: 1;
+        grid-column-end: 2;
     }
 }

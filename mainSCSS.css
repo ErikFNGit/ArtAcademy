@@ -180,7 +180,7 @@ a {
   text-align: left;
 }
 
-.container {
+.containerMainAdmin {
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -188,7 +188,7 @@ a {
   font-weight: bold;
   font-family: sans-serif;
 }
-.container div {
+.containerMainAdmin div {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr auto;
@@ -198,21 +198,57 @@ a {
   padding: 20px;
   padding-right: 40px;
 }
-.container div ul li:nth-child(1) {
+.containerMainAdmin div ul li:nth-child(1) {
   margin-bottom: 40px;
 }
-.container div ul li:nth-child(2) {
+.containerMainAdmin div ul li:nth-child(2) {
   margin-bottom: 40px;
 }
-.container div ul a {
+.containerMainAdmin div ul a {
   text-align: center;
   text-decoration: none;
 }
-.container div ul a:hover {
+.containerMainAdmin div ul a:hover {
   color: blue;
   text-decoration: underline;
 }
-.container a {
+.containerMainAdmin a {
   margin-top: 20px;
   width: 35px;
+}
+
+.containerPerfilAlumno {
+  font-weight: bold;
+  font-family: sans-serif;
+  display: grid;
+  grid-template-columns: 1fr 80%;
+}
+.containerPerfilAlumno .foto {
+  width: 150px;
+  height: 150px;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+.containerPerfilAlumno .foto img {
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 100%;
+}
+.containerPerfilAlumno .tabla {
+  width: 350px;
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+.containerPerfilAlumno .tabla th {
+  width: 150px;
+  text-align: center;
+  font-weight: bolder;
+}
+.containerPerfilAlumno .tabla td {
+  text-align: center;
+}
+.containerPerfilAlumno a {
+  width: 35px;
+  margin-top: 15px;
+  grid-column-start: 1;
+  grid-column-end: 2;
 }/*# sourceMappingURL=mainSCSS.css.map */

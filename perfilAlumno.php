@@ -16,8 +16,23 @@
         echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
     }else{
         include("Funciones.php");
-        perfilStudent($_SESSION["dni"]);
-        echo"<a href='inicioAlumno.php'>Atras</a>";
+        ?>
+        <header>
+            <div>
+                <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
+            </div>
+            <div>
+                <a href="perfilAlumno.php"> Mi perfil </a>
+            </div>
+            <div>
+                <a href="registrarAlumno.php"> Cerrar Sesion</a>
+            </div>
+        </header>
+        <div class="containerPerfilAlumno">
+        <?php
+            perfilStudent($_SESSION["dni"]);
+        echo"<a class='button' href='inicioAlumno.php'>Atras</a>";
+        echo"</div>";
     }
 ?>        
 </body>

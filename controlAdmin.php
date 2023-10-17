@@ -21,7 +21,7 @@
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
     </header>
-    <div class="container">
+    <div class="containerMainAdmin">
     <h1>Centro de Administracion</h1>
         <div class="menu">
             <ul>
