@@ -28,9 +28,10 @@ a{
     grid-template-rows: 100%;
     div{
         @include divsMainMenu;
+        padding: 15px;
     }
     a{
-        margin-top: 10px;
+        margin-top: 40px;
         height: 15px;
         width: 80px;
         text-align: center;
