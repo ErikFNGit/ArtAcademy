@@ -16,6 +16,7 @@ body{
 }
 a{
     text-decoration: inherit;
+    color: $color_links;
 }
 .button{
     @include button; 
@@ -56,7 +57,6 @@ a{
     text-align: center;
     align-items: center;
 }
-
 .formulario{
     display: grid;
     grid-template-columns: repeat(9,1fr);
@@ -93,4 +93,42 @@ a{
        }
     }
 
+}
+.container{
+    display:flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 10%;
+    @include textStyle;
+    div{
+        display:grid;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr auto;
+        background-color: $color_fondo_divs;
+        border-radius: 10%;
+        box-shadow: $sombreado_divs;
+        padding: 20px;
+        padding-right: 40px;
+        ul{
+            li:nth-child(1){
+                margin-bottom: 40px;
+            }
+            li:nth-child(2){
+                margin-bottom: 40px;
+            }
+            a{
+                text-align: center;
+                text-decoration: none;
+
+            }
+            a:hover{
+                color: $color_links_hover;
+                text-decoration: underline;
+            }
+        }
+    }
+    a{
+        margin-top: 20px;
+        width: 35px;
+    }
 }
