@@ -27,26 +27,34 @@
                     <table>
                         <tr>
                             <td class="lbl"><label for="name">Nombre del curso:</label></td>
+                        </tr>
+                        <tr>
                             <td><input type="text" name="name" id="" required></td>
                         </tr>
                         <tr>
                             <td class="lbl"><label for="horas">Horas del curso:</label></td>
+                        </tr>
+                        <tr>
                             <td><input type="number" name="hours" id="" required></td>
                         </tr>
                         <tr>
                             <td class="lbl"><label for="inicio">Inicio del curso:</label></td>
-                            <td><input type="date" name="start" id=""  min="<?php echo date('Y-m-d'); ?>" required></td>
+                            <td class="lbl"><label for="fin">Fin del curso:</label></td>
                         </tr>
                         <tr>
-                            <td class="lbl"><label for="fin">Fin del curso:</label></td>
+                            <td><input type="date" name="start" id=""  min="<?php echo date('Y-m-d'); ?>" required></td>
                             <td><input type="date" name="end" id="" min="<?php echo date('Y-m-d'); ?>" required></td>
                         </tr>
                         <tr>
                             <td class="lbl"><label for="profe">Profesor asignado:</label></td>
+                        </tr>
+                        <tr>
                             <td><?php  selectTeachers("","0"); ?> </td>
                         </tr>
                         <tr>
                             <td class="lbl"><label for="activo">Curso activo:</label></td>
+                        </tr>
+                        <tr>
                             <td>
                                 <input type="radio" name="activo" value="si">Si</input>
                                 <input type="radio" name="activo" value="no">No</input>
@@ -54,15 +62,17 @@
                         </tr>
                         <tr>
                             <td class="lbl"><label for="desc">Descripcion del curso:</label></td>
-                            <td><input type="text" name="descripcion" id="" required></td>
+                        </tr>
+                        <tr>
+                            <td colspan=2><textarea name="descripcion" maxlength=254 required></textarea></td>
                         </tr>
                         <tr>
                             <td><input type="submit" value="Aceptar"></td>
                         </tr>
                     </table>
+                    <a href = 'controlAdmin.php' class="button"> Atras </a>  
                 </form>
             </div>
-            <a href = 'controlAdmin.php' class="button"> Atras </a>  
             <?php
         }
         else
