@@ -57,7 +57,8 @@
         {
             $_SESSION["userType"]="student";
             $_SESSION["dni"]=$_POST["dni"];
-            addStudent(conexion());
+            addStudent(conexion(),$_POST["dni"],$_POST["name"],$_POST["surname"],$_POST["mail"]
+            ,$_POST["passwd"],$_POST["age"],$_FILES["photo"]["tmp_name"], $_FILES["photo"]["name"]);
             echo "<meta http-equiv='refresh' content ='0; url=inicioAlumno.php'>";
         }else{
             unset($_POST["dni"]);
