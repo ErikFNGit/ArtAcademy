@@ -37,13 +37,16 @@
     <label for="arhivo">Ingresar alumnos con archivo local: </label>
     <input type="file" id="archivo">
     <?php
+  
         if(isset($_POST["alumnos"])){
             $alumnos = $_POST["alumnos"];
-            $alumnos = explode("/,",$alumnos); 
+            $alumnos = explode("/,",$alumnos);
+            echo "Primer explode"; 
+            print_r($alumnos);
             $_SESSION["alumnos"] = $alumnos;
             unset($_POST["alumnos"]);
         }
-        echo "<a href='listadoAlumnos.php?id=1' class='button'>Subir archivos</a>";
+        echo "<div> <a href='listadoAlumnos.php?id=1' class='button'>Subir archivos</a> </div>";
 
 
         if(isset($_GET["id"]) and $_GET["id"] == 1){
@@ -56,13 +59,15 @@
                 $mail = $alumno[3];
                 $passwd = $alumno[4];
                 $edad = $alumno[5];
-                $foto = $alumno[6];
-                print_r($alumno);                
-                addStudent(conexion(),$dni,$nombre,$apellido,$mail,$passwd,$edad,$foto,"");
+                addStudent(conexion(),$dni,$nombre,$apellido,$mail,$passwd,$edad,"img/sinFoto.jpg");
             }
             unset($_SESSION["alumnos"]);
+            unset($_GET["id"]);
+            echo "<meta http-equiv='refresh' content ='0; url=listadoAlumnos.php'>";
+
         }
-    ?>       
+    ?>      
+    <div id="resultado"></div> 
     <script src="cargarAlumnos.js"></script>
     <a href='controlAdmin.php'>Atras</a>    
 </body>

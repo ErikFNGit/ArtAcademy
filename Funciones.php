@@ -50,14 +50,18 @@ function addCurso($conexion){
 
 function addStudent($conexion,$dni,$name,$surname,$mail,$password,$age,$picture){
     $password=md5($password);
-    if(is_uploaded_file($picture)){    
-        $directory= "img/" ;            
-        $fileName= $_FILES['photo']['name'];
-        $idUnico=time();
-        $path=$directory.$idUnico.$fileName;
-        move_uploaded_file($picture,$path);
+    if($picture!="img/sinFoto.jpg"){
+        if(is_uploaded_file($picture)){    
+            $directory= "img/" ;            
+            $fileName= $_FILES['photo']['name'];
+            $idUnico=time();
+            $path=$directory.$idUnico.$fileName;
+            move_uploaded_file($picture,$path);
+        }else{
+            print("Error, no se ha subido la imagen");
+        }
     }else{
-        print("Error, no se ha subido la imagen");
+        $path="img/sinFoto.jpg";
     }
     $query="INSERT INTO students (dni, name, surname, mail, stPass, age, picture) VALUES ('$dni','$name','$surname','$mail', '$password','$age','$path')";
     echo $query;
