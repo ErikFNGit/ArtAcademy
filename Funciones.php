@@ -39,13 +39,6 @@ function addCurso($conexion){
     $insertNewCourse = "INSERT INTO `curso`(`name`, `hours`, `sDate`, `eDate`, `teacher_id`, `description`,`active`) 
     VALUES ($datos);";
     mysqli_query($conexion,$insertNewCourse);
-    $buscarIDcurso = "SELECT code FROM curso WHERE teacher_id='".$_POST["idTeacher"]."';";
-    $ID = mysqli_query($conexion, $buscarIDcurso);
-    $ID = mysqli_fetch_array($ID, MYSQLI_NUM);
-    $ID = $ID[0];
-    $updateTeacher = "UPDATE teachers SET curso_id='".$ID."' WHERE id ='".$_POST["idTeacher"]."';";
-    echo $updateTeacher;
-    mysqli_query($conexion,$updateTeacher);
 }
 
 function addStudent($conexion,$dni,$name,$surname,$mail,$password,$age,$picture){
@@ -71,10 +64,10 @@ function addStudent($conexion,$dni,$name,$surname,$mail,$password,$age,$picture)
 
 function updateCurso(){
     $conexion = conexion();
-    $findTeacher = "SELECT id FROM teachers WHERE curso_id = ".$_POST["id"]."";
+    $findTeacher = "SELECT teacher_id FROM curso WHERE code = ".$_POST["id"]."";
     $teacherId = mysqli_query(conexion(),$findTeacher);
-    $teacherId = mysqli_fetch_array($teacherId,MYSQLI_ASSOC);
-    $teacherId = $teacherId["id"];
+    $teacherId = mysqli_fetch_array($teacherId);
+    $teacherId = $teacherId[0];
     //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
     if($conexion == FALSE){
         echo"Error en la base de datos";
@@ -96,13 +89,6 @@ function updateCurso(){
     $consulta->bind_param("ssissii",$name, $description, $hours, $sDate, $eDate, $teacher, $active );
     $consulta->execute();
     $consulta->close();
-    $query="UPDATE teachers SET curso_id=? WHERE id=?";
-    $consulta = $conexion->prepare($query);
-    $consulta->bind_param("ii",$_POST['id'],$teacher);
-    $consulta->execute();
-    $conexion->close();
-    $limpiarRegistroProfe = "UPDATE teachers SET curso_id='0' WHERE id='".$teacherId."'";
-    mysqli_query(conexion(),$limpiarRegistroProfe);
     
 
 }
@@ -115,18 +101,18 @@ function selectTeachers($code,$curso){
         mysqli_connect_error();
         exit();
     }
-    $query = "SELECT id,curso_id,name,surname FROM teachers WHERE active"."=1;";
+    $query = "SELECT id,name,surname FROM teachers WHERE active"."=1;";
     $teachers=mysqli_query($conexion,$query);
     echo "<select name='idTeacher'>";
     for($i=0; $i<mysqli_num_rows($teachers);$i++){
         $teacher=mysqli_fetch_array($teachers, MYSQLI_ASSOC);
-        if($teacher["curso_id"]==0 or $teacher["curso_id"]==$curso){
-            if($code==$teacher["id"]){
-                echo "<option value='".$teacher["id"]."' selected>".$teacher["name"]." ".$teacher["surname"]."</option>";
-            }else{
-                echo "<option value='".$teacher["id"]."'>".$teacher["name"]." ".$teacher["surname"]."</option>";
-            }
+        
+        if($code==$teacher["id"]){
+            echo "<option value='".$teacher["id"]."' selected>".$teacher["name"]." ".$teacher["surname"]."</option>";
+        }else{
+            echo "<option value='".$teacher["id"]."'>".$teacher["name"]." ".$teacher["surname"]."</option>";
         }
+        
     }
     echo "</select>";
     
@@ -625,7 +611,6 @@ if(isset($_GET["llamarDelete"])){ dropMatricula(conexion(), $_SESSION["dni"], $_
 function findCursos($conexion, $query){
     $cursos = mysqli_query($conexion, $query);
     $listaCursos = [];
-    
     for($i=0; $i<mysqli_num_rows($cursos);$i++){
         $curso = mysqli_fetch_array($cursos, MYSQLI_ASSOC);
         $query2="SELECT name FROM teachers WHERE id = ".$curso['teacher_id']."";
