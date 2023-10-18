@@ -53,7 +53,7 @@
                 $_SESSION["dni"] = $_POST["dni"];
                 $_SESSION["userType"] = "teacher";
                 $_SESSION["start"] = true;
-                echo "<meta http-equiv='refresh' content ='0; url=perfilProfe.php'>";           
+                echo "<meta http-equiv='refresh' content ='0; url=inicioProfe.php'>";           
             }
         }
     ?>

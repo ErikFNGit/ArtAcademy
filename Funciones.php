@@ -551,7 +551,7 @@ function listaCursos($conexion, $busqueda, $userType){
                     echo"<tr>";
                         echo"<td>".$row['name']." </td>";
                         echo"<td></td>";
-                        echo"<td> <a href='notasCurso.php?id=".$row['code']."'>Alumnos</a>";
+                        echo"<td> <a  class='studentGrade' href='notasCurso.php?id=".$row['code']."'>Alumnos</a>";
                     echo"</tr>";
                 echo"</table>";
                 echo"</div>";
@@ -607,28 +607,40 @@ function listaCursos($conexion, $busqueda, $userType){
 }
 
 function listarAlumnosMatriculados($conexion, $cursoID){
-    $alumnos="SELECT student_id FROM matricula WHERE curso_id LIKE ".$cursoID.";";
+    $alumnos="SELECT student_id, score FROM matricula WHERE curso_id LIKE ".$cursoID.";";
     $alumnos=mysqli_query($conexion,$alumnos);
     echo"<div class='listado'>";
         echo"<div class='tabla'>";
+        echo"<form action'notasCurso.php' method='post'>";
             echo"<table>";
                 echo"<tr>";
                     echo"<td> Alumnos </td>";
                     echo"<td> Nota </td>";
                 echo"</tr>";
                 while($row = mysqli_fetch_array($alumnos)){
+                    echo"<tr>";
+                    $nombreAlumno="SELECT name FROM students WHERE id LIKE '".$row['student_id']."';";
+                    $nombreAlumno=mysqli_query($conexion,$nombreAlumno);
+                    $nombreAlumno=mysqli_fetch_array($nombreAlumno);
+                    $nombreAlumno=$nombreAlumno[0];
+                    echo"<td>$nombreAlumno</td>";
+                    echo"<td><input type='number' min=0 max=10 name='studentGrades[".$row['student_id']."]'  value='".$row['score']."' step='0.01'></td>";
+                    echo"</tr>";
+                }
                 echo"<tr>";
-                $nombreAlumno="SELECT name FROM students WHERE id LIKE '".$row['student_id']."';";
-                $nombreAlumno=mysqli_query($conexion,$nombreAlumno);
-                $nombreAlumno=mysqli_fetch_array($nombreAlumno);
-                $nombreAlumno=$nombreAlumno[0];
-                echo"<td>$nombreAlumno</td>";
-                echo"<td>Aqui se pondan las notas</td>";
+                echo"<td><input type='submit' class='button' value='Guardar'></td>";
                 echo"</tr>";
-            }
             echo"</table>";
+        echo"</form>";
         echo"</div>";
     echo"</div>";
+}
+function updateNotes($conexion,$students,$curso){
+    foreach ($students as $studentID => $score) {
+        $query = "UPDATE matricula SET score = '$score' WHERE student_id = '$studentID' AND curso_id = '$curso';";
+        $result = mysqli_query($conexion, $query);
+    }
+    echo "<meta http-equiv='refresh' content='0;url=inicioProfe.php'>";
 }
 function cursosDisponibles($conexion){
     $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);

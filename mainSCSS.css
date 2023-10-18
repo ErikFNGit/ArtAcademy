@@ -261,4 +261,7 @@ a {
   margin-top: 15px;
   grid-column-start: 1;
   grid-column-end: 2;
+}
+.containerPerfilAlumno .studentGrade {
+  font-style: italic;
 }/*# sourceMappingURL=mainSCSS.css.map */

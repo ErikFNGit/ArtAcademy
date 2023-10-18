@@ -8,13 +8,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Notas</title>
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-    <?php 
-        if(isset($_SESSION["start"])){
-    ?>
     <header>
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
@@ -23,8 +20,13 @@
             <a href="cerrarSesion.php"> Cerrar Sesion </a>
         </div>
     </header>
-    <?php
-    listarAlumnosMatriculados(conexion(),$_GET['id']);
+    <?php 
+        if(isset($_SESSION["start"])){
+            if(!isset($_POST['studentGrades'])){
+                listarAlumnosMatriculados(conexion(),$_GET['id']);
+            }else{
+                updateNotes(conexion(),$_POST['studentGrades'],$_GET['id']);
+        }
     }else{
         echo "<h1>NO TIENES ACCESO A ESTA PAGINA</h1>";
     }
