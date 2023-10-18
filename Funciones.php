@@ -125,7 +125,7 @@ function listarAlumnos($conexion,$busqueda){
         $query = "SELECT * FROM students WHERE name LIKE '%$busqueda%';"; 
     }
     $alumnos = mysqli_query($conexion, $query);
-    echo"<table border = '1'>";
+    echo"<table>";
         echo"<tr>";
             echo"<td>ID </td>";
             echo"<td>DNI </td>";

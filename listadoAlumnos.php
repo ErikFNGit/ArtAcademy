@@ -32,14 +32,16 @@
         <input type="submit" value="Aceptar">
     </form>
     </br>
-    <?php
+    <div class="alumnos">   
+        <?php
         if(isset($_POST["busqueda"]))
         {
             listarAlumnos(conexion(),$_POST["busqueda"]);
         }else{
             listarAlumnos(conexion(),"");
         }
-    ?>
+        ?>
+    </div>
     <label for="arhivo">Ingresar alumnos con archivo local: </label>
     <input type="file" id="archivo">
     <?php
