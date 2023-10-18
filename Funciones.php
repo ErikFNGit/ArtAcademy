@@ -47,27 +47,28 @@ function addCurso($conexion){
     echo $updateTeacher;
     mysqli_query($conexion,$updateTeacher);
 }
-function addStudent($conexion){
-    $dni=$_POST['dni'];
-    $name=$_POST['name'];
-    $surname=$_POST['surname'];       
-    $mail=$_POST['mail'] ;
-    $password=md5($_POST['passwd']);
-    $age = $_POST["age"];
-    $picture=$_FILES['photo']['tmp_name']; 
-    if(is_uploaded_file($picture)){    
-        $directory= "img/" ;            
-        $fileName= $_FILES['photo']['name'];
-        $idUnico=time();
-        $path=$directory.$idUnico.$fileName;
-        move_uploaded_file($picture,$path);
+
+function addStudent($conexion,$dni,$name,$surname,$mail,$password,$age,$picture){
+    $password=md5($password);
+    if($picture!="img/sinFoto.jpg"){
+        if(is_uploaded_file($picture)){    
+            $directory= "img/" ;            
+            $fileName= $_FILES['photo']['name'];
+            $idUnico=time();
+            $path=$directory.$idUnico.$fileName;
+            move_uploaded_file($picture,$path);
+        }else{
+            print("Error, no se ha subido la imagen");
+        }
     }else{
-        print("Error, no se ha subido la imagen");
+        $path="img/sinFoto.jpg";
     }
     $query="INSERT INTO students (dni, name, surname, mail, stPass, age, picture) VALUES ('$dni','$name','$surname','$mail', '$password','$age','$path')";
+    echo $query;
     mysqli_query($conexion,$query);
 
 }
+
 function updateCurso(){
     $conexion = conexion();
     $findTeacher = "SELECT id FROM teachers WHERE curso_id = ".$_POST["id"]."";
@@ -105,6 +106,7 @@ function updateCurso(){
     
 
 }
+
 function selectTeachers($code,$curso){
     $conexion = conexion();
     //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
@@ -129,6 +131,7 @@ function selectTeachers($code,$curso){
     echo "</select>";
     
 }
+
 function listarAlumnos($conexion,$busqueda){
     if($busqueda==""){
         $query = "SELECT * FROM students;";
@@ -140,7 +143,7 @@ function listarAlumnos($conexion,$busqueda){
         echo"<tr>";
             echo"<td>ID </td>";
             echo"<td>DNI </td>";
-            echo"<td>Nomre </td>";
+            echo"<td>Nombre </td>";
             echo"<td>Apellido </td>";
             echo"<td>Correo </td>";
         echo"</tr>";
@@ -156,6 +159,7 @@ function listarAlumnos($conexion,$busqueda){
     }
     echo "</table>";
 }
+
 function studentLogin($conexion){
     $dni = $_POST["dni"];
     $passwd = $_POST["passwd"];
@@ -175,6 +179,25 @@ function studentLogin($conexion){
    
     return $login;
 
+}
+function teacherLogin($conexion){
+    $dni = $_POST["dni"];
+    $passwd = $_POST["passwd"];
+    $passwd = md5($passwd);
+
+
+    $query = "SELECT password FROM teachers WHERE dni LIKE '$dni'";
+    $pass = mysqli_query($conexion,$query);
+    $pass = mysqli_fetch_array($stPass, MYSQLI_NUM);
+    $login = false;
+    if(isset($stPass[0])){
+        $pass = $pass[0];
+        if($stPass==$passwd){
+            $login = true;
+        }
+    }
+   
+    return $login;
 }
 function adminLogin($conexion){
     $ID = $_POST["ID"];
@@ -395,7 +418,7 @@ function fillInfoStudent($id){
             <td><a href='perfilAlumno.php'>Atras</td>
         </tr>
     </table>
-</form>
+    </form>
         <?php
         }else{
         echo"<h2>Este id no correspone a ningun alumno</h2>";
@@ -592,11 +615,10 @@ function cursosDisponibles($conexion){
     foreach($listadoCursos as $curso){
         if(!in_array($curso["code"],$matriculas))
         {
-            if($curso["sDate"]<date("Y-m-d"))
+            if($curso["sDate"]>date("Y-m-d"))
             {
                 echo "<div>";
                     echo "<h1>".$curso["name"]."</h1>";
-                    //Aqui ya pues pones tu ya pones la foto y tal
                     echo "<p>".$curso["description"]."</p>";
                     echo "<p>".$curso["hours"]."</p>";
                     echo "<p>".$curso["sDate"]."</p>";

@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include("Funciones.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,9 +11,7 @@
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-    <?php
-        include("Funciones.php");
-    ?>
+    
     <header>
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
@@ -24,19 +26,49 @@
         <input type="submit" value="Aceptar">
     </form>
     </br>
-        <?php
-            if(isset($_POST["busqueda"]))
-            {
-                listarAlumnos(conexion(),$_POST["busqueda"]);
+    <?php
+        if(isset($_POST["busqueda"]))
+        {
+            listarAlumnos(conexion(),$_POST["busqueda"]);
+        }else{
+            listarAlumnos(conexion(),"");
+        }
+    ?>
+    <label for="arhivo">Ingresar alumnos con archivo local: </label>
+    <input type="file" id="archivo">
+    <?php
+  
+        if(isset($_POST["alumnos"])){
+            $alumnos = $_POST["alumnos"];
+            $alumnos = explode("/,",$alumnos);
+            echo "Primer explode"; 
+            print_r($alumnos);
+            $_SESSION["alumnos"] = $alumnos;
+            unset($_POST["alumnos"]);
+        }
+        echo "<div> <a href='listadoAlumnos.php?id=1' class='button'>Subir archivos</a> </div>";
 
 
-            }else{
-                listarAlumnos(conexion(),"");
-
+        if(isset($_GET["id"]) and $_GET["id"] == 1){
+            $alumnos = $_SESSION["alumnos"];
+            foreach($alumnos as $alumno){
+                $alumno = explode(",",$alumno);
+                $dni = $alumno[0];
+                $nombre = $alumno[1];
+                $apellido = $alumno[2];
+                $mail = $alumno[3];
+                $passwd = $alumno[4];
+                $edad = $alumno[5];
+                addStudent(conexion(),$dni,$nombre,$apellido,$mail,$passwd,$edad,"img/sinFoto.jpg");
             }
-        ?>
-    <a href='controlAdmin.php'>Atras</a>
+            unset($_SESSION["alumnos"]);
+            unset($_GET["id"]);
+            echo "<meta http-equiv='refresh' content ='0; url=listadoAlumnos.php'>";
 
-    
+        }
+    ?>      
+    <div id="resultado"></div> 
+    <script src="cargarAlumnos.js"></script>
+    <a href='controlAdmin.php'>Atras</a>    
 </body>
 </html>
