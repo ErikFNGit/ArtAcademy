@@ -1,8 +1,9 @@
+<?php
+    session_start();
+    include ("Funciones.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
-    <?php
-    include ("Funciones.php");
-    ?>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,15 @@
 </head>
 <body>
     <?php
-    $name= "";
-    if (isset($_POST["name"]) && $_POST["name"]!=""){
-        //Relleno todos los campos de la busquedA
-        $name= $_POST['name'];
-    }
+        if($_SESSION['userType']!="admin"){  
+            echo "<h1>No tienes acceso a esta pagina</h1>";
+            echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+        }else{
+            $name= "";
+            if (isset($_POST["name"]) && $_POST["name"]!=""){
+                //Relleno todos los campos de la busquedA
+                $name= $_POST['name'];
+            }
     ?>
     <header>
         <div>
@@ -39,5 +44,8 @@
             <a class="button" href = 'controlAdmin.php'> Atras </a>
         </div>
     </div>  
+    <?php 
+        } 
+    ?>
 </body>
 </html>

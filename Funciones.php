@@ -190,7 +190,7 @@ function teacherLogin($conexion){
     $pass = mysqli_query($conexion,$query);
     $pass = mysqli_fetch_array($pass, MYSQLI_NUM);
     $login = false;
-    if(isset($stPass[0])){
+    if(isset($pass[0])){
         $pass = $pass[0];
         if($pass==$passwd){
             $login = true;

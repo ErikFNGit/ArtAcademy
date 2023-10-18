@@ -11,16 +11,20 @@
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-    <?php
-if ($_GET){
-        fillInfoStudent($_GET['id']);
-    }
-    else if ($_POST){
-        $_SESSION['dni']=$_POST['dni'];
-        updateStudent();
-        ?>
-        <meta http-equiv="refresh" content="0; url=perfilAlumno.php">;
-        <?php
+<?php
+    if($_SESSION["userType"]!="admin"){
+        echo "<h1>No tienes acceso a esta pagina</h1>";
+        echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+    }else{
+        if ($_GET){
+            fillInfoStudent($_GET['id']);
+        }else if ($_POST){
+            $_SESSION['dni']=$_POST['dni'];
+            updateStudent();
+?>
+<meta http-equiv="refresh" content="0; url=perfilAlumno.php">;
+<?php
+        }
     }
 ?>
 </body>

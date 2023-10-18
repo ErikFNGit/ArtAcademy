@@ -11,14 +11,19 @@
 </head>
 <body>
     <?php
-    if ($_GET){
-        fillInfoTeacher($_GET['id']);
-    }
-    else if ($_POST){
-        updateTeacher();
-        ?>
-        <meta http-equiv="refresh" content="0; url=listarProfes.php">
-        <?php
+    if($_SESSION["userType"]!="admin"){
+        echo "<h1>No tienes acceso a esta pagina</h1>";
+        echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+    }else{
+        if ($_GET){
+            fillInfoTeacher($_GET['id']);
+        }
+        else if ($_POST){
+            updateTeacher();
+            ?>
+            <meta http-equiv="refresh" content="0; url=listarProfes.php">
+            <?php
+        }
     }
     ?>
 </body>

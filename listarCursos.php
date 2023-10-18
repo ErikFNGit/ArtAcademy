@@ -1,7 +1,6 @@
 <?php
     session_start();
     $_SESSION["screen"] = "listadoCursos";
-    $_SESSION["userType"] = "admin";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,6 +75,7 @@
     <?php
         }else{
             echo "<h1>NO TIENES ACCESO A ESTA PAGINA</h1>";
+            echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
         }
     ?>
    

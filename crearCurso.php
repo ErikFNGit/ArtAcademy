@@ -1,3 +1,7 @@
+<?php
+    session_start();
+    include("Funciones.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,10 +12,12 @@
 </head>
 <body>
     <?php
-        include("Funciones.php");
-        if(!isset($_POST["name"]))
-        {
-            
+        if($_SESSION["userType"] != "admin"){
+            echo "<h1>No tienes acceso a esta pagina</h1>";
+            echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+        }else{
+            if(!isset($_POST["name"]))
+            {   
     ?>
     <header>
         <div>
@@ -79,7 +85,8 @@
         {
             addCurso(conexion());
             echo "<meta http-equiv='refresh' content ='0; url=listarCursos.php'>";
-        }   
+        }
+    }
         ?>
 </body>
 </html>

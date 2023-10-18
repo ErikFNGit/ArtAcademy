@@ -11,17 +11,21 @@
 </head>
 <body>
     <?php
-    if($_POST){
-        if(DNIExistente()==false && IDExistente()==false){
-            if(comprobarDNI($_POST["dni"])==true){
-                nuevoTeacher();
-                echo"<h2>Profesor@ registrado con exito</h2>";
+    if($_SESSION["userType"]!="admin"){
+        echo "<h1>No tienes acceso a esta pagina</h1>";
+        echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+    }else{
+        if($_POST){
+            if(DNIExistente()==false && IDExistente()==false){
+                if(comprobarDNI($_POST["dni"])==true){
+                    nuevoTeacher();
+                    echo"<h2>Profesor@ registrado con exito</h2>";
+                }else{
+                    echo"<p>Este DNI no es correcto </p>";
+                }
             }else{
-                echo"<p>Este DNI no es correcto </p>";
+                echo"<p>Error, este DNI o est ID ya están en uso</p>";
             }
-        }else{
-            echo"<p>Error, este DNI o est ID ya están en uso</p>";
-        }
     
     ?>
     <meta http-equiv="REFRESH" content="2;url=AltaProfes.php">
@@ -83,6 +87,7 @@
 
     <a href = 'controlAdmin.php'> Atras </a>  
     <?php
+        }
     }
     ?>    
 </body>

@@ -25,7 +25,7 @@
                 <a href="perfilAlumno.php"> Mi perfil </a>
             </div>
             <div>
-                <a href="registrarAlumno.php"> Cerrar Sesion</a>
+                <a href="cerrarSesion.php"> Cerrar Sesion</a>
             </div>
         </header>
         <div class="containerPerfilAlumno">

@@ -20,6 +20,12 @@
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
     </header>
+    <?php
+        if($_SESSION["userType"] != "admin"){
+            echo "<h1>No tienes acceso a esta pagina</h1>";
+            echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+        }else{
+    ?>
     <form action="listadoAlumnos.php" method="POST">
         <label for="codigo">Buscador:</label>
         <input type="text" name="busqueda">
@@ -69,6 +75,9 @@
     ?>      
     <div id="resultado"></div> 
     <script src="cargarAlumnos.js"></script>
-    <a href='controlAdmin.php'>Atras</a>    
+    <a href='controlAdmin.php'>Atras</a>
+    <?php
+        }
+    ?>
 </body>
 </html>
