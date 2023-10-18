@@ -125,9 +125,10 @@ function listarAlumnos($conexion,$busqueda){
         $query = "SELECT * FROM students WHERE name LIKE '%$busqueda%';"; 
     }
     $alumnos = mysqli_query($conexion, $query);
-    echo"<table>";
+    echo"<table class='tabla'>";
         echo"<tr>";
-            echo"<td>ID </td>";
+            echo"<td></td>";
+            echo"<td>ID</td>";
             echo"<td>DNI </td>";
             echo"<td>Nombre </td>";
             echo"<td>Apellido </td>";
@@ -136,6 +137,7 @@ function listarAlumnos($conexion,$busqueda){
     for($i=0; $i<mysqli_num_rows($alumnos);$i++){
         $alumno = mysqli_fetch_array($alumnos, MYSQLI_ASSOC);
         echo "<tr>";
+            echo "<td class='indice'>*</td>";
             echo "<td>". $alumno['id']."</td>";
             echo "<td>". $alumno['dni']."</td>";
             echo "<td>". $alumno['name']."</td>";
@@ -143,7 +145,10 @@ function listarAlumnos($conexion,$busqueda){
             echo "<td>". $alumno['mail']."</td>";
         echo "</tr>";
     }
+    echo "<tr><td><a href='controlAdmin.php' class='button'>Atras</a></td></tr>";
     echo "</table>";
+
+
 }
 
 function studentLogin($conexion){
@@ -313,39 +318,42 @@ function fillInfoTeacher($id){
             if($datos->num_rows>0){
             $row= $datos->fetch_assoc();
             ?>
-        <form action="edicionProfes.php" method="POST" enctype="multipart/form-data">
-        <table>
-            <tr>
-                <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
-                <td><label>Dni: </label></td>
-                <td><input type="text" name="dni" value=<?php echo $row['dni'];?> required></td>
-            </tr>
-            <tr>
-                <td><label>Nombre: </label></td>
-                <td><input type="text" name="name" value=<?php echo $row['name'];?> required></td>
-            </tr>
-            <tr>
-                <td><label>Apellido: </label></td>
-                <td><input type="text" name="surname" value=<?php echo $row['surname'];?> required></td>
-            </tr>
-            <tr>
-                <td><label>Titulo: </label></td> 
-                <td><input type="text" name="title" value=<?php echo $row['title'];?> required></td>
-            </tr>
-            <tr>
-                <td><label>Activo: </label></td>
-                <td><input type="radio" id="yes" name="active" value ="yes" <?php echo $row['active'] == 1 ?'checked':'';?> required><label for="yes">Si</label></td>
-                <td><input type="radio" id="no" name="active" value = "no" <?php echo $row['active'] == 0  ?'checked':'';?>><label for="no">No</label></td>
-            </tr>
-            <tr>
-                <td><label>Foto: </label></td>
-                <td><input type="file" name="photo" required></td>
-            </tr>       
-            </tr><td><input type="submit" value="Editar"></td>
-                <td><a href='listarProfes.php'>Atras</td>
-            </tr>
-        </table>
-    </form>
+            <div class="formulario">
+                <h1>Editar datos profesor</h1>
+                <form action="edicionProfes.php" method="POST" enctype="multipart/form-data">
+                    <table>
+                        <tr>
+                            <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
+                            <td><label>Dni: </label></td>
+                            <td><input type="text" name="dni" value=<?php echo $row['dni'];?> required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Nombre: </label></td>
+                            <td><input type="text" name="name" value=<?php echo $row['name'];?> required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Apellido: </label></td>
+                            <td><input type="text" name="surname" value=<?php echo $row['surname'];?> required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Titulo: </label></td> 
+                            <td><input type="text" name="title" value=<?php echo $row['title'];?> required></td>
+                        </tr>
+                        <tr>
+                            <td><label>Activo: </label></td>
+                            <td><input type="radio" id="yes" name="active" value ="yes" <?php echo $row['active'] == 1 ?'checked':'';?> required><label for="yes">Si</label></td>
+                            <td><input type="radio" id="no" name="active" value = "no" <?php echo $row['active'] == 0  ?'checked':'';?>><label for="no">No</label></td>
+                        </tr>
+                        <tr>
+                            <td><label>Foto: </label></td>
+                            <td><input type="file" name="photo" required></td>
+                        </tr>       
+                        </tr><td><input type="submit" value="Editar"></td>
+                            <td><a href='listarProfes.php'>Atras</td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
             <?php
             }else{
             echo"<h2>Este id no correspone a ningun profesor</h2>";
@@ -369,39 +377,41 @@ function fillInfoStudent($id){
         if($datos->num_rows>0){
         $row= $datos->fetch_assoc();
         ?>
-    <form action="editarEstudiante.php" method="POST" enctype="multipart/form-data">
-    <table>
-        <tr>
-            <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
-            <td><label>Dni: </label></td>
-            <td><input type="text" name="dni" value=<?php echo $row['dni'];?> required></td>
-        </tr>
-        <tr>
-            <td><label>Nombre: </label></td>
-            <td><input type="text" name="name" value=<?php echo $row['name'];?> required></td>
-        </tr>
-        <tr>
-            <td><label>Apellido: </label></td>
-            <td><input type="text" name="surname" value=<?php echo $row['surname'];?> required></td>
-        </tr>  
-        <tr>
-            <td><label>Correo: </label></td>
-            <td><input type="text" name="mail" value=<?php echo $row['mail'];?> required></td>
-        </tr>  
-        <tr>
-            <td><label>Contraseña: </label></td>
-            <td><input type="password" name="stPass" value=<?php echo $row['stPass']; ?> required></td>
-        </tr>
-        <tr>
-            <td><label>Foto: </label></td>
-            <td><input type="file" name="photo" required></td>
-        </tr>                
-        <tr>            
-            <td><input type="submit" value="Editar"></td>
-            <td><a href='perfilAlumno.php'>Atras</td>
-        </tr>
-    </table>
-    </form>
+        <div class="formulario">
+            <form action="editarEstudiante.php" method="POST" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <input type="hidden" name="id" value=<?php echo $row['id']; ?>>
+                        <td><label>Dni: </label></td>
+                        <td><input type="text" name="dni" value=<?php echo $row['dni'];?> required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Nombre: </label></td>
+                        <td><input type="text" name="name" value=<?php echo $row['name'];?> required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Apellido: </label></td>
+                        <td><input type="text" name="surname" value=<?php echo $row['surname'];?> required></td>
+                    </tr>  
+                    <tr>
+                        <td><label>Correo: </label></td>
+                        <td><input type="text" name="mail" value=<?php echo $row['mail'];?> required></td>
+                    </tr>  
+                    <tr>
+                        <td><label>Contraseña: </label></td>
+                        <td><input type="password" name="stPass" value=<?php echo $row['stPass']; ?> required></td>
+                    </tr>
+                    <tr>
+                        <td><label>Foto: </label></td>
+                        <td><input type="file" name="photo" required></td>
+                    </tr>                
+                    <tr>            
+                        <td><input type="submit" value="Editar"></td>
+                        <td><a href='perfilAlumno.php'>Atras</td>
+                    </tr>
+                </table>
+            </form>
+        </div>
         <?php
         }else{
         echo"<h2>Este id no correspone a ningun alumno</h2>";
@@ -721,7 +731,7 @@ function perfilStudent($dni){
     echo"<h2>Hola, ".$name['name']. " </h2>";
     echo "<div class='foto'><img src='".$name['picture']."'width='150px' height='150px'></div>";
     echo"<div class='listado'>";
-    echo"<div class='tabla'>";
+    echo"<div class='tableta'>";
     echo"<table>";
     echo"<p>Notas: </p>";
     echo"<th>Curso </th>";

@@ -26,24 +26,32 @@
             echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
         }else{
     ?>
-    <form action="listadoAlumnos.php" method="POST">
-        <label for="codigo">Buscador:</label>
-        <input type="text" name="busqueda">
-        <input type="submit" value="Aceptar">
-    </form>
-    </br>
-    <div class="alumnos">   
+  
+    
+    <div class="listado"> 
+        <div class="buscador">
+            <form action="listadoAlumnos.php" method="POST">
+                <label for="codigo">Buscador:</label>
+                <input type="text" name="busqueda">
+                <input type="submit" value="Aceptar">
+            </form>
+        </div>  
         <?php
         if(isset($_POST["busqueda"]))
         {
             listarAlumnos(conexion(),$_POST["busqueda"]);
         }else{
             listarAlumnos(conexion(),"");
+
         }
         ?>
+        <div class="lbl">
+            <label for="archivo">Ingresar alumnos con archivo local:</label>
+            <input type="file" id="archivo">
+            <div> <a href='listadoAlumnos.php?id=1' class='button'>Subir archivos</a> </div>
+        </div>
     </div>
-    <label for="arhivo">Ingresar alumnos con archivo local: </label>
-    <input type="file" id="archivo">
+   
     <?php
   
         if(isset($_POST["alumnos"])){
@@ -54,7 +62,6 @@
             $_SESSION["alumnos"] = $alumnos;
             unset($_POST["alumnos"]);
         }
-        echo "<div> <a href='listadoAlumnos.php?id=1' class='button'>Subir archivos</a> </div>";
 
 
         if(isset($_GET["id"]) and $_GET["id"] == 1){
@@ -75,9 +82,7 @@
 
         }
     ?>      
-    <div id="resultado"></div> 
     <script src="cargarAlumnos.js"></script>
-    <a href='controlAdmin.php'>Atras</a>
     <?php
         }
     ?>

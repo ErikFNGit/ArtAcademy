@@ -38,19 +38,17 @@ footer div:last-child ul {
 .listado {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(3, auto);
+  grid-template-rows: repeat(3, 1r);
 }
 .listado .buscador {
-  display: flex;
-  justify-content: flex-end;
-  font-weight: bold;
-  font-family: sans-serif;
-}
-.listado form {
-  grid-column-start: 1;
-  grid-column-end: 2;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  grid-column-start: 2;
+  grid-column-end: 3;
   grid-row-start: 1;
   grid-row-start: 2;
+  font-family: sans-serif;
+  font-weight: bold;
 }
 .listado .tabla {
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
@@ -73,6 +71,14 @@ footer div:last-child ul {
 }
 .listado .tabla .indice {
   font-size: 2em;
+}
+.listado .lbl {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 3;
+  grid-row-start: 4;
+  font-family: sans-serif;
+  font-weight: bold;
 }
 .listado h1 {
   text-align: center;
@@ -237,17 +243,17 @@ a {
   background-color: rgba(255, 255, 255, 0.4);
   border-radius: 100%;
 }
-.containerPerfilAlumno .tabla {
+.containerPerfilAlumno .tableta {
   width: 350px;
   grid-column-start: 1;
   grid-column-end: 2;
 }
-.containerPerfilAlumno .tabla th {
+.containerPerfilAlumno .tableta th {
   width: 150px;
   text-align: center;
   font-weight: bolder;
 }
-.containerPerfilAlumno .tabla td {
+.containerPerfilAlumno .tableta td {
   text-align: center;
 }
 .containerPerfilAlumno a {
