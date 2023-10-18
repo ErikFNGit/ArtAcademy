@@ -557,30 +557,50 @@ function listaCursos($conexion, $busqueda, $userType){
                 echo"</div>";
                 echo"</div>";
                 }
-        }else{
+    }else{
         echo"<table>";
                 echo"<tr>";
-                echo"<td></td>";
-                echo"<td>Nombre </td>";
-                echo"<td>Descripcion </td>";
-                echo"<td>Horas </td>";
-                echo"<td>Fecha Inicio </td>";
-                echo"<td>Fecha Final </td>";
-                echo"<td>Profesor </td>";
-            echo"</tr>";
+                    echo"<td></td>";
+                    echo"<td>Nombre </td>";
+                    echo"<td>Descripcion </td>";
+                    echo"<td>Horas </td>";
+                    echo"<td>Fecha Inicio </td>";
+                    echo"<td>Fecha Final </td>";
+                    echo"<td>Profesor </td>";
+                echo"</tr>";
         foreach(findCursos(conexion(),$query) as $curso){
             if($userType=="admin"){
                 echo "<tr>";
-                echo "<td class='indice'>*</td>";
-                echo "<td>". $curso['name']."</td>";
-                echo "<td>". $curso['description']."</td>";
-                echo "<td>". $curso['hours']."</td>";
-                echo "<td>". $curso['sDate']."</td>";
-                echo "<td>". $curso['eDate']."</td>";
-                echo "<td>". $curso['profesor']."</td>";
-                echo "<td> <a href = 'editarCurso.php?id=".$curso["code"]."' class='button'> EDITAR </a></td>";
+                    echo "<td class='indice'>*</td>";
+                    echo "<td>". $curso['name']."</td>";
+                    echo "<td>". $curso['description']."</td>";
+                    echo "<td>". $curso['hours']."</td>";
+                    echo "<td>". $curso['sDate']."</td>";
+                    echo "<td>". $curso['eDate']."</td>";
+                    echo "<td>". $curso['profesor']."</td>";
+                    echo "<td> <a href = 'editarCurso.php?id=".$curso["code"]."' class='button'> EDITAR </a></td>";
+                echo "</tr>";  
+            }elseif($userType=="student"){
+                $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
+                $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
+                $matriculas = [];
+                for($i=0; $i<mysqli_num_rows($cursosMatriculado);$i++){
+                    $placeholder = mysqli_fetch_array($cursosMatriculado, MYSQLI_NUM);
+                    $matriculas[$i] = $placeholder[0];
+                }
+                if(in_array($curso["code"],$matriculas)){
+                    echo "<tr>";
+                        echo "<td class='indice'>*</td>";
+                        echo "<td>". $curso['name']."</td>";
+                        echo "<td>". $curso['description']."</td>";
+                        echo "<td>". $curso['hours']."</td>";
+                        echo "<td>". $curso['sDate']."</td>";
+                        echo "<td>". $curso['eDate']."</td>";
+                        echo "<td>". $curso['profesor']."</td>";
+                        echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
+                    echo "</tr>"; 
+                }
             }
-            echo "</tr>";  
         }
         echo "</table>";
     }
@@ -622,6 +642,7 @@ function cursosDisponibles($conexion){
     foreach($listadoCursos as $curso){
         if(!in_array($curso["code"],$matriculas))
         {
+            echo "hola";
             if($curso["sDate"]>date("Y-m-d"))
             {
                 echo "<div>";
@@ -635,8 +656,7 @@ function cursosDisponibles($conexion){
                 echo "</div>";
             }
         }
-    }
-    
+    }    
 }
 
 if(isset($_GET["llamarInsert"])){ insertMatricula(conexion(), $_SESSION["dni"], $_GET["codigo"]); }
