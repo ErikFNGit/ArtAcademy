@@ -44,14 +44,14 @@
 </div>
     <?php 
         }else{
-            if(!studentLogin(conexion())){
+            if(!teacherLogin(conexion())){
                 unset($_POST["dni"]);
                 unset($_POST["passwd"]);
                 $_SESSION["error"]="<p>Contraseña o usuario incorrecto(s) pruebe de nuevo</p>";
                 echo "<meta http-equiv='refresh' content ='0; url=loginProfes.php'>";        
             }else{
                 $_SESSION["dni"] = $_POST["dni"];
-                $_SESSION["userType"] = "student";
+                $_SESSION["userType"] = "teacher";
                 $_SESSION["start"] = true;
                 echo "<meta http-equiv='refresh' content ='0; url=inicioProfe.php'>";           
             }
