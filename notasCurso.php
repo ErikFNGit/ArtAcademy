@@ -8,11 +8,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profesor</title>
+    <title>Document</title>
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-<?php 
+    <?php 
         if(isset($_SESSION["start"])){
     ?>
     <header>
@@ -23,11 +23,8 @@
             <a href="cerrarSesion.php"> Cerrar Sesion </a>
         </div>
     </header>
-    <h1>Mis cursos</h1>
-            <?php
-                listaCursos(conexion(),"",$_SESSION["userType"]);
-            ?>
     <?php
+    listarAlumnosMatriculados(conexion(),$_GET['id']);
     }else{
         echo "<h1>NO TIENES ACCESO A ESTA PAGINA</h1>";
     }
