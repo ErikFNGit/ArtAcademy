@@ -567,8 +567,8 @@ function listaCursos($conexion, $busqueda, $userType){
                     echo"<td>Fecha Inicio </td>";
                     echo"<td>Fecha Final </td>";
                     echo"<td>Profesor </td>";
-                echo"</tr>";
-        foreach(findCursos(conexion(),$query) as $curso){
+                echo"</tr>";        
+        foreach(findCursos($conexion,$query) as $curso){
             if($userType=="admin"){
                 echo "<tr>";
                     echo "<td class='indice'>*</td>";
@@ -600,6 +600,11 @@ function listaCursos($conexion, $busqueda, $userType){
                         echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
                     echo "</tr>"; 
                 }
+            }
+        }
+        if($_SESSION["userType"] == "student"){
+            if(count($matriculas)<=0){
+                echo "<h1>No estás apuntando a ningun curso</h1>";
             }
         }
         echo "</table>";
@@ -654,7 +659,6 @@ function cursosDisponibles($conexion){
     foreach($listadoCursos as $curso){
         if(!in_array($curso["code"],$matriculas))
         {
-            echo "hola";
             if($curso["sDate"]>date("Y-m-d"))
             {
                 echo "<div>";

@@ -264,4 +264,20 @@ a {
 }
 .containerPerfilAlumno .studentGrade {
   font-style: italic;
+}
+
+.disponibles {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.disponibles div {
+  margin-top: 15px;
+  width: 350px;
+  background-color: rgba(214, 214, 214, 0.6);
+  padding: 15px;
+  border-radius: 20px;
+}
+.disponibles div h1 {
+  text-align: center;
 }/*# sourceMappingURL=mainSCSS.css.map */

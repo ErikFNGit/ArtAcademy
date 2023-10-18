@@ -35,7 +35,7 @@
             ?>
         </div>
     </div>
-    <div class="listado">
+    <div class="disponibles">
         <h1>Cursos disponibles:</h1>
         <?php
             cursosDisponibles(conexion());
@@ -58,6 +58,8 @@
     <?php
         }else{
             echo "<h1>NO TIENES ACCESO A ESTA PAGINA</h1>";
+            echo "<meta http-equiv='refresh' content ='0; url=index.php'>";           
+
         }
     ?>
 </body>

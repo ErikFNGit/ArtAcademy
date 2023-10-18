@@ -171,3 +171,19 @@ a{
         font-style: italic;
     }
 }
+
+.disponibles{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    div{
+        margin-top: 15px;
+        width: 350px;
+        background-color: $grey;
+        padding: 15px;
+        border-radius: 20px;
+        h1{
+            text-align: center;
+        }
+    }
+}

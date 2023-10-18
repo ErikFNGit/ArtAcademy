@@ -11,14 +11,7 @@
 </head>
 <body class="paginaIndex">
 
-    <?php
-        include("Funciones.php");
-        if(!isset($_POST["dni"])){
-            if(isset($_SESSION["error"])){
-                echo $_SESSION["error"];
-                unset($_SESSION["error"]);
-            }
-    ?>
+   
 <div class="test">
 <div class="listado">
     <div class="tabla">
@@ -34,6 +27,14 @@
                     <td><input type="password" name="passwd"></td>
                 </tr>   
             </table>
+            <?php
+                include("Funciones.php");
+                if(!isset($_POST["dni"])){
+                    if(isset($_SESSION["error"])){
+                        echo $_SESSION["error"];
+                        unset($_SESSION["error"]);
+                    }
+            ?>
             <input type="submit" value="Acceder">
         </form>
         <p>Aun no te has registrado? <a  href = 'registrarAlumno.php'>Clic aqui </a></p>
