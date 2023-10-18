@@ -155,6 +155,7 @@ a {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
   font-family: Impact, "Arial Narrow Bold", sans-serif;
+  resize: none;
 }
 .formulario h1 {
   grid-column-start: 4;
@@ -167,6 +168,7 @@ a {
   background-color: rgba(214, 214, 214, 0.6);
   padding: 5%;
   border-radius: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
 }
 .formulario form table tbody tr td input {
   border-radius: 7px;
