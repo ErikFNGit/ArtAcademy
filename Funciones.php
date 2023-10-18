@@ -184,8 +184,6 @@ function teacherLogin($conexion){
     $dni = $_POST["dni"];
     $passwd = $_POST["passwd"];
     $passwd = md5($passwd);
-    
-    
     $query = "SELECT password FROM teachers WHERE dni LIKE '$dni'";
     $pass = mysqli_query($conexion,$query);
     $pass = mysqli_fetch_array($pass, MYSQLI_NUM);
@@ -543,63 +541,53 @@ function listaCursos($conexion, $busqueda, $userType){
     }else{
         $query = "SELECT * FROM curso WHERE name LIKE '%$busqueda%';"; 
     }
-    if($userType=="student"){
-        $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
-        $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
-        $matriculas = [];
-        for($i=0; $i<mysqli_num_rows($cursosMatriculado);$i++){
-            $placeholder = mysqli_fetch_array($cursosMatriculado, MYSQLI_NUM);
-            $matriculas[$i] = $placeholder[0];
+    if($userType=="teacher"){
+        $teacherId="SELECT id FROM teachers WHERE dni LIKE '".$_SESSION["dni"]."';";
+        $teacherId=mysqli_query($conexion,$teacherId);
+        $teacherId=mysqli_fetch_array($teacherId);
+        $teacherId=$teacherId[0];
+        // $codCurso="SELECT code FROM curso WHERE teacher_id LIKE ".$teacherId.";";
+        // $codCurso=mysqli_query($conexion,$codCurso);
+        $nombreCurso="SELECT name FROM curso WHERE teacher_id LIKE ".$teacherId.";";
+        $nombreCurso=mysqli_query($conexion,$nombreCurso);
+        while ($row = mysqli_fetch_array($nombreCurso)) {
+            echo"<h1>Curso</h1>";
+            echo"<table>";
+                echo"<tr>";
+                echo"</tr>";
+                echo"<tr>";
+                    echo"<td>".$row['name']." </td>";
+                    echo"<td> <a href=''>Alumnos</a>";
+                echo"</tr>";
+            echo"</table>";
+            }
+    }else{
+        echo"<table>";
+                echo"<tr>";
+                echo"<td></td>";
+                echo"<td>Nombre </td>";
+                echo"<td>Descripcion </td>";
+                echo"<td>Horas </td>";
+                echo"<td>Fecha Inicio </td>";
+                echo"<td>Fecha Final </td>";
+                echo"<td>Profesor </td>";
+            echo"</tr>";
+        foreach(findCursos(conexion(),$query) as $curso){
+            if($userType=="admin"){
+                echo "<tr>";
+                echo "<td class='indice'>*</td>";
+                echo "<td>". $curso['name']."</td>";
+                echo "<td>". $curso['description']."</td>";
+                echo "<td>". $curso['hours']."</td>";
+                echo "<td>". $curso['sDate']."</td>";
+                echo "<td>". $curso['eDate']."</td>";
+                echo "<td>". $curso['profesor']."</td>";
+                echo "<td> <a href = 'editarCurso.php?id=".$curso["code"]."' class='button'> EDITAR </a></td>";
+            }
+            echo "</tr>";  
         }
-
+        echo "</table>";
     }
-    echo"<table>";
-            echo"<tr>";
-            echo"<td></td>";
-            echo"<td>Nombre </td>";
-            echo"<td>Descripcion </td>";
-            echo"<td>Horas </td>";
-            echo"<td>Fecha Inicio </td>";
-            echo"<td>Fecha Final </td>";
-            echo"<td>Profesor </td>";
-        echo"</tr>";
-    foreach(findCursos(conexion(),$query) as $curso){
-        if($userType=="admin")
-        {
-            echo "<tr>";
-            echo "<td class='indice'>*</td>";
-            echo "<td>". $curso['name']."</td>";
-            echo "<td>". $curso['description']."</td>";
-            echo "<td>". $curso['hours']."</td>";
-            echo "<td>". $curso['sDate']."</td>";
-            echo "<td>". $curso['eDate']."</td>";
-            echo "<td>". $curso['profesor']."</td>";
-            echo "<td> <a href = 'editarCurso.php?id=".$curso["code"]."' class='button'> EDITAR </a></td>";
-
-        }elseif($userType=="student" and $curso["active"]=="1" and in_array($curso["code"],$matriculas))
-        {
-            echo "<tr>";
-            echo "<td class='indice'>*</td>";
-            echo "<td>". $curso['name']."</td>";
-            echo "<td>". $curso['description']."</td>";
-            echo "<td>". $curso['hours']."</td>";
-            echo "<td>". $curso['sDate']."</td>";
-            echo "<td>". $curso['eDate']."</td>";
-            echo "<td>". $curso["profesor"]."</td>";
-            echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
-           /* if($_SESSION["screen"] != "inicioAlumno"){
-                if(!in_array($curso["code"],$matriculas)){
-                    echo "<td><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
-                }else{
-                    echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
-    
-                }
-            }*/
-        }
-        echo "</tr>";  
-    }
-    echo "</table>";
-    
 }
 
 function cursosDisponibles($conexion){
@@ -804,4 +792,5 @@ function passOlvidada($dni,$mail,$pass,$passMatch){
 
     
 }
+
 ?>

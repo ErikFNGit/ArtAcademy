@@ -51,7 +51,7 @@
                 echo "<meta http-equiv='refresh' content ='0; url=loginProfes.php'>";        
             }else{
                 $_SESSION["dni"] = $_POST["dni"];
-                $_SESSION["userType"] = "student";
+                $_SESSION["userType"] = "teacher";
                 $_SESSION["start"] = true;
                 echo "<meta http-equiv='refresh' content ='0; url=perfilProfe.php'>";           
             }
