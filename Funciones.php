@@ -184,19 +184,18 @@ function teacherLogin($conexion){
     $dni = $_POST["dni"];
     $passwd = $_POST["passwd"];
     $passwd = md5($passwd);
-
-
+    
+    
     $query = "SELECT password FROM teachers WHERE dni LIKE '$dni'";
     $pass = mysqli_query($conexion,$query);
-    $pass = mysqli_fetch_array($stPass, MYSQLI_NUM);
+    $pass = mysqli_fetch_array($pass, MYSQLI_NUM);
     $login = false;
     if(isset($stPass[0])){
         $pass = $pass[0];
-        if($stPass==$passwd){
+        if($pass==$passwd){
             $login = true;
         }
     }
-   
     return $login;
 }
 function adminLogin($conexion){
