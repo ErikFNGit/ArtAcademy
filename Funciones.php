@@ -718,12 +718,11 @@ function perfilStudent($dni){
     $consulta->close();
     $query2="SELECT curso_id, score FROM matricula WHERE student_id = ".$name['id']."";
     $notas=mysqli_query($conexion, $query2);
-    echo"<h2>Bienvenido a tu perfil de estudiante, ".$name['name']. " </h2>";
-    echo "<div><img src='".$name['picture']."'></div>";
-
+    echo"<h2>Hola, ".$name['name']. " </h2>";
+    echo "<div class='foto'><img src='".$name['picture']."'width='150px' height='150px'></div>";
     echo"<div class='listado'>";
     echo"<div class='tabla'>";
-    echo"<table border = '1'>";
+    echo"<table>";
     echo"<p>Notas: </p>";
     echo"<th>Curso </th>";
     echo"<th> Nota </th>";
@@ -740,7 +739,7 @@ function perfilStudent($dni){
     echo"</table>";
     echo"</div>";
     echo"</div>";
-    echo "<td><a href = 'editarEstudiante.php?id=".$name['id']."'> Editar </a></td>";
+    echo "<td><a class='button' href = 'editarEstudiante.php?id=".$name['id']."'> Editar </a></td>";
 }
 function updateStudent(){
     $conexion = conexion();
@@ -790,6 +789,7 @@ function passOlvidada($dni,$mail,$pass,$passMatch){
         $consulta->execute();
         $consulta->close();
         $conexion->close();
+        echo "<meta http-equiv='refresh' content ='0; url=index.php'>";
     }else{
         echo"<p>Ambas contraseñas no coinciden, introduzcalas de nuevo por favor.</p>";
         echo "<meta http-equiv='refresh' content ='10; url=passOlvidada.php'>";

@@ -10,8 +10,6 @@
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-    
-    <h1>Login administrador</h1>
     <?php
         include("Funciones.php");
         if(!isset($_POST["ID"])){
@@ -21,19 +19,26 @@
                 unset($_SESSION["error"]);
             }
     ?>
-    <table>
-        <form action="loginAdministrador.php" method="post">
-            <tr>
-                <td><label for="ID">ID:</label></td>
-                <td><input type="text" name="ID"></td>
-            </tr>
-            <tr>
-                <td><label for="passwd">Contraseña:</label></td>
-                <td><input type="password" name="passwd"></td>
-            </tr>
-            <tr><td><input type="submit" value="Acceder"></td></tr>
-        </form>
-    </table>
+    <div class="test">
+        <div class="listado">
+            <div class="tabla">
+            <h1>Login administrador</h1>
+                <table>
+                    <form action="loginAdministrador.php" method="post">
+                        <tr>
+                            <td><label for="ID">ID:</label></td>
+                            <td><input type="text" name="ID"></td>
+                        </tr>
+                        <tr>
+                            <td><label for="passwd">Contraseña:</label></td>
+                            <td><input type="password" name="passwd"></td>
+                        </tr>
+                    </table>
+                    <input type="submit" value="Acceder">
+                </form>
+            </div>
+        </div>
+    </div>
     <?php 
         }else{
             if(!adminLogin(conexion())){

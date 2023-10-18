@@ -21,19 +21,22 @@
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
     </header>
-    <div class="container">
+    <div class="containerMainAdmin">
+    <h1>Centro de Administracion</h1>
         <div class="menu">
-            <a href="AltaProfes.php">Añadir profesores</a> <br>
-            <a href="crearCurso.php">Añadir cursos</a> <br>
-            <a href="listarProfes.php">Editar profesores</a> <br>
-            <a href="listarCursos.php?id=admin">Listado de cursos</a> <br>
-            <a href="registrarAlumno.php">Registrar alumno</a> <br>
-            <a href="listadoAlumnos.php">Listado alumno</a> <br>
-            <a href="loginAdministrador.php">Atras</a> 
-
+            <ul>
+                <li><a href="AltaProfes.php">Añadir profesores</a> </li>
+                <li><a href="crearCurso.php">Añadir cursos</a> </li>
+                <li><a href="registrarAlumno.php">Registrar alumno</a> </li>
+            </ul>
+            <ul>
+                <li><a href="listarProfes.php">Editar profesores</a> </li> 
+                <li><a href="listarCursos.php?id=admin">Listado de cursos</a>  </li>
+                <li><a href="listadoAlumnos.php">Listado alumno</a> </li>
+            </ul>
         </div>
+        <a class="button" href="loginAdministrador.php">Atras</a>
     </div>
-
     <?php
         }else{
             echo "<h1>No tienes acceso a esta pagina</h1>";

@@ -11,12 +11,17 @@
 }
 @mixin divsMainMenu{
     display:flex;
-    margin: auto;
+    margin-left: 25%;
+    margin-right: 25%;
+    margin-top:20%;
     flex-direction: column;
     text-align: center;
     align-items: center;
+    background-color: $color_fondo_divs;
+    border-radius: 15%;
+    box-shadow: $sombreado_divs;
 }
 @mixin textStyle{
-        font-weight: bold;
-        font-family: sans-serif;
+    font-weight: bold;
+    font-family: sans-serif;
 }
