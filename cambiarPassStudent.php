@@ -11,6 +11,20 @@
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
+        <header>
+        <div>
+            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
+        </div>
+        <div>
+            <a href="inicioAlumno.php">Inicio</a>
+        </div>
+        <div>
+            <a href="perfilAlumno.php"> Mi perfil </a>
+        </div>
+        <div>
+            <a href="cerrarSesion.php"> Cerrar Sesion </a>
+        </div>
+    </header>
     <?php
     if(!isset($_POST['pass'])){
     ?>
