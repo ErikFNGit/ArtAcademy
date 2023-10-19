@@ -398,14 +398,15 @@ function fillInfoStudent($id){
                         <td><input type="text" name="mail" value=<?php echo $row['mail'];?> required></td>
                     </tr>  
                     <tr>
-                        <td><label>Aqui va un link a otra pagina para cambiar la pass</label></td>
+                        <td>Para cambiar la contraseña</td>
+                        <td><a href="cambiarPassStudent.php">Clic aqui</a></td>
                     </tr>
                     <tr>
                         <td><label>Aqui va un link a otra ppagina para cambiar la foto </label></td>
                     </tr>                
                     <tr>            
                         <td><input type="submit" value="Editar"></td>
-                        <td><a href='perfilAlumno.php'>Atras</td>
+                        <td><a class="button" href='perfilAlumno.php'>Atras</td>
                     </tr>
                 </table>
             </form>
@@ -753,13 +754,14 @@ function perfilStudent($dni){
             mysqli_connect_error();
             exit();
         }
-    $query="SELECT name, id, picture FROM students WHERE dni=?";
+    $query="SELECT name, id, picture, mail FROM students WHERE dni=?";
     $consulta = $conexion->prepare($query);
     $consulta->bind_param("i",$dni );
     $consulta->execute();
     $row=$consulta->get_result();
     $name=$row->fetch_assoc();
     $consulta->close();
+    $_SESSION['mail']=$name['mail'];
     $query2="SELECT curso_id, score FROM matricula WHERE student_id = ".$name['id']."";
     $notas=mysqli_query($conexion, $query2);
     echo"<h2>Hola, ".$name['name']. " </h2>";
@@ -841,9 +843,39 @@ function passOlvidada($dni,$mail,$pass,$passMatch){
         unset($_SESSION['mail']);
         unset($_POST['pass']);
         unset($_POST['passComprobar']);
+    }  
+}
+function cambiarPass($dni,$passActual,$pass,$passMatch){
+    $conexion=conexion();
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
     }
-
-    
+    $query="SELECT stPass FROM students WHERE dni=?";
+    $consulta = $conexion->prepare($query);
+    $consulta->bind_param("s",$dni );
+    $consulta->execute();
+    $row=$consulta->get_result();
+    $consulta->close();
+    if(md5($passActual)==$row){
+        if($pass == $passMatch){
+        $query="UPDATE students SET stPass=? WHERE dni=?";
+        $consulta = $conexion->prepare($query);
+        $newPass=md5($pass);
+        $consulta -> bind_param("ss", $newPass, $dni);
+        $consulta->execute();
+        $consulta->close();
+        $conexion->close();
+        echo "<meta http-equiv='refresh' content ='0; url=perfilAlumno.php'>";
+        }else{
+        echo"<p>Ambas contraseñas no coinciden, introduzcalas de nuevo por favor.</p>";
+        echo "<meta http-equiv='refresh' content ='10; url=cambiarPassStudent.php'>";
+        unset($_POST['passActual']);
+        unset($_POST['pass']);
+        unset($_POST['passComprobar']);
+        }  
+    }
 }
 
 ?>
