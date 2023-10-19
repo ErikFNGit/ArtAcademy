@@ -663,10 +663,10 @@ function cursosDisponibles($conexion){
                 echo "<div>";
                     echo "<h1>".$curso["name"]."</h1>";
                     echo "<p>".$curso["description"]."</p>";
-                    echo "<p>".$curso["hours"]."</p>";
-                    echo "<p>".$curso["sDate"]."</p>";
-                    echo "<p>".$curso["eDate"]."</p>";
-                    echo "<p>".$curso["profesor"]."</p>";
+                    echo "<p>Horas: ".$curso["hours"]."</p>";
+                    echo "<p>Inicio: ".$curso["sDate"]."</p>";
+                    echo "<p>Final: ".$curso["eDate"]."</p>";
+                    echo "<p>Docente: ".$curso["profesor"]."</p>";
                     echo "<td class='down'><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
                 echo "</div>";
             }
