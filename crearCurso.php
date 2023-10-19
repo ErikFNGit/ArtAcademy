@@ -73,10 +73,11 @@
                             <td colspan=2><textarea name="descripcion" maxlength=254 required></textarea></td>
                         </tr>
                         <tr>
-                            <td><input type="submit" value="Aceptar"></td>
+                            <td><input type="submit" value="Aceptar" class="button"></td>
+                            <td><a href = 'controlAdmin.php' class="button"> Atras </a>  </td>
                         </tr>
                     </table>
-                    <a href = 'controlAdmin.php' class="button"> Atras </a>  
+                    
                 </form>
             </div>
             <?php

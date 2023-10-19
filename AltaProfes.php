@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <?php
-    include("Funciones.php");
+        session_start();
+        include("Funciones.php");
     ?>
 <head>
     <meta charset="UTF-8">
@@ -40,9 +41,8 @@
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
     </header>
-<div class="listado">
+<div class="formulario">
     <form action="AltaProfes.php" method="POST" enctype="multipart/form-data">
-        <div class="talba">
             <table>
                 <tr>
                 <td><label>Id: </label></td>
@@ -78,14 +78,14 @@
                     <td><input type="radio" id="no" name="active" value = "no" required>No</input></td>
                 </tr>       
                 <tr>
-                    <td><input type="submit" value="Registrarse"></td>
+                    <td><input type="submit" value="Registrarse" class="button"></td>
+                    <td><a href = 'controlAdmin.php' class="button"> Atras </a>  </td>
                 </tr>
             </table>
-        </div>
     </form>
 </div>
 
-    <a href = 'controlAdmin.php'> Atras </a>  
+    
     <?php
         }
     }

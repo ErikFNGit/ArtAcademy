@@ -163,18 +163,18 @@ a {
 
 .formulario {
   display: grid;
-  grid-template-columns: repeat(9, 1fr);
+  grid-template-columns: repeat(8, auto);
   font-family: sans-serif;
   resize: none;
 }
 .formulario h1 {
   grid-column-start: 4;
-  grid-column-end: 6;
+  grid-column-end: 5;
   text-align: center;
 }
 .formulario form {
   grid-column-start: 4;
-  grid-column-end: 6;
+  grid-column-end: 5;
   background-color: rgba(214, 214, 214, 0.6);
   padding: 5%;
   border-radius: 30px;
