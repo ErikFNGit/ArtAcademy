@@ -369,7 +369,7 @@ function fillInfoStudent($id){
         mysqli_connect_error();
         exit();
     }
-    $query="SELECT id, dni, name, surname, mail, stPass FROM students WHERE id = ?";
+    $query="SELECT id, dni, name, surname, mail FROM students WHERE id = ?";
     $consulta = $conexion->prepare($query);
     $consulta->bind_param("i",$id);
     if($consulta->execute()){
@@ -398,12 +398,10 @@ function fillInfoStudent($id){
                         <td><input type="text" name="mail" value=<?php echo $row['mail'];?> required></td>
                     </tr>  
                     <tr>
-                        <td><label>Contraseña: </label></td>
-                        <td><input type="password" name="stPass" value=<?php echo $row['stPass']; ?> required></td>
+                        <td><label>Aqui va un link a otra pagina para cambiar la pass</label></td>
                     </tr>
                     <tr>
-                        <td><label>Foto: </label></td>
-                        <td><input type="file" name="photo" required></td>
+                        <td><label>Aqui va un link a otra ppagina para cambiar la foto </label></td>
                     </tr>                
                     <tr>            
                         <td><input type="submit" value="Editar"></td>
@@ -668,7 +666,7 @@ function cursosDisponibles($conexion){
                     echo "<p>".$curso["sDate"]."</p>";
                     echo "<p>".$curso["eDate"]."</p>";
                     echo "<p>".$curso["profesor"]."</p>";
-                    echo "<td><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
+                    echo "<td class='down'><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
                 echo "</div>";
             }
         }

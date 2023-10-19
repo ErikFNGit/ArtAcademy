@@ -21,7 +21,7 @@
             <a href="index.php"> Iniciar Sesion </a>
         </div>
         <div>
-            <a href="cerrarSesion.php"> Registrarse </a>
+            <a href="registrarAlumno.php"> Registrarse </a>
         </div>
     <?php
     }else{
@@ -34,7 +34,7 @@
             <a href="perfilAlumno.php"> Mi perfil </a>
         </div>
         <div>
-            <a href="registrarAlumno.php"> Cerrar Sesion</a>
+            <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
 
     <?php
