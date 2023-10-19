@@ -1,7 +1,7 @@
 header {
   display: grid;
-  grid-template-columns: 90% 5% 5%;
-  background-color: white;
+  grid-template-columns: 85% 5% 5% 5%;
+  background-color: rgb(255, 255, 255);
 }
 header div {
   display: flex;

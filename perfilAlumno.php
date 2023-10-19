@@ -22,7 +22,7 @@
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
         <div>
-            <a href="inicioAlumno.php">Inicio</a>
+            <a href="paginaPrincipal.php">Inicio</a>
         </div>
         <div>
             <a href="perfilAlumno.php"> Mi perfil </a>
