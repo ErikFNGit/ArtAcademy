@@ -8,6 +8,8 @@
     text-decoration: none;
     font-size: small;
     font-family: sans-serif;
+    position: relative;
+    bottom: 0;
 }
 @mixin divsMainMenu{
     display:flex;

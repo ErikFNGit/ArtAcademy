@@ -12,9 +12,9 @@ header div:nth-child(2), header div:last-child {
 }
 
 footer {
-  position: fixed;
+  /*position: fixed;
   bottom: 0;
-  width: 100%;
+  width: 100%;*/
   display: grid;
   grid-template-columns: 70% 15% 15%;
   background-color: rgb(0, 0, 0);
@@ -92,7 +92,7 @@ body {
   margin: 0%;
   padding: 0%;
   display: grid;
-  grid-template-rows: 10% 80% 10%;
+  grid-template-rows: auto auto auto;
   height: 100%;
 }
 
@@ -109,6 +109,8 @@ a {
   text-decoration: none;
   font-size: small;
   font-family: sans-serif;
+  position: relative;
+  bottom: 0;
 }
 
 .mainMenu {
@@ -162,7 +164,7 @@ a {
 .formulario {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  font-family: Impact, "Arial Narrow Bold", sans-serif;
+  font-family: sans-serif;
   resize: none;
 }
 .formulario h1 {
@@ -270,6 +272,7 @@ a {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  padding-bottom: 15px;
 }
 .disponibles div {
   margin-top: 15px;
