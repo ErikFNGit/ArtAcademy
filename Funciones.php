@@ -563,7 +563,7 @@ function listaCursos($conexion, $busqueda, $userType){
                 echo"<tr>";
                     echo"<td></td>";
                     echo"<td>Nombre </td>";
-                    echo"<td>Horas </td>";
+                    echo"<td>Horas</td>";
                     echo"<td>Fecha Inicio </td>";
                     echo"<td>Fecha Final </td>";
                     echo"<td>Profesor </td>";
@@ -592,7 +592,6 @@ function listaCursos($conexion, $busqueda, $userType){
                     echo "<tr>";
                         echo "<td class='indice'>*</td>";
                         echo "<td>". $curso['name']."</td>";
-                        echo "<td>". $curso['description']."</td>";
                         echo "<td>". $curso['hours']."</td>";
                         echo "<td>". $curso['sDate']."</td>";
                         echo "<td>". $curso['eDate']."</td>";

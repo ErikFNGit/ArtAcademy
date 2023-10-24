@@ -12,7 +12,7 @@ header div:nth-child(2), header div:last-child {
 }
 
 footer {
-  position: fixed;
+  position: relative;
   bottom: 0;
   width: 100%;
   display: grid;
