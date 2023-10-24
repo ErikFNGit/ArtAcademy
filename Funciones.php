@@ -377,6 +377,7 @@ function fillInfoStudent($id){
         if($datos->num_rows>0){
         $row= $datos->fetch_assoc();
         ?>
+        <h1>Pruba Olga </h1>
         <div class="formulario">
             <form action="editarEstudiante.php" method="POST" enctype="multipart/form-data">
                 <table>

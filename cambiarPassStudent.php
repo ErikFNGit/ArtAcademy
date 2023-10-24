@@ -38,7 +38,7 @@
                 <div class="listado">
                     <div class="tabla">
                         <table>
-                            <form action='cambiarPassOlvidada.php' method='post'>
+                            <form action='cambiarPassStudent.php' method='post'>
                             <tr>
                             <td><label for='passActual'>Introduzca su contraseña actual: </label></td>
                                 <td><input type='password' name='passActual' required></td>
