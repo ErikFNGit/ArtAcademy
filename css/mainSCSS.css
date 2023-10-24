@@ -85,10 +85,6 @@ footer div:last-child ul {
   font-family: sans-serif;
 }
 
-* {
-  font-family: sans-serif;
-}
-
 body {
   background-image: url(batllo.jpeg);
   background-size: cover;
@@ -250,8 +246,6 @@ a {
   border-radius: 100%;
 }
 .containerPerfilAlumno .tableta {
-  margin-left: 400px;
-  border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   background-color: rgba(255, 255, 255, 0.4);
   width: 360px;

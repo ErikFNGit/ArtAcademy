@@ -1,25 +1,23 @@
 footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-areas: "logo logo logo contacto rrss";
-  background-color: white;
+  grid-template-columns: 70% 15% 15%;
+  background-color: rgb(0, 0, 0);
 }
-
-.logo {
-  grid-area: logo;
-  text-align: left;
-}
-
-.contacto {
-  grid-area: contacto;
-  justify-content: center;
+footer div {
+  display: flex;
   align-items: center;
+  color: rgb(255, 255, 255);
+}
+footer div a {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+}
+footer div:nth-child(2), footer div:last-child {
   text-align: right;
 }
-
-.rrss {
-  grid-area: rrss;
-  justify-content: center;
-  align-items: center;
-  text-align: right;
+footer div:last-child ul {
+  list-style-type: none;
 }/*# sourceMappingURL=footerSCSS.css.map */

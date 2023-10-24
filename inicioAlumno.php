@@ -40,7 +40,6 @@
     </div>
     <h1>Cursos disponibles:</h1>
     <div class="disponibles">
-      
         <?php
             cursosDisponibles(conexion());
         ?>

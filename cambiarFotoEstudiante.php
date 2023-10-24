@@ -7,7 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
     <?php
@@ -31,7 +32,7 @@
         </div>
     </header>
         <?php
-        if(!$_POST){
+        if(!isset($_FILES['photo'])){
         ?>
             <div class="test">
                 <div class="listado">
@@ -43,8 +44,6 @@
                                 <td><input type="file" name="photo" required></td>
                             <tr>
                                 <td><input class="button" type="submit" value="Cambiar"></td>
-                            </tr>
-                            <tr>
                                 <td><a class="button" href='perfilAlumno.php'>Atras</td>
                             </tr>
                             </form>
@@ -54,7 +53,7 @@
             </div>
         <?php
         }else{
-            cambiarFotoAlumno($_SESSION['dni'], $_POST['photo']);
+            cambiarFotoAlumno($_SESSION['dni']);
         }
     }
     ?>
