@@ -378,6 +378,7 @@ function fillInfoStudent($id){
         if($datos->num_rows>0){
         $row= $datos->fetch_assoc();
         ?>
+        <h1>Pruba Olga </h1>
         <div class="formulario">
             <form action="editarEstudiante.php" method="POST" enctype="multipart/form-data">
                 <table>
@@ -663,10 +664,10 @@ function cursosDisponibles($conexion){
                 echo "<div>";
                     echo "<h1>".$curso["name"]."</h1>";
                     echo "<p>".$curso["description"]."</p>";
-                    echo "<p>".$curso["hours"]."</p>";
-                    echo "<p>".$curso["sDate"]."</p>";
-                    echo "<p>".$curso["eDate"]."</p>";
-                    echo "<p>".$curso["profesor"]."</p>";
+                    echo "<p>Horas: ".$curso["hours"]."</p>";
+                    echo "<p>Inicio: ".$curso["sDate"]."</p>";
+                    echo "<p>Final: ".$curso["eDate"]."</p>";
+                    echo "<p>Docente: ".$curso["profesor"]."</p>";
                     echo "<td class='down'><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
                 echo "</div>";
             }
@@ -858,17 +859,25 @@ function cambiarPass($dni,$passActual,$pass,$passMatch){
     $consulta->bind_param("s",$dni );
     $consulta->execute();
     $row=$consulta->get_result();
+    $row=$consulta->fetch_assoc();
     $consulta->close();
     if(md5($passActual)==$row){
         if($pass == $passMatch){
-        $query="UPDATE students SET stPass=? WHERE dni=?";
+      /*  $query="UPDATE students SET stPass=? WHERE dni=?";
         $consulta = $conexion->prepare($query);
         $newPass=md5($pass);
         $consulta -> bind_param("ss", $newPass, $dni);
         $consulta->execute();
         $consulta->close();
-        $conexion->close();
-        echo "<meta http-equiv='refresh' content ='0; url=perfilAlumno.php'>";
+        $conexion->close();*/
+        ?>
+        <script>
+            document.addEventListener("DOMContentLoaded",function algo({
+                alertify.alert('Contraseña actualizada correctamente');
+            }));
+        </script>
+        <?php
+        echo "<meta http-equiv='refresh' content ='0; url=editarEstudiante.php'>";
         }else{
         echo"<p>Ambas contraseñas no coinciden, introduzcalas de nuevo por favor.</p>";
         echo "<meta http-equiv='refresh' content ='10; url=cambiarPassStudent.php'>";
@@ -876,7 +885,12 @@ function cambiarPass($dni,$passActual,$pass,$passMatch){
         unset($_POST['pass']);
         unset($_POST['passComprobar']);
         }  
+    }else{
+        echo"<p>No ha introducido su contraseña correctamente, vuelva a intentarlo<p>";
+        echo "<meta http-equiv='refresh' content ='10; url=cambiarPassStudent.php'>";
+        unset($_POST['passActual']);
+        unset($_POST['pass']);
+        unset($_POST['passComprobar']);
     }
 }
-
 ?>

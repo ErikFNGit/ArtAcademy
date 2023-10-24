@@ -17,17 +17,20 @@
     }else{
         include("Funciones.php");
         ?>
-        <header>
-            <div>
-                <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
-            </div>
-            <div>
-                <a href="perfilAlumno.php"> Mi perfil </a>
-            </div>
-            <div>
-                <a href="cerrarSesion.php"> Cerrar Sesion</a>
-            </div>
-        </header>
+    <header>
+        <div>
+            <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
+        </div>
+        <div>
+            <a href="paginaPrincipal.php">Inicio</a>
+        </div>
+        <div>
+            <a href="perfilAlumno.php"> Mi perfil </a>
+        </div>
+        <div>
+            <a href="cerrarSesion.php"> Cerrar Sesion </a>
+        </div>
+    </header>
         <div class="containerPerfilAlumno">
         <?php
             perfilStudent($_SESSION["dni"]);

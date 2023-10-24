@@ -21,15 +21,20 @@
         </div>
     </header>
     <?php 
+    if($_SESSION['userType']!="teacher"){
+        echo "<h1>No tienes acceso a esta pagina</h1>";
+        echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+    }else{
         if(isset($_SESSION["start"])){
             if(!isset($_POST['studentGrades'])){
                 listarAlumnosMatriculados(conexion(),$_GET['id']);
             }else{
                 updateNotes(conexion(),$_POST['studentGrades'],$_GET['id']);
         }
-    }else{
-        echo "<h1>NO TIENES ACCESO A ESTA PAGINA</h1>";
+        }else{
+            echo "<h1>NO TIENES ACCESO A ESTA PAGINA</h1>";
+        }
     }
-    ?>
+        ?>
 </body>
 </html>

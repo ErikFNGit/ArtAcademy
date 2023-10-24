@@ -26,7 +26,7 @@
                 <table>
                     <form action="loginAdministrador.php" method="post">
                         <tr>
-                            <td><label for="ID">ID:</label></td>
+                            <td><label for="ID">DNI:</label></td>
                             <td><input type="text" name="ID"></td>
                         </tr>
                         <tr>

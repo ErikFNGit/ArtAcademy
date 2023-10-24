@@ -23,7 +23,7 @@
         <table>
             <form action="loginProfes.php" method="post">
                 <tr>
-                    <td><label for="dni">ID:</label></td>
+                    <td><label for="dni">DNI:</label></td>
                     <td><input type="text" name="dni"></td>
                 </tr>
                 <tr>
