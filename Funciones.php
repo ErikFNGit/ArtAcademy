@@ -20,6 +20,7 @@ function findStudentID($conexion, $dni){
     $id = mysqli_query($conexion,$findStudent);
     $id = mysqli_fetch_array($id,MYSQLI_NUM);
     $id = $id[0];
+    echo 'id: '.$id[0];
     return $id;
 
 }
@@ -562,7 +563,6 @@ function listaCursos($conexion, $busqueda, $userType){
                 echo"<tr>";
                     echo"<td></td>";
                     echo"<td>Nombre </td>";
-                    echo"<td>Descripcion </td>";
                     echo"<td>Horas </td>";
                     echo"<td>Fecha Inicio </td>";
                     echo"<td>Fecha Final </td>";
@@ -573,13 +573,13 @@ function listaCursos($conexion, $busqueda, $userType){
                 echo "<tr>";
                     echo "<td class='indice'>*</td>";
                     echo "<td>". $curso['name']."</td>";
-                    echo "<td>". $curso['description']."</td>";
                     echo "<td>". $curso['hours']."</td>";
                     echo "<td>". $curso['sDate']."</td>";
                     echo "<td>". $curso['eDate']."</td>";
                     echo "<td>". $curso['profesor']."</td>";
                     echo "<td> <a href = 'editarCurso.php?id=".$curso["code"]."' class='button'> EDITAR </a></td>";
-                echo "</tr>";  
+                echo "</tr>";
+                echo "<tr><td colspan=6>Descripcion del curso: ". $curso['description']."</td></tr>";
             }elseif($userType=="student"){
                 $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
                 $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
@@ -698,6 +698,7 @@ function insertMatricula($conexion,$alumno,$curso){
     $find = "SELECT * FROM matricula WHERE curso_id = $curso AND student_id = $id;";
     $esta = mysqli_query($conexion,$find);
     $esta = mysqli_fetch_array($esta,MYSQLI_NUM);
+    
     try{
         $query = "INSERT INTO matricula (student_id,curso_id) VALUES ($id,$curso);";
         mysqli_query($conexion,$query);

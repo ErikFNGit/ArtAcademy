@@ -57,29 +57,37 @@
         if(isset($_POST["alumnos"])){
             $alumnos = $_POST["alumnos"];
             $alumnos = explode("/,",$alumnos);
-            echo "Primer explode"; 
-            print_r($alumnos);
             $_SESSION["alumnos"] = $alumnos;
             unset($_POST["alumnos"]);
         }
 
 
         if(isset($_GET["id"]) and $_GET["id"] == 1){
+            $matriculas = [];
             $alumnos = $_SESSION["alumnos"];
             foreach($alumnos as $alumno){
-                $alumno = explode(",",$alumno);
-                $dni = $alumno[0];
-                $nombre = $alumno[1];
-                $apellido = $alumno[2];
-                $mail = $alumno[3];
-                $passwd = $alumno[4];
-                $edad = $alumno[5];
+                $datos = explode(",",$alumno);
+                $dni = $datos[0];
+                $nombre = $datos[1];
+                $apellido = $datos[2];
+                $mail = $datos[3];
+                $passwd = $datos[4];
+                $edad = $datos[5];
                 addStudent(conexion(),$dni,$nombre,$apellido,$mail,$passwd,$edad,"img/sinFoto.jpg");
+                $cursos = str_replace(["(",")","/"],"",$datos[7]);
+                $cursos = explode("-",$cursos);
+                unset($cursos[0]);
+                $matriculas[$dni] = $cursos;
+            }
+            foreach($matriculas as $dni=>$cursos){
+                foreach($cursos as $curso){
+                    echo trim($dni);
+                    insertMatricula(conexion(),trim($dni),$curso);
+                }
             }
             unset($_SESSION["alumnos"]);
             unset($_GET["id"]);
             echo "<meta http-equiv='refresh' content ='0; url=listadoAlumnos.php'>";
-
         }
     ?>      
     <script src="cargarAlumnos.js"></script>
