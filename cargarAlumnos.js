@@ -11,12 +11,15 @@ document.getElementById("archivo").addEventListener("change", function(e){
             for(i=0;i<contenido.length-1;i++){
                 let fila = document.createElement("tr");
                 let alumno = contenido[i].split(",");
-                //let values = ""+alumno[0]+","+""+alumno[1]+","+""+alumno[2]+","+""+alumno[3]+","+""+alumno[4]+","+""+alumno[5]+","+""+alumno[6]+"/";
-                let values = alumno[0]+","+alumno[1]+","+alumno[2]+","+alumno[3]+","+alumno[4]+","+alumno[5]+","+alumno[6]+"/";
+                let values = alumno[0]+","+alumno[1]+","+alumno[2]+","+alumno[3]+","+alumno[4]+","+alumno[5]+","+alumno[6]+",";
+                for(x=7;x<alumno.length;x++){
+                    values += "-"+alumno[x];
+                }
+                values += "/";
                 alumnos.push(values);
-                for(x=0;x<alumno.length;x++){
+                for(y=0;y<alumno.length;y++){
                     let cell = document.createElement("td");
-                    cell.innerHTML = alumno[x];
+                    cell.innerHTML = alumno[y];
                     fila.appendChild(cell);
                 }
                 tabla.appendChild(fila);
