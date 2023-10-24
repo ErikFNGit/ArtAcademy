@@ -20,7 +20,6 @@ function findStudentID($conexion, $dni){
     $id = mysqli_query($conexion,$findStudent);
     $id = mysqli_fetch_array($id,MYSQLI_NUM);
     $id = $id[0];
-    echo 'id: '.$id[0];
     return $id;
 
 }
@@ -799,26 +798,15 @@ function updateStudent(){
         exit();
     }
     //Preparamos la query para insertar el usuario
-    $query="UPDATE students SET id=?, dni=?, name=?, surname=?,mail=?, stPass=?, picture=? WHERE id=?";
+    $query="UPDATE students SET id=?, dni=?, name=?, surname=?,mail=? WHERE id=?";
     $consulta = $conexion->prepare($query);
     $id=$_POST['id'];
     $dni=$_POST['dni'];
     $name=$_POST['name'];
     $surname=$_POST['surname'];
     $mail=$_POST['mail'];
-    $stPass=md5($_POST['stPass']);
-    $picture=$_FILES['photo']['tmp_name'];
-    if(is_uploaded_file($picture)){    
-        $directory= "img/" ;
-        $fileName= $_FILES['photo']['name'];
-        $idUnico=time();
-        $path=$directory.$idUnico.$fileName;
-        move_uploaded_file($picture,$path);
-    }else{
-        print("Error, no se ha subido la imagen");
-    }
     //Usmoas bind_param para asginarle los valores a la query y ejecutarla
-    $consulta->bind_param("issssssi",$id,$dni, $name, $surname, $mail, $stPass, $path, $id);
+    $consulta->bind_param("issssi",$id,$dni, $name, $surname, $mail, $id);
     $consulta->execute();
     $consulta->close();
     $conexion->close();
@@ -894,6 +882,21 @@ function cambiarPass($dni,$passActual,$pass,$passMatch){
         unset($_POST['passActual']);
         unset($_POST['pass']);
         unset($_POST['passComprobar']);
+    }
+}
+function cambiarFotoAlumno($dni, ){
+    $conexion=conexion();
+    $query="UPDATE students SET picture=? WHERE dni=?";
+    $consulta = $conexion->prepare($query);
+    $picture=$_FILES['photo']['tmp_name'];
+    if(is_uploaded_file($picture)){    
+        $directory= "img/" ;
+        $fileName= $_FILES['photo']['name'];
+        $idUnico=time();
+        $path=$directory.$idUnico.$fileName;
+        move_uploaded_file($picture,$path);
+    }else{
+        print("Error, no se ha subido la imagen");
     }
 }
 ?>

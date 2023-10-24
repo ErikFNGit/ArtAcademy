@@ -39,25 +39,15 @@
                         <table>
                             <form action="cambiarFotoEstudiante.php" method="POST" enctype="multipart/form-data">
                             <tr>
-                            <td><label for='passActual'>Introduzca su contraseña actual: </label></td>
-                                <td><input type='password' name='passActual' required></td>
-                            </tr>
-                            <tr>
-                                <td><label for='pass'>Nueva contraseña: </label></td>
-                                <td><input type='password' name='pass' required></td>
-                            </tr>
-                            <tr>
-                                <td><label for='passComprobar'>Introduzca de nuevo la contraseña:</label></td>
-                                <td><input type='password' name='passComprobar' required></td>
-                            </tr>
+                                <td><label for='passActual'>Nueva foto: </label></td>
+                                <td><input type="file" name="photo" required></td>
                             <tr>
                                 <td><input class="button" type="submit" value="Cambiar"></td>
                             </tr>
                             <tr>
                                 <td><a class="button" href='perfilAlumno.php'>Atras</td>
                             </tr>
-                            
-                        </form>
+                            </form>
                         </table>
                     </div>
                 </div>
