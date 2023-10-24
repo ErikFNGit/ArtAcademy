@@ -401,10 +401,11 @@ function fillInfoStudent($id){
                     </tr>  
                     <tr>
                         <td>Para cambiar la contraseña</td>
-                        <td><a href="cambiarPassStudent.php">Clic aqui</a></td>
+                        <td><a style="text-decoration-line: underline;" href="cambiarPassStudent.php">Clic aqui</a></td>
                     </tr>
                     <tr>
-                        <td><label>Aqui va un link a otra ppagina para cambiar la foto </label></td>
+                        <td>Para cambiar su foto de perfil</td>
+                        <td><a style="text-decoration-line: underline;" href="cambiarFotoEstudiante.php">Clic aqui</a></td>
                     </tr>                
                     <tr>            
                         <td><input type="submit" value="Editar"></td>
@@ -854,22 +855,22 @@ function cambiarPass($dni,$passActual,$pass,$passMatch){
         mysqli_connect_error();
         exit();
     }
-    $query="SELECT stPass FROM students WHERE dni=?";
+    $query="SELECT stPass, id FROM students WHERE dni=?";
     $consulta = $conexion->prepare($query);
     $consulta->bind_param("s",$dni );
     $consulta->execute();
     $row=$consulta->get_result();
-    $row=$consulta->fetch_assoc();
+    $row=$row->fetch_assoc();
     $consulta->close();
-    if(md5($passActual)==$row){
+    if(md5($passActual)==$row['stPass']){
         if($pass == $passMatch){
-      /*  $query="UPDATE students SET stPass=? WHERE dni=?";
+        $query="UPDATE students SET stPass=? WHERE dni=?";
         $consulta = $conexion->prepare($query);
         $newPass=md5($pass);
         $consulta -> bind_param("ss", $newPass, $dni);
         $consulta->execute();
         $consulta->close();
-        $conexion->close();*/
+        $conexion->close();
         ?>
         <script>
             document.addEventListener("DOMContentLoaded",function algo({
@@ -877,15 +878,17 @@ function cambiarPass($dni,$passActual,$pass,$passMatch){
             }));
         </script>
         <?php
-        echo "<meta http-equiv='refresh' content ='0; url=editarEstudiante.php'>";
+        echo "<meta http-equiv='refresh' content ='0; url=editarEstudiante.php?id=".$row['id']."'>";
         }else{
         echo"<p>Ambas contraseñas no coinciden, introduzcalas de nuevo por favor.</p>";
-        echo "<meta http-equiv='refresh' content ='10; url=cambiarPassStudent.php'>";
+        echo "<meta http-equiv='refresh' content ='10; url=cambiarPassStudent.php?id=".$row['id']."'>";
         unset($_POST['passActual']);
         unset($_POST['pass']);
         unset($_POST['passComprobar']);
         }  
     }else{
+        echo md5($passActual);
+        echo $row;
         echo"<p>No ha introducido su contraseña correctamente, vuelva a intentarlo<p>";
         echo "<meta http-equiv='refresh' content ='10; url=cambiarPassStudent.php'>";
         unset($_POST['passActual']);
