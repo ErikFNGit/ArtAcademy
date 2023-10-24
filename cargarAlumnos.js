@@ -6,11 +6,17 @@ document.getElementById("archivo").addEventListener("change", function(e){
         lector.readAsText(archivo);
         lector.onload = function(event){
             let contenido = event.target.result;
+            contenido = contenido.replaceAll(/\s/g,'');
+            contenido = contenido.replaceAll(/[\n\r]+/g,'');
             let tabla = document.createElement("table");
             contenido = contenido.split(";");
             for(i=0;i<contenido.length-1;i++){
                 let fila = document.createElement("tr");
                 let alumno = contenido[i].split(",");
+                // for(x=0; x<alumno.length; x++){
+                //     alumno[x] = alumno[x].replaceAll(/\s/g,'');
+                //     alert(alumno[x]);
+                // }
                 let values = alumno[0]+","+alumno[1]+","+alumno[2]+","+alumno[3]+","+alumno[4]+","+alumno[5]+","+alumno[6]+",";
                 for(x=7;x<alumno.length;x++){
                     values += "-"+alumno[x];
