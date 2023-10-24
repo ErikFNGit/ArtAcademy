@@ -54,7 +54,7 @@
             </div>
         <?php
         }else{
-
+            cambiarFotoAlumno($_SESSION['dni'], $_POST['photo']);
         }
     }
     ?>
