@@ -11,7 +11,6 @@ document.getElementById("archivo").addEventListener("change", function(e){
             for(i=0;i<contenido.length-1;i++){
                 let fila = document.createElement("tr");
                 let alumno = contenido[i].split(",");
-                //let values = ""+alumno[0]+","+""+alumno[1]+","+""+alumno[2]+","+""+alumno[3]+","+""+alumno[4]+","+""+alumno[5]+","+""+alumno[6]+"/";
                 let values = alumno[0]+","+alumno[1]+","+alumno[2]+","+alumno[3]+","+alumno[4]+","+alumno[5]+","+alumno[6]+"/";
                 alumnos.push(values);
                 for(x=0;x<alumno.length;x++){
