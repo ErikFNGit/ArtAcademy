@@ -14,7 +14,7 @@
 </head>
 <body>
     <?php 
-        if(isset($_SESSION["start"])){
+        if($_SESSION['userType']=="student"){
     ?>
     <header>
         <div>
