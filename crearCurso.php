@@ -29,7 +29,7 @@
     </header>
             <div class="formulario">
                 <h1>Añadir curso</h1>
-                <form action="crearCurso.php" method="POST">
+                <form action="crearCurso.php" method="POST" enctype="multipart/form-data">
                     <table>
                         <tr>
                             <td class="lbl"><label for="name">Nombre del curso:</label></td>
@@ -72,6 +72,10 @@
                         <tr>
                             <td colspan=2><textarea name="descripcion" maxlength=254 required></textarea></td>
                         </tr>
+                        <tr>
+                            <td><label>Foto: </label></td>
+                            <td><input type="file" name="photo" required></td>
+                        </tr> 
                         <tr>
                             <td><input type="submit" value="Aceptar" class="button"></td>
                             <td><a href = 'controlAdmin.php' class="button"> Atras </a>  </td>

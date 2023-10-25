@@ -26,18 +26,29 @@ function findStudentID($conexion, $dni){
 function addCurso($conexion){
     $datos="";
     $datos=$datos."'".$_POST["name"]."',";
+    $datos=$datos."'".$_POST["descripcion"]."',";
+    $picture=$_FILES['photo']['tmp_name'];
+    if(is_uploaded_file($picture)){    
+        $directory= "img/" ;
+        $fileName= $_FILES['photo']['name'];
+        $idUnico=time();
+        $path=$directory.$idUnico.$fileName;
+        move_uploaded_file($picture,$path);
+        $datos=$datos."'".$path."',";
+    }else{
+        echo "<h1>Error, no se ha subido la imagen</h1>";
+    }
     $datos=$datos."'".$_POST["hours"]."',";
     $datos=$datos."'".$_POST["start"]."',";
     $datos=$datos."'".$_POST["end"]."',";
     $datos=$datos."'".$_POST["idTeacher"]."',";
-    $datos=$datos."'".$_POST["descripcion"]."',";
     if($_POST["activo"] == "si"){
         $datos = $datos."'1'";
     }else{
         $datos = $datos."'0'";
     }
-    $insertNewCourse = "INSERT INTO `curso`(`name`, `hours`, `sDate`, `eDate`, `teacher_id`, `description`,`active`) 
-    VALUES ($datos);";
+    $insertNewCourse = "INSERT INTO `curso`(`name`, `description`, `foto`, `hours`, `sDate`, `eDate`, `teacher_id`, `active`) 
+    VALUES ($datos)";
     mysqli_query($conexion,$insertNewCourse);
 }
 
@@ -582,9 +593,9 @@ function listaCursos($conexion, $busqueda, $userType){
                     echo "<td>". $curso['sDate']."</td>";
                     echo "<td>". $curso['eDate']."</td>";
                     echo "<td>". $curso['profesor']."</td>";
-                    echo "<td> <a href = 'editarCurso.php?id=".$curso["code"]."' class='button'> EDITAR </a></td>";
+                    echo "<td><a href = 'editarCurso.php?id=".$curso["code"]."' class='button'> EDITAR </a></td>";
                 echo "</tr>";
-                echo "<tr><td colspan=6>Descripcion del curso: ". $curso['description']."</td></tr>";
+                echo "<tr><td><img src='".$curso['foto']."'width='50px' height='50px'></td><td colspan=4>Descripcion del curso: ". $curso['description']."</td></tr>";
             }elseif($userType=="student"){
                 $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
                 $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
@@ -595,12 +606,13 @@ function listaCursos($conexion, $busqueda, $userType){
                 }
                 if(in_array($curso["code"],$matriculas)){
                     echo "<tr>";
-                        echo "<td class='indice'>*</td>";
+                        echo "<td><img src='".$curso['foto']."'width='50px' height='50px'></td>";
                         echo "<td>". $curso['name']."</td>";
                         echo "<td>". $curso['hours']."</td>";
                         echo "<td>". $curso['sDate']."</td>";
                         echo "<td>". $curso['eDate']."</td>";
                         echo "<td>". $curso['profesor']."</td>";
+                        echo "<tr><td></td></tr>";
                         echo "<td><a href='?llamarDelete&codigo=".$curso["code"]."' class='button'>Desapuntarme</a></td>";
                     echo "</tr>"; 
                 }
@@ -671,6 +683,7 @@ function cursosDisponibles($conexion){
             {
                 echo "<div>";
                     echo "<h1>".$curso["name"]."</h1>";
+                    echo "<img src='".$curso['foto']."'width='150px' height='150px'>";
                     echo "<p>".$curso["description"]."</p>";
                     echo "<p>Horas: ".$curso["hours"]."</p>";
                     echo "<p>Inicio: ".$curso["sDate"]."</p>";
