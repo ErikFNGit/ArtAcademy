@@ -32,7 +32,7 @@
             <h1>CURSOS</h1>
             <p>Si quieres informacion <br> de los cursos que <br> impartimos, clic aqui</p>
             <img src="clasearte.jpg" alt="Gente pintando" width="150px" height="100px"> <br>
-            <a class="button" href=""> Cursos </a>
+            <a class="button" href="cursosPublicos.php"> Cursos </a>
         </div>
         <div>
             <h1>QUIENES SOMOS</h1>

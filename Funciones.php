@@ -653,16 +653,19 @@ function updateNotes($conexion,$students,$curso){
     echo "<meta http-equiv='refresh' content='0;url=inicioProfe.php'>";
 }
 function cursosDisponibles($conexion){
-    $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
-    $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
-    $matriculas = [];
-    for($i=0; $i<mysqli_num_rows($cursosMatriculado);$i++){
-        $placeholder = mysqli_fetch_array($cursosMatriculado, MYSQLI_NUM);
-        $matriculas[$i] = $placeholder[0];
+    if(isset($_SESSION["dni"])){
+        $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
+        $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
+        $matriculas = [];
+        for($i=0; $i<mysqli_num_rows($cursosMatriculado);$i++){
+            $placeholder = mysqli_fetch_array($cursosMatriculado, MYSQLI_NUM);
+            $matriculas[$i] = $placeholder[0];
+        }
     }
+
     $listadoCursos = findCursos(conexion(),"SELECT * FROM curso");
     foreach($listadoCursos as $curso){
-        if(!in_array($curso["code"],$matriculas))
+        if(!isset($matriculas) or !in_array($curso["code"],$matriculas))
         {
             if($curso["sDate"]>date("Y-m-d"))
             {
