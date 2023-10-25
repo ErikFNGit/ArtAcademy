@@ -546,7 +546,12 @@ function listaCursos($conexion, $busqueda, $userType){
         $nombreCurso="SELECT code, name FROM curso WHERE teacher_id LIKE ".$teacherId.";";
         $nombreCurso=mysqli_query($conexion,$nombreCurso);
         while ($row = mysqli_fetch_array($nombreCurso)) {
-            echo"<div class='listado'>";
+            $query = "SELECT eDate FROM curso WHERE code LIKE '".$row[0]."';";
+            $fechaFin = mysqli_query($conexion,$query);
+            $fechaFin = mysqli_fetch_array($fechaFin, MYSQLI_NUM);
+            $fechaFin = $fechaFin[0];
+            if($fechaFin>date("Y-m-d")){
+                echo"<div class='listado'>";
                 echo"<div class='tabla'>";
                 echo"<table>";
                     echo"<tr>";
@@ -557,7 +562,8 @@ function listaCursos($conexion, $busqueda, $userType){
                 echo"</table>";
                 echo"</div>";
                 echo"</div>";
-                }
+            }
+        }
     }else{
         echo"<table>";
                 echo"<tr>";
@@ -613,6 +619,7 @@ function listaCursos($conexion, $busqueda, $userType){
 function listarAlumnosMatriculados($conexion, $cursoID){
     $alumnos="SELECT student_id, score FROM matricula WHERE curso_id LIKE ".$cursoID.";";
     $alumnos=mysqli_query($conexion,$alumnos);
+    $cursoEnd = false;
     echo"<div class='listado'>";
         echo"<div class='tabla'>";
         echo"<form action'notasCurso.php' method='post'>";
