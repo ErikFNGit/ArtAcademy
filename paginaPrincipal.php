@@ -10,12 +10,15 @@
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-    <header>
     <?php
-    if (!isset($_SESSION)){
+    if (!isset($_SESSION['userType'])){
     ?>
+    <header>
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
+        </div>
+        <div>
+            <a href="paginaPrincipal.php">Inicio</a>
         </div>
         <div>
             <a href="index.php"> Iniciar Sesion </a>
@@ -23,7 +26,8 @@
         <div>
             <a href="registrarAlumno.php"> Registrarse </a>
         </div>
-        <div class="mainMenu">
+    </header>
+    <div class="mainMenu">
         <div>
             <h1>CURSOS</h1>
             <p>Si quieres informacion <br> de los cursos que <br> impartimos, clic aqui</p>
@@ -34,7 +38,7 @@
             <h1>QUIENES SOMOS</h1>
             <p>Aqui tienes toda la <br> informacion sobre <br> nuestros profesionales</p>
             <img src="arteprofe.jpg" alt="Profesor pintando" width="150px" height="100px"> <br>
-            <a class="button" href=""> About us </a>
+            <a class="button" href="aboutUs.php"> About us </a>
         </div>
         <div>
             <h1>CONTACTANOS</h1>
@@ -46,9 +50,12 @@
     <?php
     }else{
     ?>
-
+    <header>
         <div>
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
+        </div>
+        <div>
+            <a href="paginaPrincipal.php">Inicio</a>
         </div>
         <div>
             <a href="perfilAlumno.php"> Mi perfil </a>
@@ -57,7 +64,7 @@
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
     </header>
-        <div class="mainMenu">
+    <div class="mainMenu">
         <div>
             <h1>CURSOS</h1>
             <p>Si quieres informacion <br> de los cursos que <br> impartimos, clic aqui</p>
@@ -80,7 +87,6 @@
     <?php
     }
     ?>
-
     <footer>
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>

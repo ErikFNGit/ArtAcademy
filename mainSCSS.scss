@@ -4,6 +4,9 @@
 @import 'scss/headerSCSS.scss';
 @import 'scss/footerSCSS.scss';
 @import 'scss/listadoSCSS.scss';
+*{
+    font-family: sans-serif;
+}
 body{
     background-image: url(batllo.jpeg);
     background-size: cover;
@@ -137,7 +140,7 @@ a{
 .containerPerfilAlumno{
     @include textStyle;
     display: grid;
-    grid-template-columns: 1fr 80%;
+    grid-template-columns: 1fr 80% ;
     .foto{
         width: 150px;
         height: 150px;
@@ -149,7 +152,11 @@ a{
         }
     }
     .tableta{
-        width: 350px;
+        margin-left: 400px;
+        border-radius: 15px;
+        box-shadow: $sombreado_divs;
+        background-color: $color_fondo_divs;
+        width: 360px;
         grid-column-start: 1;
         grid-column-end: 2;
         th{

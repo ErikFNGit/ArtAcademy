@@ -1,18 +1,14 @@
 header {
   display: grid;
-  grid-template-columns: 79% 5% 8% 8%;
+  grid-template-columns: 85% 5% 5% 5%;
   background-color: rgb(255, 255, 255);
 }
 header div {
   display: flex;
   align-items: center;
 }
-header div:nth-child(3), header div:nth-child(2), header div:last-child {
+header div:nth-child(2), header div:last-child {
   text-align: right;
-}
-header div:nth-child(3) :hover, header div:nth-child(2) :hover, header div:last-child :hover {
-  color: blue;
-  text-decoration-line: underline;
 }
 
 footer {
@@ -86,10 +82,6 @@ footer div:last-child ul {
 }
 .listado h1 {
   text-align: center;
-  font-family: sans-serif;
-}
-
-* {
   font-family: sans-serif;
 }
 
@@ -254,8 +246,6 @@ a {
   border-radius: 100%;
 }
 .containerPerfilAlumno .tableta {
-  margin-left: 400px;
-  border-radius: 15px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   background-color: rgba(255, 255, 255, 0.4);
   width: 360px;

@@ -377,7 +377,6 @@ function fillInfoStudent($id){
         if($datos->num_rows>0){
         $row= $datos->fetch_assoc();
         ?>
-        <h1>Pruba Olga </h1>
         <div class="formulario">
             <form action="editarEstudiante.php" method="POST" enctype="multipart/form-data">
                 <table>
@@ -777,7 +776,6 @@ function perfilStudent($dni){
     echo"<div class='listado'>";
     echo"<div class='tableta'>";
     echo"<table>";
-    echo"<p>Notas: </p>";
     echo"<th>Curso </th>";
     echo"<th> Nota </th>";
     for($i=0;$i<mysqli_num_rows($notas);$i++){
@@ -865,13 +863,6 @@ function cambiarPass($dni,$passActual,$pass,$passMatch){
         $consulta->execute();
         $consulta->close();
         $conexion->close();
-        ?>
-        <script>
-            document.addEventListener("DOMContentLoaded",function algo({
-                alertify.alert('Contraseña actualizada correctamente');
-            }));
-        </script>
-        <?php
         echo "<meta http-equiv='refresh' content ='0; url=editarEstudiante.php?id=".$row['id']."'>";
         }else{
         echo"<p>Ambas contraseñas no coinciden, introduzcalas de nuevo por favor.</p>";
@@ -890,7 +881,7 @@ function cambiarPass($dni,$passActual,$pass,$passMatch){
         unset($_POST['passComprobar']);
     }
 }
-function cambiarFotoAlumno($dni, ){
+function cambiarFotoAlumno($dni){
     $conexion=conexion();
     $query="UPDATE students SET picture=? WHERE dni=?";
     $consulta = $conexion->prepare($query);
@@ -904,5 +895,17 @@ function cambiarFotoAlumno($dni, ){
     }else{
         print("Error, no se ha subido la imagen");
     }
+    $consulta->bind_param("ss", $path, $dni);
+    $consulta->execute();
+    $consulta->close();
+    $query="SELECT id FROM students WHERE dni=?";
+    $consulta = $conexion->prepare($query);
+    $consulta->bind_param("s",$dni );
+    $consulta->execute();
+    $row=$consulta->get_result();
+    $row=$row->fetch_assoc();
+    $consulta->close();
+    $conexion->close();
+    echo "<meta http-equiv='refresh' content ='0; url=editarEstudiante.php?id=".$row['id']."'>";
 }
 ?>

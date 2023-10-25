@@ -14,7 +14,7 @@
 </head>
 <body>
     <?php 
-        if(isset($_SESSION["start"])){
+        if($_SESSION['userType']=="student"){
     ?>
     <header>
         <div>
@@ -40,7 +40,6 @@
     </div>
     <h1>Cursos disponibles:</h1>
     <div class="disponibles">
-      
         <?php
             cursosDisponibles(conexion());
         ?>
