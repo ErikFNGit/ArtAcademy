@@ -24,6 +24,9 @@ a{
 .button{
     @include button; 
 }
+.lbl{
+    font-weight: bold;
+}
 .mainMenu{
     @include textStyle;
     height: 100%;
@@ -65,6 +68,7 @@ a{
     grid-template-columns: repeat(8,auto);
     font-family: sans-serif;
     resize: none;
+    padding-top: 5px;
     h1{
         grid-column-start: 4;
         grid-column-end: 5;
@@ -193,5 +197,29 @@ a{
         h1{
             text-align: center;
         }
+    }
+}
+
+#usAbout{
+    text-align: center;
+}
+.aboutUsContainer{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    h1{
+        text-align: center;
+    }
+    div{
+        margin-top: 15px;
+        width: 350px;
+        background-color: $grey;
+        padding: 15px;
+        border-radius: 20px;
+        h3{
+            text-align: center;
+        }
+        
     }
 }

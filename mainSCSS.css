@@ -121,6 +121,10 @@ a {
   bottom: 0;
 }
 
+.lbl {
+  font-weight: bold;
+}
+
 .mainMenu {
   font-weight: bold;
   font-family: sans-serif;
@@ -174,6 +178,7 @@ a {
   grid-template-columns: repeat(8, auto);
   font-family: sans-serif;
   resize: none;
+  padding-top: 5px;
 }
 .formulario h1 {
   grid-column-start: 4;
@@ -294,5 +299,29 @@ a {
   border-radius: 20px;
 }
 .disponibles div h1 {
+  text-align: center;
+}
+
+#usAbout {
+  text-align: center;
+}
+
+.aboutUsContainer {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding-bottom: 15px;
+}
+.aboutUsContainer h1 {
+  text-align: center;
+}
+.aboutUsContainer div {
+  margin-top: 15px;
+  width: 350px;
+  background-color: rgba(214, 214, 214, 0.6);
+  padding: 15px;
+  border-radius: 20px;
+}
+.aboutUsContainer div h3 {
   text-align: center;
 }/*# sourceMappingURL=mainSCSS.css.map */

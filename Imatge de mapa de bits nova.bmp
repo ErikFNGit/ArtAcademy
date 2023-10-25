@@ -1,14 +1,18 @@
+<?php
+    session_start();
+    include("Funciones.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contactanos</title>
+    <title>Document</title>
     <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
-<?php
-    if (!isset($_SESSION['userType'])){
+    <?php
+        if (!isset($_SESSION['userType'])){
     ?>
     <header>
         <div>
@@ -41,42 +45,12 @@
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
         </div>
     </header>
-    <?php
-    }
-    ?>
-    <div class="formulario">
-        <h1>CONTACTANOS</h1>
-        <div class="formularioContacto">
-        <table>
-            <form action="paginaPrncipal.php">
-            <tr>
-                <td>Nombre *</td>
-            </tr>
-            <tr>
-                <td><input type="text" size="75"></td>
-            </tr>
-            <tr>
-                <td>Apellido *</td>
-            </tr>
-            <tr>
-                <td><input type="text" size="75"></td>
-            </tr>
-            <tr>
-                <td>Asunto *</td>
-            </tr>
-            <tr>
-                <td><input type="text" size="75"></td>
-            </tr>
-            <tr>
-                <td>Mensaje *</td>
-            </tr>
-            <tr>
-                <td><input type="text" size="75" style="height:100px;"></td>
-            </tr>
-            </form>
-        </table>
-        </div>
+    <?php } ?>
+    
+    <div class="disponibles">
+        <?php cursosDisponibles(conexion()); ?>
     </div>
+
     <footer>
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>

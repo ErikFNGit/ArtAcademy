@@ -1,8 +1,7 @@
 @import 'variablesSCSS.scss';
 
 footer{
-    position: relative;
-    bottom: 0;
+   
     width: 100%;
     display: grid;
     grid-template-columns: 70% 15% 15%;
@@ -24,4 +23,14 @@ footer{
             }
         }
     }
+}
+
+.footerAbs{
+        position: absolute;
+        bottom: 0;
+}
+
+.footerRel{
+    position: relative;
+    bottom: 0;
 }

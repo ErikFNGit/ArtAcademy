@@ -81,7 +81,7 @@
             <h1>CONTACTANOS</h1>
             <p>¿Necesitas mas <br> informacion? <br> Contactanos!</p>
             <img src="logoGmail.png" alt="el logo de gmail" width="150px" height="100px"> <br>
-            <a class="button" href=""> Contactanos </a>
+            <a class="button" href="contactanos.php"> Contactanos </a>
         </div>
     </div>
     <?php

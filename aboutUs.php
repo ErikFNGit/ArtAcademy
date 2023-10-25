@@ -44,8 +44,10 @@
     <?php
     }
     ?>
-    <div class="aboutUsContainer">
-        <h1>¿QUIENES SOMOS?</h1>
+
+
+<h1 id="usAbout">¿QUIENES SOMOS?</h1>
+<div class="aboutUsContainer">
         <div>
             <h3>Bienvenidos a Art Academy</h3>
             <p>Somos una academia que reune todos los niveles de artistas, desde aspirantes a maestros, de todas als disciplinas imaginables. Aqui encontraras cuross de iniciacion
@@ -53,13 +55,14 @@
             </p>
         </div>
         <div>   
-            <h3>¿Cuales son nuestors objetivos?</h3>
+            <h3>¿Cuales son nuestros objetivos?</h3>
             <p>En Art Academy buscamos que todos desde pequeños3a mayores desarrollen su lado artistico </p>
             <p>Una depuracion de la tencnica de nuestros estudiantes</p>
             <p>Y el desarrollo de cualquier tipo de disciplina artistica</p>
         </div>
     </div>
-    <footer>
+
+    <footer class="footerAbs">
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>
             Calle Invent, 69 08917 Badalona <br>
