@@ -77,7 +77,7 @@
         </table>
         </div>
     </div>
-    <footer>
+    <footer class="footerAbs">
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>
             Calle Invent, 69 08917 Badalona <br>

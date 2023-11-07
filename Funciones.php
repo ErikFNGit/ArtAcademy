@@ -700,7 +700,9 @@ function cursosDisponibles($conexion){
                     echo "<p>Inicio: ".$curso["sDate"]."</p>";
                     echo "<p>Final: ".$curso["eDate"]."</p>";
                     echo "<p>Docente: ".$curso["profesor"]."</p>";
-                    echo "<td class='down'><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
+                    if(isset($_SESSION["dni"])){
+                        echo "<td class='down'><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
+                    }
                 echo "</div>";
             }
         }

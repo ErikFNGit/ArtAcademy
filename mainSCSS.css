@@ -16,8 +16,6 @@ header div:nth-child(3) :hover, header div:nth-child(2) :hover, header div:last-
 }
 
 footer {
-  position: relative;
-  bottom: 0;
   width: 100%;
   display: grid;
   grid-template-columns: 70% 15% 15%;
@@ -37,6 +35,16 @@ footer div:nth-child(2), footer div:last-child {
 }
 footer div:last-child ul {
   list-style-type: none;
+}
+
+.footerAbs {
+  position: absolute;
+  bottom: 0;
+}
+
+.footerRel {
+  position: relative;
+  bottom: 0;
 }
 
 .listado {
