@@ -17,7 +17,7 @@
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
         <div>
-            <a href="paginaPrincipal.php">Inicio</a>
+            <a href="index.php">Inicio</a>
         </div>
         <div>
             <a href="cerrarSesion.php"> Cerrar Sesion</a>
@@ -26,7 +26,7 @@
     <?php
         if($_SESSION["userType"] != "admin"){
             echo "<h1>No tienes acceso a esta pagina</h1>";
-            echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+            echo "<meta http-equiv='refresh' content ='2; url=loginUsuario.php'>";
         }else{
     ?>
   

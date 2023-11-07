@@ -15,12 +15,12 @@ session_start();
         if($_SESSION){
             session_destroy();
         ?>
-        <meta http-equiv="REFRESH" content="0;url=index.php">
+        <meta http-equiv="REFRESH" content="0;url=loginUsuario.php">
         <?php
         }else{
             echo"Debe esta validado primero";
         ?>
-        <meta http-equiv="REFRESH" content="0;url=index.php">
+        <meta http-equiv="REFRESH" content="0;url=loginUsuario.php">
         <?php
         }
     ?>

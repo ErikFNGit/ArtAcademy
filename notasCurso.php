@@ -23,7 +23,7 @@
     <?php 
     if($_SESSION['userType']!="teacher"){
         echo "<h1>No tienes acceso a esta pagina</h1>";
-        echo "<meta http-equiv='refresh' content ='2; url=index.php'>";
+        echo "<meta http-equiv='refresh' content ='2; url=loginUsuario.php'>";
     }else{
         if(isset($_SESSION["start"])){
             if(!isset($_POST['studentGrades'])){

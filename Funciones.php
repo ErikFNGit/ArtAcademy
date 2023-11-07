@@ -857,7 +857,7 @@ function passOlvidada($dni,$mail,$pass,$passMatch){
         $consulta->execute();
         $consulta->close();
         $conexion->close();
-        echo "<meta http-equiv='refresh' content ='0; url=index.php'>";
+        echo "<meta http-equiv='refresh' content ='0; url=loginUsuario.php'>";
     }else{
         echo"<p>Ambas contraseñas no coinciden, introduzcalas de nuevo por favor.</p>";
         echo "<meta http-equiv='refresh' content ='10; url=passOlvidada.php'>";

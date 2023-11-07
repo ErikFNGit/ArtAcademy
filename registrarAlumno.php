@@ -19,10 +19,10 @@
         </div>
         <div></div>
         <div>
-            <a href="paginaPrincipal.php">Inicio</a>
+            <a href="index.php">Inicio</a>
         </div>
         <div>
-            <a href="index.php"> Iniciar Sesion </a>
+            <a href="loginUsuario.php"> Iniciar Sesion </a>
         </div>
     </header>
     <div class="formulario">
@@ -59,7 +59,7 @@
                 </tr>       
                 </tr>
                     <td><input type="submit" value="Registrarse" class="button"></td>
-                    <td><a class="button" href = 'index.php'> Atras </a></td>
+                    <td><a class="button" href = 'loginUsuario.php'> Atras </a></td>
                 </tr>
                     </tr>
                 </table>

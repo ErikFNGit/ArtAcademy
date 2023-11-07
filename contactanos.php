@@ -15,10 +15,10 @@
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
         <div>
-            <a href="paginaPrincipal.php">Inicio</a>
+            <a href="index.php">Inicio</a>
         </div>
         <div>
-            <a href="index.php"> Iniciar Sesion </a>
+            <a href="loginUsuario.php"> Iniciar Sesion </a>
         </div>
         <div>
             <a href="registrarAlumno.php"> Registrarse </a>
