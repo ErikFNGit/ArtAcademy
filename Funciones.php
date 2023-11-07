@@ -1,4 +1,13 @@
 <?php
+
+
+
+
+/**
+ * conexion
+ *
+ * @return void
+ */
 function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;
@@ -372,6 +381,7 @@ function fillInfoTeacher($id){
         $consulta->close(); 
         } 
 }
+
 function fillInfoStudent($id){
     $conexion = conexion();
     //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
@@ -509,6 +519,7 @@ function fillInfoCursos($idCurso){
     $consulta->close(); 
     } 
 }
+
 function updateTeacher(){
         $conexion = conexion();
         //Comprobamos que se ha hecho la conexion. Si da error, detiene la ejecucion del codigo
