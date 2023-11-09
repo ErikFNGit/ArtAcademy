@@ -38,8 +38,8 @@
             ?>
         </div>
     </div>
-    <h1>Cursos disponibles:</h1>
     <div class="disponibles">
+        <h1 class="titulo">Cursos disponibles:</h1>
         <?php
             cursosDisponibles(conexion());
         ?>

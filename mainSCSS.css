@@ -299,6 +299,12 @@ a {
   flex-wrap: wrap;
   padding-bottom: 15px;
 }
+.disponibles * {
+  font-weight: bold;
+}
+.disponibles h1 {
+  flex: 100%;
+}
 .disponibles div {
   margin-top: 15px;
   width: 350px;

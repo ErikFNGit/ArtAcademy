@@ -184,6 +184,13 @@ a{
 }
 
 .disponibles{
+    *{
+        font-weight: bold;
+    }
+    h1{
+        flex: 100%;
+        
+    }
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
