@@ -4,7 +4,8 @@ function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;
 }
-function comprobarDNI($dni){
+// Comprobar la DNA a partir de la cuenta $dni
+function comprobarDNI($dni){ 
     $dni=strtoupper($dni);
     if (preg_match("/[0-9]{8}[A-Z]$/",$dni)){
         $numeroDni=intval(substr($dni, 0 ,8));

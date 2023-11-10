@@ -302,8 +302,9 @@ a {
 .disponibles * {
   font-weight: bold;
 }
-.disponibles h1 {
-  flex: 100%;
+.disponibles .titulo {
+  margin-left: 12%;
+  flex-basis: 100%;
 }
 .disponibles div {
   margin-top: 15px;
@@ -314,6 +315,13 @@ a {
 }
 .disponibles div h1 {
   text-align: center;
+}
+.disponibles div img {
+  border: solid 2px;
+  margin-left: 25%;
+}
+.disponibles div .button {
+  margin-left: 35%;
 }
 
 #usAbout {
