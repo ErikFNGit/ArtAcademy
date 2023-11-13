@@ -184,10 +184,17 @@ a{
 }
 
 .disponibles{
+    *{
+        font-weight: bold;
+    }
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     padding-bottom: 15px;
+    .titulo{
+        margin-left: 12%;
+        flex-basis: 100%;
+    }
     div{
         margin-top: 15px;
         width: 350px;
@@ -196,6 +203,13 @@ a{
         border-radius: 20px;
         h1{
             text-align: center;
+        }
+        img{
+            border: solid 2px;
+            margin-left: 25%;
+        }
+        .button{
+            margin-left: 35%;
         }
     }
 }

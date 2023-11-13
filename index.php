@@ -55,7 +55,7 @@
             <img src="logoNegro.png" alt="Logo de la academia con la letra en negro" width="100px" height="50px">
         </div>
         <div>
-            <a href="paginaPrincipal.php">Inicio</a>
+            <a href="index.php">Inicio</a>
         </div>
         <div>
             <a href="perfilAlumno.php"> Mi perfil </a>
@@ -69,7 +69,7 @@
             <h1>CURSOS</h1>
             <p>Si quieres informacion <br> de los cursos que <br> impartimos, clic aqui</p>
             <img src="clasearte.jpg" alt="Gente pintando" width="150px" height="100px"> <br>
-            <a class="button" href="inicioAlumno.php"> Cursos </a>
+            <a class="button" href="cursosPublicos.php"> Cursos </a>
         </div>
         <div>
             <h1>QUIENES SOMOS</h1>
@@ -87,7 +87,7 @@
     <?php
     }
     ?>
-    <footer>
+    <footer class="footerAbs">
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>
             Calle Invent, 69 08917 Badalona <br>

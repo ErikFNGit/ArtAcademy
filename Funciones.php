@@ -1,18 +1,11 @@
 <?php
 
-
-
-
-/**
- * conexion
- *
- * @return void
- */
 function conexion(){
             $conexion = mysqli_connect("localhost","root","","ArtAcademy");
             return $conexion;
-} 
-function comprobarDNI($dni){
+}
+// Comprobar la DNA a partir de la cuenta $dni
+function comprobarDNI($dni){ 
     $dni=strtoupper($dni);
     if (preg_match("/[0-9]{8}[A-Z]$/",$dni)){
         $numeroDni=intval(substr($dni, 0 ,8));
@@ -696,11 +689,13 @@ function cursosDisponibles($conexion){
                     echo "<h1>".$curso["name"]."</h1>";
                     echo "<img src='".$curso['foto']."'width='150px' height='150px'>";
                     echo "<p>".$curso["description"]."</p>";
-                    echo "<p>Horas: ".$curso["hours"]."</p>";
+                    echo "<p>Duracion: ".$curso["hours"]." horas</p>";
                     echo "<p>Inicio: ".$curso["sDate"]."</p>";
                     echo "<p>Final: ".$curso["eDate"]."</p>";
                     echo "<p>Docente: ".$curso["profesor"]."</p>";
-                    echo "<td class='down'><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
+                    if(isset($_SESSION["dni"])){
+                        echo "<td class='down'><a href='?llamarInsert&codigo=".$curso["code"]."' class='button'>Matricularme</a></td>";
+                    }
                 echo "</div>";
             }
         }

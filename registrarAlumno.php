@@ -65,7 +65,7 @@
                 </table>
         </form>
     </div>
-    <footer>
+    <footer class="footerAbs">
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>
             Calle Invent, 69 08917 Badalona <br>
@@ -98,7 +98,8 @@
             unset($_POST["age"]);
             unset($_POST["photo"]);
             session_destroy();
-            echo "<meta http-equiv='refresh' content ='15; url=registrarAlumno.php'>";
+            echo "<h1>Este DNI ya se ha registrado</h1>";
+            echo "<meta http-equiv='refresh' content ='5; url=loginUsuario.php'>";
         }
     }else{
         echo"<p>Dni invalido, porfavor, asegurese de introducir un DNI correcto</p>";
