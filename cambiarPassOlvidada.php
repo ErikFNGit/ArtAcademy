@@ -12,10 +12,6 @@
 </head>
 <body>
     <?php
-    if($_SESSION['userType']!="student"){
-        echo "<h1>No tienes acceso a esta pagina</h1>";
-        echo "<meta http-equiv='refresh' content ='2; url=loginUsuario.php'>";
-    }else{
         if(!$_POST){
         ?>
             <div class="test">
@@ -43,7 +39,6 @@
         }else{
             passOlvidada($_SESSION['dni'],$_SESSION['mail'],$_POST['pass'],$_POST['passComprobar']);
         }
-    }
     ?>
 
 </body>
