@@ -13,11 +13,7 @@
     <?php
         include("Funciones.php");
         if(!isset($_POST["ID"])){
-            if(isset($_SESSION["error"]))
-            {
-                echo $_SESSION["error"];
-                unset($_SESSION["error"]);
-            }
+            
     ?>
     <div class="test">
         <div class="listado">
@@ -25,6 +21,13 @@
             <h1>Login administrador</h1>
                 <table>
                     <form action="loginAdministrador.php" method="post">
+                        <?php
+                            if(isset($_SESSION["error"]))
+                            {
+                                echo $_SESSION["error"];
+                                unset($_SESSION["error"]);
+                            }
+                        ?>
                         <tr>
                             <td><label for="ID">DNI:</label></td>
                             <td><input type="text" name="ID"></td>
@@ -44,7 +47,7 @@
             if(!adminLogin(conexion())){
                 unset($_POST["ID"]);
                 unset($_POST["passwd"]);
-                $_SESSION["error"]="<p>Contraseña o usuario incorrecto(s) pruebe de nuevo</p>";
+                $_SESSION["error"]="<p style='color: red'>Contraseña o usuario incorrecto(s) pruebe de nuevo</p>";
                 echo "<meta http-equiv='refresh' content ='0; url=loginAdministrador.php'>";               
             }else{
                 $_SESSION["userType"] = "admin";

@@ -1,11 +1,14 @@
+.listado > h1 {
+  margin-left: 150px;
+  font-family: sans-serif;
+}
+
 .listado {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: repeat(3, 1r);
+  grid-template-rows: min-content min-content auto;
 }
 .listado .buscador {
-  padding-top: 10px;
-  padding-bottom: 10px;
   grid-column-start: 2;
   grid-column-end: 3;
   grid-row-start: 1;
@@ -35,6 +38,18 @@
 .listado .tabla .indice {
   font-size: 2em;
 }
+.listado .tabla .titulo {
+  display: flex;
+}
+.listado .tabla .titulo a {
+  margin-top: 25px;
+  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  background-image: url("img/plusSimbolo.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 .listado .lbl {
   grid-column-start: 2;
   grid-column-end: 3;
@@ -42,8 +57,4 @@
   grid-row-start: 4;
   font-family: sans-serif;
   font-weight: bold;
-}
-.listado h1 {
-  text-align: center;
-  font-family: sans-serif;
 }/*# sourceMappingURL=listadoSCSS.css.map */

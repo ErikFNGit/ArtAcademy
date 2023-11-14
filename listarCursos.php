@@ -34,11 +34,14 @@
             <form action="listarCursos.php" method="POST">
                 <label for="codigo">Buscador:</label>
                 <input type="text" name="busqueda">
-                <input type="submit" value="Aceptar">
+                <input type="submit" value="Aceptar" class="button">
             </form>
         </div>
         <div class="tabla">
-            <h1>CURSOS</h1>
+            <div class="titulo">
+                <h1>CURSOS</h1>
+                <a href="crearCurso.php"></a>
+            </div>
             <?php
                 if(isset($_POST["busqueda"])){
                     listaCursos(conexion(),$_POST["busqueda"],$_SESSION["userType"]);
@@ -58,7 +61,7 @@
             ?>
         </div>
     </div>
-    <footer class="footerAbs">
+    <footer class="footerRel">
         <img src="logoBlanco.png" alt="Logo de la academia con la letra en blanco" width="100px" height="50px">
         <div>
             Calle Invent, 69 08917 Badalona <br>

@@ -14,8 +14,7 @@ body{
     margin: 0%;
     padding: 0%;
     display: grid;
-    grid-template-rows: auto auto auto;
-    height: 100%;
+    grid-template-rows: auto 1fr auto;
 }
 a{
     text-decoration: inherit;
@@ -28,6 +27,7 @@ a{
     font-weight: bold;
 }
 .mainMenu{
+
     @include textStyle;
     height: 100%;
     display:grid;
@@ -191,8 +191,9 @@ a{
     justify-content: space-around;
     flex-wrap: wrap;
     padding-bottom: 15px;
+    min-height: 85vh;
     .titulo{
-        margin-left: 12%;
+        margin-left: $marginTitulos;
         flex-basis: 100%;
     }
     div{
