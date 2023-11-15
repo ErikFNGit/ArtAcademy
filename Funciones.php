@@ -668,7 +668,7 @@ function updateNotes($conexion,$students,$curso){
     }
     echo "<meta http-equiv='refresh' content='0;url=inicioProfe.php'>";
 }
-function cursosDisponibles($conexion){
+function cursosDisponibles($conexion, $busqueda){
     if(isset($_SESSION["dni"])){
         $cursosMatriculado = "SELECT curso_id FROM matricula WHERE student_id LIKE ".findStudentID($conexion, $_SESSION["dni"]);
         $cursosMatriculado = mysqli_query($conexion,$cursosMatriculado);
@@ -678,8 +678,12 @@ function cursosDisponibles($conexion){
             $matriculas[$i] = $placeholder[0];
         }
     }
-
-    $listadoCursos = findCursos(conexion(),"SELECT * FROM curso");
+    if($busqueda==""){
+        $query = "SELECT * FROM curso";
+    }else{
+        $query = "SELECT * FROM curso WHERE name LIKE '%$busqueda%';";
+    }
+    $listadoCursos = findCursos(conexion(),$query);
     foreach($listadoCursos as $curso){
         if(!isset($matriculas) or !in_array($curso["code"],$matriculas))
         {

@@ -50,8 +50,8 @@
                     <td><input type="password" name="passwd" required></td>
                 </tr>
                 <tr>
-                    <td><label class="lbl">Edad: </label></td>
-                    <td><input type="date" name="age" required></td>
+                    <td><label class="lbl">Fecha de nacimiento: </label></td>
+                    <td><input type="date" name="age" max="<?php $fecha = date('Y-m-d'); echo date('Y-m-d', strtotime($fecha.'-10 years')) ?>" required></td>
                 </tr>
                 <tr>
                     <td><label class="lbl">Foto: </label></td>

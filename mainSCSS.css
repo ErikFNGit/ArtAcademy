@@ -315,26 +315,28 @@ a {
 .disponibles * {
   font-weight: bold;
 }
-.disponibles .titulo {
-  margin-left: 150px;
-  flex-basis: 100%;
-}
-.disponibles div {
+.disponibles div:not(.titulo) {
   margin-top: 15px;
   width: 350px;
   background-color: rgba(214, 214, 214, 0.6);
   padding: 15px;
   border-radius: 20px;
 }
-.disponibles div h1 {
+.disponibles div:not(.titulo) h1 {
   text-align: center;
 }
-.disponibles div img {
+.disponibles div:not(.titulo) img {
   border: solid 2px;
   margin-left: 25%;
 }
-.disponibles div .button {
+.disponibles div:not(.titulo) .button {
   margin-left: 35%;
+}
+.disponibles .titulo {
+  margin-left: 150px;
+  flex-basis: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 #usAbout {

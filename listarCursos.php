@@ -43,11 +43,11 @@
                 <a href="crearCurso.php"></a>
             </div>
             <?php
-                if(isset($_POST["busqueda"])){
-                    listaCursos(conexion(),$_POST["busqueda"],$_SESSION["userType"]);
-                }else{
-                    listaCursos(conexion(),"",$_SESSION["userType"]);
-                }
+                    if(isset($_POST["busqueda"])){
+                        listaCursos(conexion(),$_POST["busqueda"],$_SESSION["userType"]);
+                    }else{
+                        listaCursos(conexion(),"",$_SESSION["userType"]);
+                    }
                 }else{
                     echo "<h1>No tienes acceso a esta pagina</h1>";
                     echo "<meta http-equiv='refresh' content ='2; url=loginUsuario.php'>";

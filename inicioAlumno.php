@@ -32,16 +32,39 @@
     </header>
     <div class="listado">
         <h1>Mis cursos:</h1>
+        <div class="buscador">
+            <form action="inicioAlumno.php" method="POST">
+                <label for="codigo">Buscador:</label>
+                <input type="text" name="busqueda">
+                <input type="submit" value="Aceptar" class="button">
+            </form>
+        </div>
         <div class="tabla">
             <?php
-                listaCursos(conexion(),"",$_SESSION["userType"]);
+                if(isset($_POST["busqueda"])){
+                    listaCursos(conexion(),$_POST["busqueda"],$_SESSION["userType"]);
+                }else{
+                    listaCursos(conexion(),"",$_SESSION["userType"]);
+                }
             ?>
         </div>
     </div>
     <div class="disponibles">
-        <h1 class="titulo">Cursos disponibles:</h1>
-        <?php
-            cursosDisponibles(conexion());
+        <div class="titulo">
+            <h1>Cursos disponibles:</h1>
+            <form action="inicioAlumno.php" method="POST">
+                <label for="codigo">Buscador:</label>
+                <input type="text" name="busquedaDisponibles">
+                <input type="submit" value="Aceptar" class="button">
+            </form>
+        </div>
+        <?php  
+            if(isset($_POST["busquedaDisponibles"])){
+                cursosDisponibles(conexion(),$_POST["busquedaDisponibles"]);
+            }else{
+                cursosDisponibles(conexion(),"");            
+            }
+            
         ?>
     </div>
     <footer class="footerRel">

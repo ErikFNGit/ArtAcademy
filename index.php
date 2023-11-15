@@ -44,7 +44,7 @@
             <h1>CONTACTANOS</h1>
             <p>¿Necesitas mas <br> informacion? <br> Contactanos!</p>
             <img src="logoGmail.png" alt="el logo de gmail" width="150px" height="100px"> <br>
-            <a class="button" href=""> Contactanos </a>
+            <a class="button" href="contactanos.php"> Contactanos </a>
         </div>
     </div>
     <?php
@@ -75,7 +75,7 @@
             <h1>QUIENES SOMOS</h1>
             <p>Aqui tienes toda la <br> informacion sobre <br> nuestros profesionales</p>
             <img src="arteprofe.jpg" alt="Profesor pintando" width="150px" height="100px"> <br>
-            <a class="button" href=""> About us </a>
+            <a class="button" href="aboutUs.php"> About us </a>
         </div>
         <div>
             <h1>CONTACTANOS</h1>
