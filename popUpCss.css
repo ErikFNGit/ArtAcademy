@@ -1,0 +1,24 @@
+*{
+    font-family: sans-serif;
+}
+div{
+    display: flex;
+    flex-direction: column;
+    background-image: url("petardos.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+h2{
+    margin: auto;
+    padding: auto;
+}
+h3{
+    margin: auto;
+    margin-top:15px;
+    padding: auto;
+}
+p{
+    font-style: italic;
+    margin-top:15px;
+    padding: auto;
+}

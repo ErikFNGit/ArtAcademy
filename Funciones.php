@@ -69,12 +69,48 @@ function addStudent($conexion,$dni,$name,$surname,$mail,$password,$age,$picture)
     }else{
         $path="img/sinFoto.jpg";
     }
-    $query="INSERT INTO students (dni, name, surname, mail, stPass, age, picture) VALUES ('$dni','$name','$surname','$mail', '$password','$age','$path')";
+    $login=0;
+    $query="INSERT INTO students (dni, name, surname, mail, stPass, age, picture,firstLogin) VALUES ('$dni','$name','$surname','$mail', '$password','$age','$path','$login')";
     echo $query;
     mysqli_query($conexion,$query);
 
 }
-
+function firstLogin($dni){
+    $conexion=conexion();
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
+    }
+    $query= "SELECT firstLogin FROM students WHERE dni= ?";
+    $consulta = $conexion->prepare($query);
+    $consulta->bind_param("s",$dni);
+    $consulta->execute();
+    $result=mysqli_stmt_get_result($consulta);
+    if(mysqli_num_rows($result)> 0){
+        $row=mysqli_fetch_array($result,MYSQLI_ASSOC);
+        if($row["firstLogin"]== 0){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    $consulta->close();
+}
+function firstLoginNoMore($dni){
+    $conexion=conexion();
+    if($conexion == FALSE){
+        echo"Error en la base de datos";
+        mysqli_connect_error();
+        exit();
+    }
+    $query= "UPDATE students SET firstLogin= ? WHERE dni= ?";
+    $consulta = $conexion->prepare($query);
+    $num=1;
+    $consulta->bind_param("is", $num, $dni);
+    $consulta->execute();
+    $consulta->close();
+}
 function updateCurso(){
     $conexion = conexion();
     $findTeacher = "SELECT teacher_id FROM curso WHERE code = ".$_POST["id"]."";

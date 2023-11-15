@@ -1,5 +1,10 @@
+function randomNum(min, max){
+    let numRandom = Math.random();
+    let result = Math.floor(numRandom*(max-min)+min);
+    return result;
+}
 function popUpSorteo(){
-    let params = 'widht=300,height=300,left=500,top=300';
+    let params = 'width=300,height=190,left=800,top=150';
     if (randomNum(1,4)==1){
         window.open('popUpBombones.php', 'sorteo', params);
     }else if (randomNum(1,4)==2){   
@@ -7,9 +12,4 @@ function popUpSorteo(){
     }else if (randomNum(1,4)==3){
         window.open('popUpVale.php', 'sorteo', params);
     }
-}
-function randomNum(min, max){
-    let numRandom = Math.random();
-    let result = Math.floor(numRandom*(max-min)+min);
-    return result;
 }

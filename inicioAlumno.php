@@ -9,12 +9,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Inicio</title>
     <link rel="stylesheet" href="mainSCSS.css">
+    <script src="funcionPopUp.js"></script>
 </head>
 <body>
     <?php 
         if($_SESSION['userType']=="student"){
+            if(firstLogin($_SESSION['dni']) == true){
+                ?>
+                <script>
+                    document.addEventListener("DOMContentLoaded",function(){popUpSorteo();})
+                </script>
+                <?php
+                firstLoginNoMore($_SESSION['dni']);
+            }
     ?>
     <header>
         <div>
@@ -25,7 +34,7 @@
         </div>
         <div>
             <a href="perfilAlumno.php"> Mi perfil </a>
-        </div>
+        </div> 
         <div>
             <a href="cerrarSesion.php"> Cerrar Sesion </a>
         </div>
