@@ -74,7 +74,7 @@
                         </tr>
                         <tr>
                             <td><label>Foto: </label></td>
-                            <td><input type="file" name="photo" required></td>
+                            <td><input type="file" name="photo" accept="image/*" required></td>
                         </tr> 
                         <tr>
                             <td><input type="submit" value="Aceptar" class="button"></td>

@@ -55,7 +55,7 @@
                 </tr>
                 <tr>
                     <td><label class="lbl">Foto: </label></td>
-                    <td><input type="file" name="photo" required></td>
+                    <td><input type="file" name="photo" accept="image/*" required></td>
                 </tr>       
                 </tr>
                     <td><input type="submit" value="Registrarse" class="button"></td>
