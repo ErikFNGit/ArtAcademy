@@ -59,7 +59,7 @@
                 </tr>       
                 </tr>
                     <td><input type="submit" value="Registrarse" class="button"></td>
-                    <td><a class="button" href = 'loginUsuario.php'> Atras </a></td>
+                    <td><a class="button" href = 'controlAdmin.php'> Atras </a></td>
                 </tr>
                     </tr>
                 </table>
