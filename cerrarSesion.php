@@ -8,7 +8,6 @@ session_start();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logout</title>
-    <link rel="stylesheet" href="mainSCSS.css">
 </head>
 <body>
     <?php
@@ -20,7 +19,7 @@ session_start();
         }else{
             echo"Debe esta validado primero";
         ?>
-        <meta http-equiv="REFRESH" content="0;url=loginUsuario.php">
+        <meta http-equiv="REFRESH" content="0;url=index.php">
         <?php
         }
     ?>
